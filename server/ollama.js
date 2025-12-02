@@ -21,7 +21,7 @@ export async function describeImage(imagePath) {
       messages: [
         {
           role: 'user',
-          content: 'Describe what you see in this image in detail. Focus on the main subjects, actions, setting, and any notable details.',
+          content: 'Describe the person in this image with extreme detail, focusing primarily on their face and facial features. Your description should be precise enough for an artist to create an accurate portrait drawing. Include: facial structure (face shape, jawline, cheekbones), eyes (shape, color, expression, eyebrows), nose (shape, size), mouth (lip shape, expression), hair (color, style, texture, length), skin tone, any distinctive features (facial hair, glasses, accessories, marks, expression lines). Also note head position, angle, and lighting. Be objective and detailed.',
           images: [base64Image]
         }
       ],

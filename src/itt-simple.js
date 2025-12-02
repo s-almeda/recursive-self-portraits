@@ -3,7 +3,7 @@ import 'xp.css'
 import { io } from 'socket.io-client';
 
 // CONFIGURATION - Easy to edit
-const CAPTURE_DELAY_MS = 3000; // Time between captures (after description is shown)
+const CAPTURE_DELAY_MS = 6000; // Time between captures (after description is shown)
 
 // Connect to WebSocket server
 const socket = io('http://localhost:3000');
@@ -21,8 +21,8 @@ document.querySelector('#app').innerHTML = `
         <button aria-label="Close"></button>
       </div>
     </div>
-    <div class="window-body" style="height: 500px; display: flex; gap: 10px; padding: 10px; font-size: 1.3em; align-items: center;">
-      <fieldset style="flex: 1; max-height: 70%; display: flex; flex-direction: column;">
+    <div class="window-body" style="height: calc(85vh - 50px); display: flex; gap: 10px; padding: 10px; font-size: 1.3em; align-items: center;">
+      <fieldset style="flex: 1; max-height: 60%; display: flex; flex-direction: column;">
         <legend>Latest Capture</legend>
         <div id="imageContainer" style="flex: 1; display: flex; align-items: center; justify-content: center; background: #fff; overflow: hidden;">
           <p id="noImageText" style="color: #000; text-align: center; padding: 20px;">No images captured yet.<br>Start recording on the main page.</p>
@@ -31,16 +31,16 @@ document.querySelector('#app').innerHTML = `
       </fieldset>
       
       <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center;">
-        <div style="width: 100%;">
+        <div style="width: 100%; max-width: 300px;">
           <p id="aiStatus" style="font-size: 1.3em; font-weight: bold; margin-bottom: 20px;">Waiting for images...</p>
-          <progress id="progressBar" style="width: 80%; display: none;"></progress>
+          <progress id="progressBar" value="0" max="100" style="width: 100%; display: none;"></progress>
         </div>
       </div>
       
-      <fieldset style="flex: 1; max-height: 70%; display: flex; flex-direction: column;">
+      <fieldset style="flex: 1; display: flex; flex-direction: column; align-self: stretch;">
         <legend>Image Description</legend>
-        <div style="flex: 1; display: flex; flex-direction: column; padding: 10px;">
-          <textarea id="descriptionText" readonly style="flex: 1; resize: none; font-family: 'Courier New', monospace; font-size: 0.9em; padding: 10px; background: #fff; border: 2px inset #dfdfdf; color: #000;">No description yet.</textarea>
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 10px; overflow: hidden;">
+          <textarea id="descriptionText" readonly style="flex: 1; resize: none; font-family: 'Courier New', monospace; font-size: 0.9em; padding: 10px; background: #fff; border: 2px inset #dfdfdf; color: #000; line-height: 1.4;">No description yet.</textarea>
         </div>
       </fieldset>
     </div>
@@ -103,9 +103,13 @@ function waitForNewFrame() {
         
         // Show progress
         progressBar.style.display = 'block';
-        progressBar.removeAttribute('value');
-        aiStatus.textContent = 'Waiting for AI...';
-        descriptionText.value = 'AI is analyzing...';
+        progressBar.value = 0;
+        progressBar.max = 100;
+        aiStatus.style.display = 'none';
+        // Keep previous description visible
+        
+        // Animate progress to 95% over estimated time (assume 30 seconds for AI)
+        animateProgress(95, 30000);
         
         // Flash effect
         latestImage.style.opacity = '0.3';
@@ -135,8 +139,8 @@ function waitForDescription() {
       if (data.imageId === currentImageId) {
         console.log('✅ Description received');
         
-        progressBar.style.display = 'none';
-        aiStatus.textContent = 'Described ✓';
+        // Complete progress bar
+        progressBar.value = 100;
         descriptionText.value = data.description;
         
         // Flash effect
@@ -144,6 +148,13 @@ function waitForDescription() {
         setTimeout(() => {
           descriptionText.style.backgroundColor = '#fff';
         }, 500);
+        
+        // Hide progress after brief moment
+        setTimeout(() => {
+          progressBar.style.display = 'none';
+          aiStatus.style.display = 'block';
+          aiStatus.textContent = 'Waiting for images...';
+        }, 1000);
         
         socket.off('description-complete', handler);
         resolve();
@@ -165,6 +176,31 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// Animate progress bar from current value to target
+let progressInterval = null;
+function animateProgress(targetPercent, durationMs) {
+  if (progressInterval) {
+    clearInterval(progressInterval);
+  }
+  
+  const startValue = progressBar.value;
+  const startTime = Date.now();
+  
+  progressInterval = setInterval(() => {
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min(elapsed / durationMs, 1);
+    
+    // Ease out curve
+    const eased = 1 - Math.pow(1 - progress, 3);
+    progressBar.value = startValue + (targetPercent - startValue) * eased;
+    
+    if (progress >= 1) {
+      clearInterval(progressInterval);
+      progressInterval = null;
+    }
+  }, 50);
+}
+
 // Socket event handlers
 socket.on('connect', () => {
   console.log('✅ Connected to server');
@@ -176,11 +212,7 @@ socket.on('connect', () => {
 socket.on('description-status', (data) => {
   if (data.imageId === currentImageId) {
     console.log('📊 Status update:', data.status);
-    if (data.status === 'processing' || data.status === 'seeing') {
-      aiStatus.textContent = 'AI is analyzing...';
-    } else if (data.status === 'describing') {
-      aiStatus.textContent = 'Generating description...';
-    }
+    // Don't show status text during processing, just let progress bar animate
   }
 });
 
