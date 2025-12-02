@@ -116,7 +116,7 @@ function waitForNewDescription() {
 
 // Mock image generation
 async function generateImage() {
-  console.log('🎨 Starting image generation (mock)...');
+  console.log('🎨 Starting image generation...');
   
   // Show progress
   progressBar.style.display = 'block';
@@ -124,37 +124,56 @@ async function generateImage() {
   progressBar.max = 100;
   aiStatus.style.display = 'none';
   
-  // Animate progress to 95% over 10 seconds
-  animateProgress(95, 10000);
+  // Animate progress to 95% over 30 seconds (image generation takes time)
+  animateProgress(95, 30000);
   
-  // Simulate generation time
-  await sleep(10000);
-  
-  // Stop oscillation and complete
-  stopOscillation();
-  progressBar.value = 100;
-  
-  // For now, just show the original camera image (mock)
-  // In the future, this will be the actual generated image
   try {
-    const response = await fetch(`http://localhost:3000/api/camera-images/${currentCameraImageId}`);
-    const data = await response.json();
+    // Call the actual image generation API
+    console.log('📡 Calling image generation API with description...');
+    const response = await fetch(
+      'https://noggin.rea.gent/willing-raccoon-7030',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer rg_v1_jj5u5a2wpjk8iog49161uxx0stpepagsa9c3_ngk',
+        },
+        body: JSON.stringify({
+          prompt: descriptionText.value,
+        }),
+      }
+    );
     
-    if (data.success && data.image) {
-      generatedImage.src = `http://localhost:3000/captures/${data.image.filename}`;
-      generatedImage.style.display = 'block';
-      noImageText.style.display = 'none';
-      
-      // Flash effect
-      generatedImage.style.opacity = '0.3';
-      setTimeout(() => {
-        generatedImage.style.opacity = '1';
-      }, 200);
-      
-      console.log('✅ Image displayed (mock)');
-    }
+    // Get the image as a blob (raw image data)
+    const imageBlob = await response.blob();
+    console.log('✅ Image generated, size:', imageBlob.size, 'bytes');
+    
+    // Create a blob URL that the browser can display
+    const imageUrl = URL.createObjectURL(imageBlob);
+    
+    // Stop oscillation and complete
+    stopOscillation();
+    progressBar.value = 100;
+    
+    // Display the generated image
+    generatedImage.src = imageUrl;
+    generatedImage.style.display = 'block';
+    noImageText.style.display = 'none';
+    
+    // Flash effect
+    generatedImage.style.opacity = '0.3';
+    setTimeout(() => {
+      generatedImage.style.opacity = '1';
+    }, 200);
+    
+    console.log('✅ Image displayed');
+    
   } catch (error) {
-    console.error('Error loading image:', error);
+    console.error('❌ Error generating image:', error);
+    aiStatus.style.display = 'block';
+    aiStatus.textContent = 'Error generating image';
+    stopOscillation();
+    progressBar.style.display = 'none';
   }
   
   // Hide progress after brief moment
