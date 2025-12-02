@@ -39,7 +39,7 @@ document.querySelector('#app').innerHTML = `
       
       <fieldset style="flex: 1; max-height: 60%; display: flex; flex-direction: column;">
         <legend>Generated Image</legend>
-        <div id="imageContainer" style="flex: 1; display: flex; align-items: center; justify-content: center; background: #c0c0c0; overflow: hidden;">
+        <div id="imageContainer" style="flex: 1; display: flex; align-items: center; justify-content: center; background: #fff; overflow: hidden;">
           <p id="noImageText" style="color: #000; text-align: center; padding: 20px;">No images generated yet.<br>Waiting for ITT descriptions.</p>
           <img id="generatedImage" style="display: none; max-width: 100%; max-height: 100%; height: auto; width: auto; object-fit: contain;" />
         </div>
