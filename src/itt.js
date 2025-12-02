@@ -3,13 +3,13 @@ import 'xp.css'
 import { io } from 'socket.io-client';
 
 // CONFIGURATION - Easy to edit
-const DISPLAY_DELAY_MS = 1000; // Time to display description before moving to next image
+const CAPTURE_DELAY_MS = 6000; // Time between captures (after description is shown)
 
 // Connect to WebSocket server
 const socket = io('http://localhost:3000');
 
-let isProcessing = false;
-let currentImage = null;
+let currentImageId = null;
+let isWaitingForCapture = false;
 
 document.querySelector('#app').innerHTML = `
   <div class="window" style="width: calc(100vw - 40px); height: 85vh; margin: auto; margin-top: 50px; max-width: 90vw ; box-sizing: border-box;">
@@ -21,8 +21,8 @@ document.querySelector('#app').innerHTML = `
         <button aria-label="Close"></button>
       </div>
     </div>
-    <div class="window-body" style="height: 500px; display: flex; gap: 10px; padding: 10px; font-size: 1.3em; align-items: center;">
-      <fieldset style="flex: 1; max-height: 70%; display: flex; flex-direction: column;">
+    <div class="window-body" style="height: calc(85vh - 50px); display: flex; gap: 10px; padding: 10px; font-size: 1.3em; align-items: center;">
+      <fieldset style="flex: 1; max-height: 60%; display: flex; flex-direction: column;">
         <legend>Latest Capture</legend>
         <div id="imageContainer" style="flex: 1; display: flex; align-items: center; justify-content: center; background: #fff; overflow: hidden;">
           <p id="noImageText" style="color: #000; text-align: center; padding: 20px;">No images captured yet.<br>Start recording on the main page.</p>
@@ -31,16 +31,16 @@ document.querySelector('#app').innerHTML = `
       </fieldset>
       
       <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center;">
-        <div style="width: 100%;">
+        <div style="width: 100%; max-width: 300px;">
           <p id="aiStatus" style="font-size: 1.3em; font-weight: bold; margin-bottom: 20px;">Waiting for images...</p>
-          <progress id="progressBar" style="width: 80%; display: none;"></progress>
+          <progress id="progressBar" value="0" max="100" style="width: 100%; display: none;"></progress>
         </div>
       </div>
       
-      <fieldset style="flex: 1; max-height: 70%; display: flex; flex-direction: column;">
+      <fieldset style="flex: 1; display: flex; flex-direction: column; align-self: stretch;">
         <legend>Image Description</legend>
-        <div style="flex: 1; display: flex; flex-direction: column; padding: 10px;">
-          <textarea id="descriptionText" readonly style="flex: 1; resize: none; font-family: 'Courier New', monospace; font-size: 0.9em; padding: 10px; background: #fff; border: 2px inset #dfdfdf; color: #000;">No description yet.</textarea>
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 10px; overflow: hidden;">
+          <textarea id="descriptionText" readonly style="flex: 1; resize: none; font-family: 'Courier New', monospace; font-size: 0.9em; padding: 10px; background: #fff; border: 2px inset #dfdfdf; color: #000; line-height: 1.4;">No description yet.</textarea>
         </div>
       </fieldset>
     </div>
@@ -53,149 +53,122 @@ const aiStatus = document.querySelector('#aiStatus');
 const progressBar = document.querySelector('#progressBar');
 const descriptionText = document.querySelector('#descriptionText');
 
-// Main processing loop
-async function processNextImage() {
-  if (isProcessing) {
-    console.log('⏸️ Already processing, skipping');
-    return;
-  }
-  
-  isProcessing = true;
-  console.log('🔄 ======== Starting next image cycle ========');
-  
+// Request a new capture from the main page
+function requestCapture() {
+  console.log('📡 Requesting new capture...');
+  socket.emit('request-capture');
+  isWaitingForCapture = true;
+  aiStatus.textContent = 'Requesting capture...';
+}
+
+// Main loop - request capture, wait for description, display, repeat
+async function processLoop() {
   try {
-    // Step 1: Get the latest image
-    console.log('📡 Fetching latest image...');
-    const response = await fetch('http://localhost:3000/api/camera-images/latest');
-    const data = await response.json();
-    console.log('📡 API response:', data);
+    // Step 1: Request a new capture
+    requestCapture();
     
-    if (!data.success || !data.image) {
-      console.log('⏳ No images available yet');
-      aiStatus.textContent = 'Waiting for images...';
-      progressBar.style.display = 'none';
-      isProcessing = false;
-      setTimeout(() => processNextImage(), 2000); // Check again in 2s
-      return;
-    }
+    // Step 2: Wait for the new frame to arrive
+    await waitForNewFrame();
     
-    currentImage = data.image;
-    console.log('🖼️ Got image:', currentImage.id, 'status:', currentImage.status);
+    // Step 3: Wait for description
+    await waitForDescription();
     
-    // Display the image
-    latestImage.src = `http://localhost:3000/captures/${currentImage.filename}`;
-    latestImage.style.display = 'block';
-    noImageText.style.display = 'none';
-    
-    // Show progress bar
-    progressBar.style.display = 'block';
-    progressBar.removeAttribute('value'); // Indeterminate state
-    aiStatus.textContent = 'Processing...';
-    descriptionText.value = 'Waiting for AI description...';
-    
-    // Step 2: Check if description already exists
-    console.log('🔍 Checking for existing description...');
-    let description = await getDescription(currentImage.id);
-    
-    if (!description) {
-      console.log('📝 No description yet, waiting for AI...');
-      // Wait for description to be created via WebSocket
-      description = await waitForDescription(currentImage.id);
-    } else {
-      console.log('✅ Found existing description');
-    }
-    
-    // Step 3: Display description
-    console.log('✅ Description received, length:', description.length);
-    progressBar.value = 100;
-    progressBar.max = 100;
-    aiStatus.textContent = 'Complete!';
-    descriptionText.value = description;
-    
-    // Flash effect
-    descriptionText.style.backgroundColor = '#ffffcc';
-    setTimeout(() => {
-      descriptionText.style.backgroundColor = '#fff';
-    }, 300);
-    
-    // Step 4: Wait for display delay
-    console.log(`⏱️ Waiting ${DISPLAY_DELAY_MS}ms before next cycle`);
-    await sleep(DISPLAY_DELAY_MS);
-    
-    // Step 5: Clean up undescribed images (except the latest)
-    console.log('🗑️ Cleaning up undescribed images (keeping', currentImage.id, ')');
-    const cleanupResponse = await fetch(`http://localhost:3000/api/cleanup-undescribed/${currentImage.id}`, {
-      method: 'POST'
-    });
-    const cleanupData = await cleanupResponse.json();
-    console.log('🗑️ Cleanup result:', cleanupData);
+    // Step 4: Wait before next capture
+    console.log(`⏱️ Waiting ${CAPTURE_DELAY_MS}ms before next capture`);
+    await sleep(CAPTURE_DELAY_MS);
     
   } catch (error) {
-    console.error('❌ Error in processing loop:', error);
+    console.error('❌ Error in process loop:', error);
     aiStatus.textContent = `Error: ${error.message}`;
-    await sleep(2000); // Wait before retrying
-  } finally {
-    isProcessing = false;
-    // Immediately start next cycle
-    console.log('🔁 Scheduling next cycle in 100ms');
-    setTimeout(() => processNextImage(), 100);
+    await sleep(2000);
   }
+  
+  // Loop again
+  setTimeout(processLoop, 100);
 }
 
-// Get existing description
-async function getDescription(imageId) {
-  try {
-    console.log('🔎 Fetching description from API for:', imageId);
-    const response = await fetch(`http://localhost:3000/api/text-descriptions/${imageId}`);
-    console.log('🔎 API status:', response.status);
-    const data = await response.json();
-    console.log('🔎 API data:', data);
-    if (data.success && data.description) {
-      console.log('✅ Description found:', data.description.description.substring(0, 50) + '...');
-      return data.description.description;
-    }
-  } catch (error) {
-    console.log('❌ Error fetching description:', error);
-  }
-  return null;
-}
-
-// Wait for description to be completed via WebSocket
-function waitForDescription(imageId) {
-  return new Promise((resolve, reject) => {
-    const timeout = setTimeout(() => {
-      cleanup();
-      reject(new Error('Description timeout'));
-    }, 120000); // 2 minute timeout
-    
+// Wait for a new frame to be captured
+function waitForNewFrame() {
+  return new Promise((resolve) => {
     const handler = (data) => {
-      console.log('🔔 description-complete event:', data);
-      if (data.imageId === imageId) {
-        cleanup();
-        resolve(data.description);
+      if (isWaitingForCapture) {
+        console.log('📸 New frame received:', data.id);
+        isWaitingForCapture = false;
+        currentImageId = data.id;
+        
+        // Display the image
+        latestImage.src = `http://localhost:3000/captures/${data.filename}`;
+        latestImage.style.display = 'block';
+        noImageText.style.display = 'none';
+        
+        // Show progress
+        progressBar.style.display = 'block';
+        progressBar.value = 0;
+        progressBar.max = 100;
+        aiStatus.style.display = 'none';
+        // Keep previous description visible
+        
+        // Animate progress to 95% over estimated time (assume 30 seconds for AI)
+        animateProgress(95, 30000);
+        
+        // Flash effect
+        latestImage.style.opacity = '0.3';
+        setTimeout(() => {
+          latestImage.style.opacity = '1';
+        }, 200);
+        
+        socket.off('new-frame', handler);
+        resolve();
       }
     };
     
-    const statusHandler = (data) => {
-      if (data.imageId === imageId) {
-        console.log('📊 Status update:', data.status);
-        if (data.status === 'processing') {
-          aiStatus.textContent = 'AI is analyzing...';
-        } else if (data.status === 'error') {
-          cleanup();
-          reject(new Error(data.message || 'Description failed'));
-        }
-      }
-    };
+    socket.on('new-frame', handler);
     
-    const cleanup = () => {
-      clearTimeout(timeout);
-      socket.off('description-complete', handler);
-      socket.off('description-status', statusHandler);
+    // Timeout after 10 seconds
+    setTimeout(() => {
+      socket.off('new-frame', handler);
+      resolve();
+    }, 10000);
+  });
+}
+
+// Wait for description to complete
+function waitForDescription() {
+  return new Promise((resolve) => {
+    const handler = (data) => {
+      if (data.imageId === currentImageId) {
+        console.log('✅ Description received');
+        
+        // Stop oscillation and complete progress bar
+        stopOscillation();
+        progressBar.value = 100;
+        descriptionText.value = data.description;
+        
+        // Flash effect
+        descriptionText.style.backgroundColor = '#ffffcc';
+        setTimeout(() => {
+          descriptionText.style.backgroundColor = '#fff';
+        }, 500);
+        
+        // Hide progress after brief moment
+        setTimeout(() => {
+          progressBar.style.display = 'none';
+          aiStatus.style.display = 'block';
+          aiStatus.textContent = 'Waiting for images...';
+        }, 1000);
+        
+        socket.off('description-complete', handler);
+        resolve();
+      }
     };
     
     socket.on('description-complete', handler);
-    socket.on('description-status', statusHandler);
+    
+    // Timeout after 2 minutes
+    setTimeout(() => {
+      socket.off('description-complete', handler);
+      resolve();
+    }, 120000);
   });
 }
 
@@ -204,40 +177,92 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// Socket connection handlers
+// Animate progress bar from current value to target
+let progressInterval = null;
+let oscillateInterval = null;
+function animateProgress(targetPercent, durationMs) {
+  if (progressInterval) {
+    clearInterval(progressInterval);
+  }
+  if (oscillateInterval) {
+    clearInterval(oscillateInterval);
+  }
+  
+  const startValue = progressBar.value;
+  const startTime = Date.now();
+  
+  progressInterval = setInterval(() => {
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min(elapsed / durationMs, 1);
+    
+    // Ease out curve
+    const eased = 1 - Math.pow(1 - progress, 3);
+    progressBar.value = startValue + (targetPercent - startValue) * eased;
+    
+    if (progress >= 1) {
+      clearInterval(progressInterval);
+      progressInterval = null;
+      
+      // Start oscillating at the end
+      if (targetPercent >= 90) {
+        startOscillation();
+      }
+    }
+  }, 50);
+}
+
+function startOscillation() {
+  let direction = -1; // Start by going down
+  const minValue = 92;
+  const maxValue = 95;
+  
+  oscillateInterval = setInterval(() => {
+    progressBar.value += direction * 0.3;
+    
+    if (progressBar.value <= minValue) {
+      direction = 1;
+    } else if (progressBar.value >= maxValue) {
+      direction = -1;
+    }
+  }, 50);
+}
+
+function stopOscillation() {
+  if (oscillateInterval) {
+    clearInterval(oscillateInterval);
+    oscillateInterval = null;
+  }
+}
+
+// Socket event handlers
 socket.on('connect', () => {
   console.log('✅ Connected to server');
-  // Start processing when connected
-  processNextImage();
+  aiStatus.textContent = 'Connected - starting capture loop...';
+  // Start the process loop
+  setTimeout(processLoop, 1000);
 });
 
-socket.on('disconnect', () => {
-  console.log('❌ Disconnected from server');
-  aiStatus.textContent = 'Disconnected from server';
-  isProcessing = false;
+socket.on('description-status', (data) => {
+  if (data.imageId === currentImageId) {
+    console.log('📊 Status update:', data.status);
+    // Don't show status text during processing, just let progress bar animate
+  }
 });
 
 socket.on('data-cleared', () => {
   console.log('🗑️ Data cleared');
   latestImage.style.display = 'none';
   noImageText.style.display = 'block';
-  aiStatus.textContent = 'Database cleared - Waiting for new images...';
+  aiStatus.textContent = 'Database cleared';
   descriptionText.value = 'No description yet.';
   progressBar.style.display = 'none';
-  currentImage = null;
-  isProcessing = false;
-  // Restart processing loop
-  setTimeout(() => processNextImage(), 1000);
+  currentImageId = null;
 });
 
-// Listen for new frames to trigger immediate processing
-socket.on('new-frame', (data) => {
-  console.log('📸 New frame captured:', data.id);
-  // If not currently processing, kick off a cycle
-  if (!isProcessing) {
-    processNextImage();
-  }
+socket.on('disconnect', () => {
+  console.log('❌ Disconnected from server');
+  aiStatus.textContent = 'Disconnected from server';
 });
 
-console.log('🚀 ITT page initialized');
-console.log(`⚙️ Display delay: ${DISPLAY_DELAY_MS}ms`);
+console.log('🚀 ITT page initialized (on-demand capture mode)');
+console.log(`⚙️ Capture delay: ${CAPTURE_DELAY_MS}ms`);

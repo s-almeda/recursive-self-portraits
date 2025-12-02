@@ -72,6 +72,13 @@ async function processImage(image) {
         description: description,
         status: 'described'
       });
+      
+      // Also emit for TTI page to start generation
+      io.emit('description-ready', {
+        descriptionId: descId,
+        cameraImageId: image.id,
+        description: description
+      });
     }
     
     console.log(`Successfully processed image: ${image.id}`);

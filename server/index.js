@@ -226,6 +226,11 @@ app.get('/itt', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/itt.html'));
 });
 
+// Serve tti.html for /tti route
+app.get('/tti', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/tti.html'));
+});
+
 // WebSocket connection
 io.on('connection', (socket) => {
   console.log('Client connected:', socket.id);
@@ -251,4 +256,5 @@ httpServer.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Main page: http://localhost:${PORT}/`);
   console.log(`ITT page: http://localhost:${PORT}/itt`);
+  console.log(`TTI page: http://localhost:${PORT}/tti`);
 });
