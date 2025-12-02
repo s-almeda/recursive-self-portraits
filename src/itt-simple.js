@@ -139,7 +139,8 @@ function waitForDescription() {
       if (data.imageId === currentImageId) {
         console.log('✅ Description received');
         
-        // Complete progress bar
+        // Stop oscillation and complete progress bar
+        stopOscillation();
         progressBar.value = 100;
         descriptionText.value = data.description;
         
@@ -178,9 +179,13 @@ function sleep(ms) {
 
 // Animate progress bar from current value to target
 let progressInterval = null;
+let oscillateInterval = null;
 function animateProgress(targetPercent, durationMs) {
   if (progressInterval) {
     clearInterval(progressInterval);
+  }
+  if (oscillateInterval) {
+    clearInterval(oscillateInterval);
   }
   
   const startValue = progressBar.value;
@@ -197,8 +202,36 @@ function animateProgress(targetPercent, durationMs) {
     if (progress >= 1) {
       clearInterval(progressInterval);
       progressInterval = null;
+      
+      // Start oscillating at the end
+      if (targetPercent >= 90) {
+        startOscillation();
+      }
     }
   }, 50);
+}
+
+function startOscillation() {
+  let direction = -1; // Start by going down
+  const minValue = 85;
+  const maxValue = 95;
+  
+  oscillateInterval = setInterval(() => {
+    progressBar.value += direction * 0.5;
+    
+    if (progressBar.value <= minValue) {
+      direction = 1;
+    } else if (progressBar.value >= maxValue) {
+      direction = -1;
+    }
+  }, 50);
+}
+
+function stopOscillation() {
+  if (oscillateInterval) {
+    clearInterval(oscillateInterval);
+    oscillateInterval = null;
+  }
 }
 
 // Socket event handlers
