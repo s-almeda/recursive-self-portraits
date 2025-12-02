@@ -3,8 +3,7 @@ import 'xp.css'
 import { io } from 'socket.io-client';
 
 let stream = null;
-let isRecording = false;
-let recordingInterval = null;
+let isCapturing = false;
 let canvas = null;
 let ctx = null;
 
@@ -16,7 +15,7 @@ socket.on('connect', () => {
 });
 
 document.querySelector('#app').innerHTML = `
-  <div class="window" style="width: 800px; margin: 2rem auto;">
+  <div class="window" style="width: 800px; margin: 2rem auto; overflow: auto;">
     <div class="title-bar">
       <div class="title-bar-text">Webcam Feed - Recording Station</div>
       <div class="title-bar-controls">
@@ -41,22 +40,14 @@ document.querySelector('#app').innerHTML = `
       </fieldset>
       
       <fieldset style="margin-top: 16px;">
-        <legend>Recording Controls</legend>
-        <div class="field-row" style="margin-bottom: 10px;">
-          <label for="frameRateSelect">Frame Rate:</label>
-          <select id="frameRateSelect">
-            <option value="5">1 frame every 5 seconds (test)</option>
-            <option value="30">1 frame every 30 seconds</option>
-            <option value="60">1 frame every 60 seconds</option>
-            <option value="120">1 frame every 2 minutes</option>
-            <option value="300">1 frame every 5 minutes</option>
-            <option value="600">1 frame every 10 minutes</option>
-          </select>
+        <legend>Capture Mode</legend>
+        <div style="margin-bottom: 10px; padding: 0 10px;">
+          <p style="margin: 5px 0; font-size: 0.9em;">Enable capture mode. The ITT page will request frames on-demand.</p>
         </div>
         <div class="field-row" style="gap: 8px;">
-          <button id="startRecordingBtn" disabled>Start Recording</button>
-          <button id="stopRecordingBtn" disabled>Stop Recording</button>
-          <span id="recordingIndicator" style="display: none; color: red; font-weight: bold; margin-left: 10px;">⏺ RECORDING</span>
+          <button id="startRecordingBtn" disabled>Enable Capture</button>
+          <button id="stopRecordingBtn" disabled>Disable Capture</button>
+          <span id="recordingIndicator" style="display: none; color: green; font-weight: bold; margin-left: 10px;">✓ READY</span>
         </div>
       </fieldset>
       
@@ -83,7 +74,6 @@ const video = document.querySelector('#webcam');
 const cameraSelect = document.querySelector('#cameraSelect');
 const startBtn = document.querySelector('#startBtn');
 const stopBtn = document.querySelector('#stopBtn');
-const frameRateSelect = document.querySelector('#frameRateSelect');
 const startRecordingBtn = document.querySelector('#startRecordingBtn');
 const stopRecordingBtn = document.querySelector('#stopRecordingBtn');
 const recordingIndicator = document.querySelector('#recordingIndicator');
@@ -155,9 +145,9 @@ async function startWebcam() {
 // Stop webcam
 function stopWebcam() {
   if (stream) {
-    // Stop recording if active
-    if (isRecording) {
-      stopRecording();
+    // Stop capturing if active
+    if (isCapturing) {
+      stopCapturing();
     }
     
     stream.getTracks().forEach(track => track.stop());
@@ -206,7 +196,7 @@ async function uploadFrame() {
     const formData = new FormData();
     formData.append('image', blob, `capture_${Date.now()}.jpg`);
     formData.append('cameraId', cameraSelect.value);
-    formData.append('frameRate', frameRateSelect.value);
+    formData.append('frameRate', 0); // Not using frame rate anymore
     
     const response = await fetch('http://localhost:3000/api/camera-images', {
       method: 'POST',
@@ -218,8 +208,8 @@ async function uploadFrame() {
     if (data.success) {
       frameCount++;
       frameCountText.textContent = `Frames captured: ${frameCount}`;
-      statusText.textContent = `Last capture: ${new Date().toLocaleTimeString()}`;
-      console.log('Frame uploaded:', data.image);
+      statusText.textContent = `Captured at ${new Date().toLocaleTimeString()}`;
+      console.log('📸 Frame uploaded:', data.image);
     } else {
       console.error('Upload failed:', data.error);
       statusText.textContent = 'Error uploading frame';
@@ -230,45 +220,33 @@ async function uploadFrame() {
   }
 }
 
-// Start recording
-function startRecording() {
+// Start capture mode (ready to receive requests)
+function startCapturing() {
   if (!stream) {
     alert('Please start the webcam first');
     return;
   }
   
-  isRecording = true;
-  const frameRate = parseInt(frameRateSelect.value) * 1000; // Convert to milliseconds
-  
-  // Capture first frame immediately
-  uploadFrame();
-  
-  // Then capture at intervals
-  recordingInterval = setInterval(uploadFrame, frameRate);
+  isCapturing = true;
   
   startRecordingBtn.disabled = true;
   stopRecordingBtn.disabled = false;
-  frameRateSelect.disabled = true;
   recordingIndicator.style.display = 'inline';
-  stopBtn.disabled = true; // Prevent stopping webcam while recording
+  stopBtn.disabled = true; // Prevent stopping webcam while in capture mode
   
-  statusText.textContent = 'Recording started';
+  statusText.textContent = 'Capture mode enabled - waiting for ITT requests';
+  console.log('✅ Capture mode enabled');
 }
 
-// Stop recording
-function stopRecording() {
-  if (recordingInterval) {
-    clearInterval(recordingInterval);
-    recordingInterval = null;
-  }
-  
-  isRecording = false;
+// Stop capture mode
+function stopCapturing() {
+  isCapturing = false;
   startRecordingBtn.disabled = false;
   stopRecordingBtn.disabled = true;
-  frameRateSelect.disabled = false;
   recordingIndicator.style.display = 'none';
   stopBtn.disabled = false;
-  statusText.textContent = 'Recording stopped';
+  statusText.textContent = 'Capture mode disabled';
+  console.log('🛑 Capture mode disabled');
 }
 
 // Clear database and images
@@ -308,9 +286,25 @@ async function clearDatabase() {
 // Event listeners
 startBtn.addEventListener('click', startWebcam);
 stopBtn.addEventListener('click', stopWebcam);
-startRecordingBtn.addEventListener('click', startRecording);
-stopRecordingBtn.addEventListener('click', stopRecording);
+startRecordingBtn.addEventListener('click', startCapturing);
+stopRecordingBtn.addEventListener('click', stopCapturing);
 clearDbBtn.addEventListener('click', clearDatabase);
+
+// WebSocket listeners
+socket.on('connect', () => {
+  console.log('✅ Connected to server');
+});
+
+socket.on('request-capture', async () => {
+  console.log('📸 Capture requested by ITT page');
+  if (isCapturing && stream) {
+    statusText.textContent = 'Capturing frame...';
+    await uploadFrame();
+    statusText.textContent = 'Capture mode enabled - waiting for ITT requests';
+  } else {
+    console.warn('⚠️ Capture request ignored - not in capture mode');
+  }
+});
 
 // Initialize camera list on page load
 getCameras();

@@ -18,7 +18,8 @@ db.exec(`
     filename TEXT NOT NULL,
     camera_id TEXT,
     captured_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    frame_rate INTEGER
+    frame_rate INTEGER,
+    status TEXT DEFAULT 'pending'
   );
 
   CREATE TABLE IF NOT EXISTS text_descriptions (
@@ -38,6 +39,20 @@ db.exec(`
     FOREIGN KEY (text_description_id) REFERENCES text_descriptions(id) ON DELETE CASCADE
   );
 `);
+
+// Migration: Add status column if it doesn't exist
+try {
+  const tableInfo = db.prepare("PRAGMA table_info(camera_images)").all();
+  const hasStatusColumn = tableInfo.some(col => col.name === 'status');
+  
+  if (!hasStatusColumn) {
+    console.log('Adding status column to camera_images table...');
+    db.exec(`ALTER TABLE camera_images ADD COLUMN status TEXT DEFAULT 'pending'`);
+    console.log('Status column added successfully');
+  }
+} catch (error) {
+  console.error('Migration error:', error);
+}
 
 // Helper function to generate prefixed IDs
 function generateId(prefix) {
@@ -143,6 +158,37 @@ export function clearAllData() {
     DELETE FROM text_descriptions;
     DELETE FROM camera_images;
   `);
+}
+
+// Get pending camera images (not yet described)
+export function getPendingCameraImages() {
+  const stmt = db.prepare(`
+    SELECT * FROM camera_images 
+    WHERE status = 'pending' 
+    ORDER BY captured_at DESC
+  `);
+  return stmt.all();
+}
+
+// Update camera image status
+export function updateCameraImageStatus(id, status) {
+  const stmt = db.prepare(`
+    UPDATE camera_images 
+    SET status = ? 
+    WHERE id = ?
+  `);
+  stmt.run(status, id);
+}
+
+// Delete all undescribed images except the specified one
+export function deleteUndescribedImagesExcept(keepImageId) {
+  const stmt = db.prepare(`
+    DELETE FROM camera_images 
+    WHERE status = 'pending' 
+    AND id != ?
+  `);
+  const result = stmt.run(keepImageId);
+  return result.changes;
 }
 
 export default db;

@@ -16,8 +16,12 @@ import {
   insertGeneratedImage,
   getGeneratedImageById,
   getFullPipeline,
-  clearAllData
+  clearAllData,
+  getPendingCameraImages,
+  updateCameraImageStatus,
+  deleteUndescribedImagesExcept
 } from './db.js';
+import { initWorker, startWorker } from './descriptionWorker.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -199,6 +203,18 @@ app.delete('/api/clear-all', (req, res) => {
   }
 });
 
+// Delete undescribed images except specified one
+app.post('/api/cleanup-undescribed/:keepImageId', (req, res) => {
+  try {
+    const { keepImageId } = req.params;
+    const deletedCount = deleteUndescribedImagesExcept(keepImageId);
+    res.json({ success: true, deletedCount });
+  } catch (error) {
+    console.error('Error cleaning up undescribed images:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 // Serve index.html for root route
 // Serve index.html for root route
 app.get('/', (req, res) => {
@@ -214,10 +230,20 @@ app.get('/itt', (req, res) => {
 io.on('connection', (socket) => {
   console.log('Client connected:', socket.id);
   
+  // Handle capture requests from ITT page
+  socket.on('request-capture', () => {
+    console.log('📸 Capture request from ITT page, broadcasting to main page...');
+    io.emit('request-capture');
+  });
+  
   socket.on('disconnect', () => {
     console.log('Client disconnected:', socket.id);
   });
 });
+
+// Initialize and start the description worker
+initWorker(io);
+startWorker();
 
 const PORT = process.env.PORT || 3000;
 
