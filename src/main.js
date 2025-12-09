@@ -3,22 +3,20 @@ import 'xp.css'
 import { io } from 'socket.io-client';
 
 let stream = null;
-let isCapturing = false;
+let isRunning = false;
 let canvas = null;
 let ctx = null;
 
-// Connect to WebSocket server - use current host so it works locally and remotely
+// Connect to WebSocket server
 const SERVER_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : window.prompt();
 const socket = io(SERVER_URL);
 
-socket.on('connect', () => {
-  console.log('Connected to server');
-});
+const CYCLE_DELAY_MS = 5000; // 5 seconds between cycles
 
 document.querySelector('#app').innerHTML = `
-  <div class="window" style="width: 800px; margin: 2rem auto; overflow: auto;">
+  <div class="window" style="width: 900px; margin: 2rem auto; overflow: auto;">
     <div class="title-bar">
-      <div class="title-bar-text">Webcam Feed - Recording Station</div>
+      <div class="title-bar-text">Recursive Self-Portrait - Control Center</div>
       <div class="title-bar-controls">
         <button aria-label="Minimize"></button>
         <button aria-label="Maximize"></button>
@@ -41,14 +39,21 @@ document.querySelector('#app').innerHTML = `
       </fieldset>
       
       <fieldset style="margin-top: 16px;">
-        <legend>Capture Mode</legend>
+        <legend>Pipeline Control</legend>
         <div style="margin-bottom: 10px; padding: 0 10px;">
-          <p style="margin: 5px 0; font-size: 0.9em;">Enable capture mode. The ITT page will request frames on-demand.</p>
+          <p style="margin: 5px 0; font-size: 0.9em;">Start the recursive self-portrait loop: Capture → Describe → Generate → Wait 5s → Repeat</p>
         </div>
         <div class="field-row" style="gap: 8px;">
-          <button id="startRecordingBtn" disabled>Enable Capture</button>
-          <button id="stopRecordingBtn" disabled>Disable Capture</button>
-          <span id="recordingIndicator" style="display: none; color: green; font-weight: bold; margin-left: 10px;">✓ READY</span>
+          <button id="startPipelineBtn" disabled>Enable Pipeline</button>
+          <button id="stopPipelineBtn" disabled>Disable Pipeline</button>
+          <span id="runningIndicator" style="display: none; color: green; font-weight: bold; margin-left: 10px;">● RUNNING</span>
+        </div>
+      </fieldset>
+      
+      <fieldset style="margin-top: 16px;">
+        <legend>Current Status</legend>
+        <div style="padding: 10px; font-family: monospace; background: #000; color: #0f0; min-height: 120px; max-height: 200px; overflow-y: auto;" id="statusLog">
+          <div>Ready to start...</div>
         </div>
       </fieldset>
       
@@ -65,7 +70,7 @@ document.querySelector('#app').innerHTML = `
       </div>
       <div class="status-bar">
         <p class="status-bar-field" id="statusText">Ready</p>
-        <p class="status-bar-field" id="frameCountText">Frames captured: 0</p>
+        <p class="status-bar-field" id="cycleCountText">Cycles: 0</p>
       </div>
     </div>
   </div>
@@ -75,17 +80,29 @@ const video = document.querySelector('#webcam');
 const cameraSelect = document.querySelector('#cameraSelect');
 const startBtn = document.querySelector('#startBtn');
 const stopBtn = document.querySelector('#stopBtn');
-const startRecordingBtn = document.querySelector('#startRecordingBtn');
-const stopRecordingBtn = document.querySelector('#stopRecordingBtn');
-const recordingIndicator = document.querySelector('#recordingIndicator');
+const startPipelineBtn = document.querySelector('#startPipelineBtn');
+const stopPipelineBtn = document.querySelector('#stopPipelineBtn');
+const runningIndicator = document.querySelector('#runningIndicator');
 const statusText = document.querySelector('#statusText');
-const frameCountText = document.querySelector('#frameCountText');
+const cycleCountText = document.querySelector('#cycleCountText');
 const clearDbBtn = document.querySelector('#clearDbBtn');
+const statusLog = document.querySelector('#statusLog');
 
 canvas = document.querySelector('#canvas');
 ctx = canvas.getContext('2d');
 
-let frameCount = 0;
+let cycleCount = 0;
+
+// Logging helper
+function log(message, type = 'info') {
+  const timestamp = new Date().toLocaleTimeString();
+  const color = type === 'error' ? '#f00' : type === 'success' ? '#0f0' : '#0ff';
+  const div = document.createElement('div');
+  div.style.color = color;
+  div.textContent = `[${timestamp}] ${message}`;
+  statusLog.appendChild(div);
+  statusLog.scrollTop = statusLog.scrollHeight;
+}
 
 // Get list of available cameras
 async function getCameras() {
@@ -132,23 +149,25 @@ async function startWebcam() {
     
     startBtn.disabled = true;
     stopBtn.disabled = false;
-    cameraSelect.disabled = false;
-    startRecordingBtn.disabled = false;
+    cameraSelect.disabled = true;
+    startPipelineBtn.disabled = false;
     
     statusText.textContent = 'Webcam active';
+    log('Webcam started');
   } catch (error) {
     console.error('Error accessing webcam:', error);
     alert('Error accessing webcam: ' + error.message);
     statusText.textContent = 'Error: ' + error.message;
+    log('Error: ' + error.message, 'error');
   }
 }
 
 // Stop webcam
 function stopWebcam() {
   if (stream) {
-    // Stop capturing if active
-    if (isCapturing) {
-      stopCapturing();
+    // Stop pipeline if running
+    if (isRunning) {
+      stopPipeline();
     }
     
     stream.getTracks().forEach(track => track.stop());
@@ -158,17 +177,17 @@ function stopWebcam() {
     startBtn.disabled = false;
     stopBtn.disabled = true;
     cameraSelect.disabled = false;
-    startRecordingBtn.disabled = true;
+    startPipelineBtn.disabled = true;
     
     statusText.textContent = 'Webcam stopped';
+    log('Webcam stopped');
   }
 }
 
 // Capture frame from video
 async function captureFrame() {
   if (!stream || !video.videoWidth) {
-    console.error('Video not ready');
-    return;
+    throw new Error('Video not ready');
   }
   
   // Set canvas size to match video
@@ -190,16 +209,23 @@ async function captureFrame() {
   });
 }
 
-// Upload frame to server
-async function uploadFrame() {
+// Run the full pipeline (capture → describe → generate)
+async function runPipelineCycle() {
   try {
+    log('🚀 Starting pipeline cycle...');
+    statusText.textContent = 'Capturing frame...';
+    
+    // Capture frame
     const blob = await captureFrame();
     const formData = new FormData();
     formData.append('image', blob, `capture_${Date.now()}.jpg`);
     formData.append('cameraId', cameraSelect.value);
-    formData.append('frameRate', 0); // Not using frame rate anymore
     
-    const response = await fetch(`${SERVER_URL}/api/camera-images`, {
+    log('📸 Frame captured, sending to server...');
+    statusText.textContent = 'Processing pipeline...';
+    
+    // Send to server for full pipeline processing
+    const response = await fetch(`${SERVER_URL}/api/start-pipeline`, {
       method: 'POST',
       body: formData
     });
@@ -207,47 +233,65 @@ async function uploadFrame() {
     const data = await response.json();
     
     if (data.success) {
-      frameCount++;
-      frameCountText.textContent = `Frames captured: ${frameCount}`;
-      statusText.textContent = `Captured at ${new Date().toLocaleTimeString()}`;
-      console.log('📸 Frame uploaded:', data.image);
+      cycleCount++;
+      cycleCountText.textContent = `Cycles: ${cycleCount}`;
+      log('✅ Pipeline complete! Description and image generated', 'success');
+      statusText.textContent = 'Cycle complete';
     } else {
-      console.error('Upload failed:', data.error);
-      statusText.textContent = 'Error uploading frame';
+      log('❌ Pipeline failed: ' + data.error, 'error');
+      statusText.textContent = 'Error in pipeline';
     }
   } catch (error) {
-    console.error('Error uploading frame:', error);
+    console.error('Pipeline error:', error);
+    log('❌ Error: ' + error.message, 'error');
     statusText.textContent = 'Error: ' + error.message;
   }
 }
 
-// Start capture mode (ready to receive requests)
-function startCapturing() {
+// Main pipeline loop
+async function pipelineLoop() {
+  if (!isRunning) return;
+  
+  await runPipelineCycle();
+  
+  if (isRunning) {
+    log(`⏳ Waiting ${CYCLE_DELAY_MS / 1000} seconds before next cycle...`);
+    statusText.textContent = `Waiting ${CYCLE_DELAY_MS / 1000}s...`;
+    setTimeout(pipelineLoop, CYCLE_DELAY_MS);
+  }
+}
+
+// Start pipeline
+function startPipeline() {
   if (!stream) {
     alert('Please start the webcam first');
     return;
   }
   
-  isCapturing = true;
+  isRunning = true;
   
-  startRecordingBtn.disabled = true;
-  stopRecordingBtn.disabled = false;
-  recordingIndicator.style.display = 'inline';
-  stopBtn.disabled = true; // Prevent stopping webcam while in capture mode
+  startPipelineBtn.disabled = true;
+  stopPipelineBtn.disabled = false;
+  runningIndicator.style.display = 'inline';
+  stopBtn.disabled = true; // Prevent stopping webcam while pipeline runs
   
-  statusText.textContent = 'Capture mode enabled - waiting for ITT requests';
-  console.log('✅ Capture mode enabled');
+  log('▶️  Pipeline enabled', 'success');
+  statusText.textContent = 'Pipeline running';
+  
+  // Start the loop
+  pipelineLoop();
 }
 
-// Stop capture mode
-function stopCapturing() {
-  isCapturing = false;
-  startRecordingBtn.disabled = false;
-  stopRecordingBtn.disabled = true;
-  recordingIndicator.style.display = 'none';
+// Stop pipeline
+function stopPipeline() {
+  isRunning = false;
+  startPipelineBtn.disabled = false;
+  stopPipelineBtn.disabled = true;
+  runningIndicator.style.display = 'none';
   stopBtn.disabled = false;
-  statusText.textContent = 'Capture mode disabled';
-  console.log('🛑 Capture mode disabled');
+  
+  statusText.textContent = 'Pipeline stopped';
+  log('⏹️  Pipeline disabled');
 }
 
 // Clear database and images
@@ -268,18 +312,21 @@ async function clearDatabase() {
     const data = await response.json();
     
     if (data.success) {
-      frameCount = 0;
-      frameCountText.textContent = 'Frames captured: 0';
-      statusText.textContent = 'Database cleared successfully';
+      cycleCount = 0;
+      cycleCountText.textContent = 'Cycles: 0';
+      statusText.textContent = 'Database cleared';
+      log('🗑️  Database cleared', 'success');
       alert('All images and database records have been deleted.');
     } else {
       console.error('Clear failed:', data.error);
       statusText.textContent = 'Error clearing database';
+      log('❌ Clear failed: ' + data.error, 'error');
       alert('Error: ' + data.error);
     }
   } catch (error) {
     console.error('Error clearing database:', error);
     statusText.textContent = 'Error: ' + error.message;
+    log('❌ Error: ' + error.message, 'error');
     alert('Error clearing database: ' + error.message);
   }
 }
@@ -287,24 +334,19 @@ async function clearDatabase() {
 // Event listeners
 startBtn.addEventListener('click', startWebcam);
 stopBtn.addEventListener('click', stopWebcam);
-startRecordingBtn.addEventListener('click', startCapturing);
-stopRecordingBtn.addEventListener('click', stopCapturing);
+startPipelineBtn.addEventListener('click', startPipeline);
+stopPipelineBtn.addEventListener('click', stopPipeline);
 clearDbBtn.addEventListener('click', clearDatabase);
 
 // WebSocket listeners
 socket.on('connect', () => {
   console.log('✅ Connected to server');
+  log('Connected to server', 'success');
 });
 
-socket.on('request-capture', async () => {
-  console.log('📸 Capture requested by ITT page');
-  if (isCapturing && stream) {
-    statusText.textContent = 'Capturing frame...';
-    await uploadFrame();
-    statusText.textContent = 'Capture mode enabled - waiting for ITT requests';
-  } else {
-    console.warn('⚠️ Capture request ignored - not in capture mode');
-  }
+socket.on('disconnect', () => {
+  console.log('❌ Disconnected from server');
+  log('Disconnected from server', 'error');
 });
 
 // Initialize camera list on page load

@@ -22,7 +22,7 @@ import {
   updateCameraImageStatus,
   deleteUndescribedImagesExcept
 } from './db.js';
-import { initWorker, startWorker } from './descriptionWorker.js';
+import { describeImage } from './ollama.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -182,6 +182,103 @@ app.get('/api/generated-images', (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 });
+
+// Get current state (latest of everything)
+app.get('/api/current-state', (req, res) => {
+  try {
+    const latestCapture = getLatestCameraImage();
+    const latestDescription = latestCapture ? getDescriptionByCameraImageId(latestCapture.id) : null;
+    const allGenerated = getAllGeneratedImages();
+    const latestGeneration = allGenerated.length > 0 ? allGenerated[allGenerated.length - 1] : null;
+    
+    res.json({
+      success: true,
+      state: {
+        latestCapture,
+        latestDescription,
+        latestGeneration
+      }
+    });
+  } catch (error) {
+    console.error('Error getting current state:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Start full pipeline (capture → describe → generate)
+app.post('/api/start-pipeline', upload.single('image'), async (req, res) => {
+  try {
+    const { cameraId } = req.body;
+    const filename = req.file.filename;
+    
+    console.log('🚀 Starting pipeline for:', filename);
+    
+    // Step 1: Save camera image
+    const imageId = insertCameraImage(filename, cameraId, 0);
+    const image = getCameraImageById(imageId);
+    const imagePath = path.join(__dirname, '../public/captures', filename);
+    
+    io.emit('state-updated', {
+      type: 'capture',
+      latestCapture: image
+    });
+    
+    // Step 2: Generate description with Ollama
+    console.log('📝 Generating description...');
+    const description = await describeImage(imagePath);
+    const descId = insertTextDescription(imageId, description);
+    const descRecord = getDescriptionByCameraImageId(imageId);
+    
+    io.emit('state-updated', {
+      type: 'description',
+      latestDescription: descRecord
+    });
+    
+    // Step 3: Generate image with Reagent API
+    console.log('🎨 Generating image...');
+    const imageGenResponse = await fetch(
+      'https://noggin.rea.gent/willing-raccoon-7030',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer rg_v1_jj5u5a2wpjk8iog49161uxx0stpepagsa9c3_ngk',
+        },
+        body: JSON.stringify({ prompt: description }),
+      }
+    );
+    
+    const imageBlob = await imageGenResponse.arrayBuffer();
+    const genFilename = `generated_${Date.now()}.webp`;
+    const genPath = path.join(__dirname, '../public/captures', genFilename);
+    
+    // Save generated image to filesystem
+    fs.writeFileSync(genPath, Buffer.from(imageBlob));
+    
+    // Save to database
+    const genId = insertGeneratedImage(genFilename, descId, description);
+    const genImage = getGeneratedImageById(genId);
+    
+    io.emit('state-updated', {
+      type: 'generation',
+      latestGeneration: genImage
+    });
+    
+    console.log('✅ Pipeline complete');
+    
+    res.json({
+      success: true,
+      result: {
+        capture: image,
+        description: descRecord,
+        generation: genImage
+      }
+    });
+  } catch (error) {
+    console.error('❌ Pipeline error:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
 // Get full pipeline for generated image
 app.get('/api/pipeline/:generatedImageId', (req, res) => {
   try {
@@ -261,27 +358,10 @@ app.get('/history', (req, res) => {
 io.on('connection', (socket) => {
   console.log('Client connected:', socket.id);
   
-  // Handle capture requests from ITT page
-  socket.on('request-capture', () => {
-    console.log('📸 Capture request from ITT page, broadcasting to main page...');
-    // io.emit('request-capture');
-  });
-
-    // Handle capture requests from ITT page
-  socket.on('request-capture-master', () => {
-    console.log('📸 Capture request from ITT page, broadcasting to main page...');
-    io.emit('request-capture');
-  });
-  
-  
   socket.on('disconnect', () => {
     console.log('Client disconnected:', socket.id);
   });
 });
-
-// Initialize and start the description worker
-initWorker(io);
-startWorker();
 
 const PORT = process.env.PORT || 3000;
 
