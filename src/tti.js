@@ -26,7 +26,7 @@ document.querySelector('#app').innerHTML = `
         </div>
       </fieldset>
       
-      <div id="progressContainer" style="flex: 0.5; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px;">
+      <div id="progressContainer" style="flex: 0.5; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; min-width: 200px; max-width: 200px;">
         <img id="hourglassImg" src="/hourglass.gif" style="width: 64px; height: 64px;" alt="Idle" />
         <progress id="progressBar" max="100" value="0" style="display: none; width: 200px;"></progress>
       </div>

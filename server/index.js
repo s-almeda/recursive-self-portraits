@@ -240,8 +240,8 @@ app.post('/api/start-pipeline', upload.single('image'), async (req, res) => {
     const descId = insertTextDescription(imageId, description);
     const descRecord = getDescriptionByCameraImageId(imageId);
     
-    // Wait for minimum 8 seconds before broadcasting description
-    await waitForMinimumTime(descriptionStartTime, 8000);
+    // Wait for minimum 10 seconds before broadcasting description
+    await waitForMinimumTime(descriptionStartTime, 10000);
     
     io.emit('state-updated', {
       type: 'description',

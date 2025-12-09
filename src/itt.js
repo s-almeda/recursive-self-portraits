@@ -27,7 +27,7 @@ document.querySelector('#app').innerHTML = `
         </div>
       </fieldset>
       
-      <div id="progressContainer" style="flex: 0.5; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px;">
+      <div id="progressContainer" style="flex: 0.5; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; min-width: 200px; max-width: 200px;">
         <img id="hourglassImg" src="/hourglass.gif" style="width: 64px; height: 64px;" alt="Idle" />
         <progress id="progressBar" max="100" value="0" style="display: none; width: 200px;"></progress>
       </div>
@@ -86,7 +86,7 @@ function updateCapture(capture) {
     descriptionText.value = '...';
     timestamp.textContent = '';
     
-    // Start 8-second progress bar
+    // Start 10-second progress bar
     startProgressBar();
   }
 }
@@ -131,7 +131,7 @@ function startProgressBar() {
   progressBar.value = 0;
   progressStartTime = Date.now();
   
-  const duration = 8000; // 8 seconds
+  const duration = 10000; // 10 seconds
   const updateInterval = 50; // Update every 50ms
   
   progressInterval = setInterval(() => {
