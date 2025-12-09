@@ -21,7 +21,7 @@ export async function describeImage(imagePath) {
       messages: [
         {
           role: 'user',
-          content: 'Describe the person in this image with extreme detail, focusing primarily on their face and facial features. Your description should be precise enough for an artist to create an accurate portrait drawing. Include: facial structure (face shape, jawline, cheekbones), eyes (shape, color, expression, eyebrows), nose (shape, size), mouth (lip shape, expression), hair (color, style, texture, length), skin tone, any distinctive features (facial hair, glasses, accessories, marks, expression lines). Also note head position, angle, and lighting. Be objective and detailed.',
+          content: 'Describe the person and any objects in front of them with extreme detail, focusing primarily on their face and facial features with accurate color descriptions. precise enough for an artist to create an accurate portrait painting. Include: facial structure (face shape, jawline, cheekbones), eyes (shape, color, expression, eyebrows), nose (shape, size), mouth (lip shape, size, expression), hair (color, style, texture, length), skin tone, distinctive features (facial hair, glasses, accessories, marks, expression lines). Also note head position, angle, and lighting. Be objective and detailed, but not too verbose. Limit to 200 words. No new lines or extra white space.',
           images: [base64Image]
         }
       ],

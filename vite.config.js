@@ -7,7 +7,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         itt: resolve(__dirname, 'itt.html'),
-        tti: resolve(__dirname, 'tti.html')
+        tti: resolve(__dirname, 'tti.html'),
+        history: resolve(__dirname, 'history.html')
       }
     }
   },

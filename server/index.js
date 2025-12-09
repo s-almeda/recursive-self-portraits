@@ -15,6 +15,7 @@ import {
   getDescriptionByCameraImageId,
   insertGeneratedImage,
   getGeneratedImageById,
+  getAllGeneratedImages,
   getFullPipeline,
   clearAllData,
   getPendingCameraImages,
@@ -155,9 +156,29 @@ app.post('/api/generated-images', upload.single('image'), (req, res) => {
     
     const genId = insertGeneratedImage(filename, textDescriptionId, prompt);
     const genImage = getGeneratedImageById(genId);
+    
+    // Broadcast to all clients (especially history page)
+    io.emit('generation-complete', {
+      generatedImageId: genImage.id,
+      filename: genImage.filename,
+      description: prompt,
+      timestamp: genImage.generated_at
+    });
+    
     res.json({ success: true, generatedImage: genImage });
   } catch (error) {
     console.error('Error creating generated image:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Get all generated images
+app.get('/api/generated-images', (req, res) => {
+  try {
+    const images = getAllGeneratedImages();
+    res.json({ success: true, images });
+  } catch (error) {
+    console.error('Error getting generated images:', error);
     res.status(500).json({ success: false, error: error.message });
   }
 });
@@ -181,7 +202,7 @@ app.delete('/api/clear-all', (req, res) => {
     // Clear database
     clearAllData();
     
-    // Clear capture files
+    // Clear all capture files (includes both camera captures and generated images)
     const capturesDir = path.join(__dirname, '../public/captures');
     if (fs.existsSync(capturesDir)) {
       const files = fs.readdirSync(capturesDir);
@@ -231,6 +252,11 @@ app.get('/tti', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/tti.html'));
 });
 
+// Serve history.html for /history route
+app.get('/history', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/history.html'));
+});
+
 // WebSocket connection
 io.on('connection', (socket) => {
   console.log('Client connected:', socket.id);
@@ -257,4 +283,5 @@ httpServer.listen(PORT, () => {
   console.log(`Main page: http://localhost:${PORT}/`);
   console.log(`ITT page: http://localhost:${PORT}/itt`);
   console.log(`TTI page: http://localhost:${PORT}/tti`);
+  console.log(`History page: http://localhost:${PORT}/history`);
 });

@@ -114,7 +114,7 @@ function waitForNewDescription() {
   });
 }
 
-// Mock image generation
+// Generate image and save to database
 async function generateImage() {
   console.log('🎨 Starting image generation...');
   
@@ -148,6 +148,20 @@ async function generateImage() {
     const imageBlob = await response.blob();
     console.log('✅ Image generated, size:', imageBlob.size, 'bytes');
     
+    // Save to server database and filesystem
+    const formData = new FormData();
+    formData.append('image', imageBlob, `generated_${Date.now()}.webp`);
+    formData.append('textDescriptionId', currentDescriptionId);
+    formData.append('prompt', descriptionText.value);
+    
+    const saveResponse = await fetch('http://localhost:3000/api/generated-images', {
+      method: 'POST',
+      body: formData
+    });
+    
+    const saveResult = await saveResponse.json();
+    console.log('💾 Image saved to database:', saveResult.generatedImage);
+    
     // Create a blob URL that the browser can display
     const imageUrl = URL.createObjectURL(imageBlob);
     
@@ -167,6 +181,14 @@ async function generateImage() {
     }, 200);
     
     console.log('✅ Image displayed');
+    
+    // Emit event for history page
+    socket.emit('generation-complete', {
+      generatedImageId: saveResult.generatedImage.id,
+      filename: saveResult.generatedImage.filename,
+      description: descriptionText.value,
+      timestamp: saveResult.generatedImage.generated_at
+    });
     
   } catch (error) {
     console.error('❌ Error generating image:', error);

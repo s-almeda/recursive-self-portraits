@@ -128,6 +128,14 @@ export function getGeneratedImageById(id) {
   return stmt.get(id);
 }
 
+export function getAllGeneratedImages() {
+  const stmt = db.prepare(`
+    SELECT * FROM generated_images 
+    ORDER BY generated_at ASC
+  `);
+  return stmt.all();
+}
+
 // Full pipeline query
 export function getFullPipeline(generatedImageId) {
   const stmt = db.prepare(`

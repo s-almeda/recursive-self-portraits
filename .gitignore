@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+*/captures/*
+public/captures/*
+public/captures/capture_*
+*.webp
+*.jpg
