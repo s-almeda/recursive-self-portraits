@@ -2,8 +2,10 @@ import './style.css'
 import 'xp.css'
 import { io } from 'socket.io-client';
 
-// Connect to WebSocket server
-const socket = io('http://localhost:3000');
+// Connect to WebSocket server - use current host so it works locally and remotely
+const SERVER_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : window.prompt();
+const socket = io(SERVER_URL);
+
 
 let generatedImages = [];
 
@@ -36,7 +38,7 @@ async function loadHistory() {
   try {
     statusDiv.textContent = 'Loading history...';
     
-    const response = await fetch('http://localhost:3000/api/generated-images');
+    const response = await fetch(`${SERVER_URL}/api/generated-images`);
     const result = await response.json();
     
     if (result.success) {

@@ -5,11 +5,15 @@ import { io } from 'socket.io-client';
 // CONFIGURATION - Easy to edit
 const CAPTURE_DELAY_MS = 6000; // Time between captures (after description is shown)
 
-// Connect to WebSocket server
-const socket = io('http://localhost:3000');
+// Connect to WebSocket server - use current host so it works locally and remotely
+const SERVER_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : window.prompt();
+const socket = io(SERVER_URL);
+
 
 let currentImageId = null;
 let isWaitingForCapture = false;
+
+const isMaster = window.confirm('ARE YOU MASTER?');
 
 document.querySelector('#app').innerHTML = `
   <div class="window" style="width: calc(100vw - 40px); height: 85vh; margin: auto; margin-top: 50px; max-width: 90vw ; box-sizing: border-box;">
@@ -56,7 +60,12 @@ const descriptionText = document.querySelector('#descriptionText');
 // Request a new capture from the main page
 function requestCapture() {
   console.log('📡 Requesting new capture...');
-  socket.emit('request-capture');
+  if (isMaster){
+    socket.emit('request-capture-master');
+  }
+  else{
+    socket.emit('request-capture');
+  }
   isWaitingForCapture = true;
   aiStatus.textContent = 'Requesting capture...';
 }
@@ -97,7 +106,7 @@ function waitForNewFrame() {
         currentImageId = data.id;
         
         // Display the image
-        latestImage.src = `http://localhost:3000/captures/${data.filename}`;
+        latestImage.src = `${SERVER_URL}/captures/${data.filename}`;
         latestImage.style.display = 'block';
         noImageText.style.display = 'none';
         

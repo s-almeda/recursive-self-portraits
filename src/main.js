@@ -7,8 +7,9 @@ let isCapturing = false;
 let canvas = null;
 let ctx = null;
 
-// Connect to WebSocket server
-const socket = io('http://localhost:3000');
+// Connect to WebSocket server - use current host so it works locally and remotely
+const SERVER_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : window.prompt();
+const socket = io(SERVER_URL);
 
 socket.on('connect', () => {
   console.log('Connected to server');
@@ -198,7 +199,7 @@ async function uploadFrame() {
     formData.append('cameraId', cameraSelect.value);
     formData.append('frameRate', 0); // Not using frame rate anymore
     
-    const response = await fetch('http://localhost:3000/api/camera-images', {
+    const response = await fetch(`${SERVER_URL}/api/camera-images`, {
       method: 'POST',
       body: formData
     });
@@ -260,7 +261,7 @@ async function clearDatabase() {
   try {
     statusText.textContent = 'Clearing database...';
     
-    const response = await fetch('http://localhost:3000/api/clear-all', {
+    const response = await fetch(`${SERVER_URL}/api/clear-all`, {
       method: 'DELETE'
     });
     

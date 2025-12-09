@@ -1,15 +1,16 @@
 import ollama from 'ollama';
 import fs from 'fs';
 import path from 'path';
+import memoizee from 'memoizee';
 
 const MODEL = 'granite3.2-vision';
 
 /**
- * Describe an image using Ollama vision model
+ * Describe an image using Ollama vision model (memoized with max 10 cache)
  * @param {string} imagePath - Absolute path to the image file
  * @returns {Promise<string>} - Description text
  */
-export async function describeImage(imagePath) {
+export const describeImage = memoizee(async (imagePath) => {
   try {
     // Read image file as base64
     const imageBuffer = fs.readFileSync(imagePath);
@@ -32,7 +33,10 @@ export async function describeImage(imagePath) {
     console.error('Error describing image with Ollama:', error);
     throw error;
   }
-}
+}, {
+  promise: true,
+  max: 10
+});
 
 /**
  * Check if Ollama is available

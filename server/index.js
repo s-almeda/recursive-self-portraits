@@ -264,8 +264,15 @@ io.on('connection', (socket) => {
   // Handle capture requests from ITT page
   socket.on('request-capture', () => {
     console.log('📸 Capture request from ITT page, broadcasting to main page...');
+    // io.emit('request-capture');
+  });
+
+    // Handle capture requests from ITT page
+  socket.on('request-capture-master', () => {
+    console.log('📸 Capture request from ITT page, broadcasting to main page...');
     io.emit('request-capture');
   });
+  
   
   socket.on('disconnect', () => {
     console.log('Client disconnected:', socket.id);

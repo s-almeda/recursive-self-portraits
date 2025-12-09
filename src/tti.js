@@ -1,12 +1,38 @@
 import './style.css'
 import 'xp.css'
 import { io } from 'socket.io-client';
+import memoizee from 'memoizee';
 
 // CONFIGURATION - Easy to edit
 const DISPLAY_DELAY_MS = 6000; // Time between generations (after image is shown)
 
-// Connect to WebSocket server
-const socket = io('http://localhost:3000');
+// Connect to WebSocket server - use current host so it works locally and remotely
+const SERVER_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : window.prompt();
+const socket = io(SERVER_URL);
+
+// Memoized image generation API call (max 10 cached results)
+const generateImageFromPrompt = memoizee(async (prompt) => {
+  console.log('📡 Calling image generation API with description...');
+  const response = await fetch(
+    'https://noggin.rea.gent/willing-raccoon-7030',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer rg_v1_jj5u5a2wpjk8iog49161uxx0stpepagsa9c3_ngk',
+      },
+      body: JSON.stringify({ prompt }),
+    }
+  );
+  
+  const imageBlob = await response.blob();
+  console.log('✅ Image generated, size:', imageBlob.size, 'bytes');
+  return imageBlob;
+}, {
+  promise: true,
+  max: 10
+});
+
 
 let currentDescriptionId = null;
 let currentCameraImageId = null;
@@ -128,25 +154,8 @@ async function generateImage() {
   animateProgress(95, 30000);
   
   try {
-    // Call the actual image generation API
-    console.log('📡 Calling image generation API with description...');
-    const response = await fetch(
-      'https://noggin.rea.gent/willing-raccoon-7030',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer rg_v1_jj5u5a2wpjk8iog49161uxx0stpepagsa9c3_ngk',
-        },
-        body: JSON.stringify({
-          prompt: descriptionText.value,
-        }),
-      }
-    );
-    
-    // Get the image as a blob (raw image data)
-    const imageBlob = await response.blob();
-    console.log('✅ Image generated, size:', imageBlob.size, 'bytes');
+    // Call the memoized image generation API
+    const imageBlob = await generateImageFromPrompt(descriptionText.value);
     
     // Save to server database and filesystem
     const formData = new FormData();
@@ -154,7 +163,7 @@ async function generateImage() {
     formData.append('textDescriptionId', currentDescriptionId);
     formData.append('prompt', descriptionText.value);
     
-    const saveResponse = await fetch('http://localhost:3000/api/generated-images', {
+    const saveResponse = await fetch(`${SERVER_URL}/api/generated-images`, {
       method: 'POST',
       body: formData
     });
