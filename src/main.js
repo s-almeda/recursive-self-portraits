@@ -14,7 +14,7 @@ const socket = io(SERVER_URL);
 const CYCLE_DELAY_MS = 5000; // 5 seconds between cycles
 
 document.querySelector('#app').innerHTML = `
-  <div class="window" style="width: 900px; margin: 2rem auto; overflow: auto;">
+  <div class="window" style="width: 900px; margin: 2rem auto; overflow: auto; max-height: calc(100vh - 4rem);">
     <div class="title-bar">
       <div class="title-bar-text">Recursive Self-Portrait - Control Center</div>
       <div class="title-bar-controls">
@@ -210,6 +210,7 @@ async function captureFrame() {
 }
 
 // Run the full pipeline (capture → describe → generate)
+// The pipeline happens on the server, but we control timing here
 async function runPipelineCycle() {
   try {
     log('🚀 Starting pipeline cycle...');
@@ -221,10 +222,11 @@ async function runPipelineCycle() {
     formData.append('image', blob, `capture_${Date.now()}.jpg`);
     formData.append('cameraId', cameraSelect.value);
     
-    log('📸 Frame captured, sending to server...');
-    statusText.textContent = 'Processing pipeline...';
+    log('📸 Frame captured, processing pipeline...');
+    statusText.textContent = 'Processing full pipeline...';
     
-    // Send to server for full pipeline processing
+    // Send to server - it will broadcast updates as each step completes
+    // The display pages will show progress bars and wait 5s after each update
     const response = await fetch(`${SERVER_URL}/api/start-pipeline`, {
       method: 'POST',
       body: formData
@@ -255,8 +257,8 @@ async function pipelineLoop() {
   await runPipelineCycle();
   
   if (isRunning) {
-    log(`⏳ Waiting ${CYCLE_DELAY_MS / 1000} seconds before next cycle...`);
-    statusText.textContent = `Waiting ${CYCLE_DELAY_MS / 1000}s...`;
+    log(`⏳ Waiting ${CYCLE_DELAY_MS / 1000} seconds before next capture...`);
+    statusText.textContent = `waiting ${CYCLE_DELAY_MS / 1000}s before next capture...`;
     setTimeout(pipelineLoop, CYCLE_DELAY_MS);
   }
 }

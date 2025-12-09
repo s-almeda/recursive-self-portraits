@@ -205,6 +205,16 @@ app.get('/api/current-state', (req, res) => {
   }
 });
 
+// Helper to ensure minimum time has passed
+async function waitForMinimumTime(startTime, minimumMs) {
+  const elapsed = Date.now() - startTime;
+  const remaining = minimumMs - elapsed;
+  if (remaining > 0) {
+    console.log(`⏳ Waiting ${remaining}ms to reach minimum ${minimumMs}ms...`);
+    await new Promise(resolve => setTimeout(resolve, remaining));
+  }
+}
+
 // Start full pipeline (capture → describe → generate)
 app.post('/api/start-pipeline', upload.single('image'), async (req, res) => {
   try {
@@ -223,19 +233,24 @@ app.post('/api/start-pipeline', upload.single('image'), async (req, res) => {
       latestCapture: image
     });
     
-    // Step 2: Generate description with Ollama
+    // Step 2: Generate description with Ollama (minimum 5 seconds)
     console.log('📝 Generating description...');
+    const descriptionStartTime = Date.now();
     const description = await describeImage(imagePath);
     const descId = insertTextDescription(imageId, description);
     const descRecord = getDescriptionByCameraImageId(imageId);
+    
+    // Wait for minimum 8 seconds before broadcasting description
+    await waitForMinimumTime(descriptionStartTime, 8000);
     
     io.emit('state-updated', {
       type: 'description',
       latestDescription: descRecord
     });
     
-    // Step 3: Generate image with Reagent API
+    // Step 3: Generate image with Reagent API (minimum 5 seconds)
     console.log('🎨 Generating image...');
+    const generationStartTime = Date.now();
     const imageGenResponse = await fetch(
       'https://noggin.rea.gent/willing-raccoon-7030',
       {
@@ -259,9 +274,20 @@ app.post('/api/start-pipeline', upload.single('image'), async (req, res) => {
     const genId = insertGeneratedImage(genFilename, descId, description);
     const genImage = getGeneratedImageById(genId);
     
+    // Wait for minimum 5 seconds before broadcasting generation
+    await waitForMinimumTime(generationStartTime, 5000);
+    
     io.emit('state-updated', {
       type: 'generation',
       latestGeneration: genImage
+    });
+    
+    // Also emit for history page
+    io.emit('generation-complete', {
+      generatedImageId: genImage.id,
+      filename: genImage.filename,
+      description: description,
+      timestamp: genImage.generated_at
     });
     
     console.log('✅ Pipeline complete');
