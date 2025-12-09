@@ -2,10 +2,10 @@ import './style.css'
 import 'xp.css'
 import { io } from 'socket.io-client';
 
-// Connect to WebSocket server - use port 3000 for both local and network access
+// Connect to WebSocket server - use window.location.origin for both local and ngrok
 const SERVER_URL = window.location.hostname === 'localhost' 
   ? 'http://localhost:3000' 
-  : `http://${window.location.hostname}:3000`;
+  : window.location.origin;
 const socket = io(SERVER_URL);
 
 
@@ -22,6 +22,9 @@ document.querySelector('#app').innerHTML = `
       </div>
     </div>
     <div class="window-body" style="height: calc(85vh - 50px); display: flex; flex-direction: column; padding: 10px; font-size: 1.1em; overflow-y: hidden;">
+      <div style="padding: 0 10px 10px 10px; text-align: center;">
+        <button id="descriptionBtn">about</button>
+      </div>
       <div id="status" style="padding: 10px; text-align: center; font-weight: bold;">
       </div>
       <div id="gallery" style="flex: 1; overflow-y: auto; padding: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; align-content: start;">
@@ -29,10 +32,65 @@ document.querySelector('#app').innerHTML = `
       </div>
     </div>
   </div>
+  
+  <!-- Description Popup -->
+  <div id="descriptionPopup" class="window" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 700px; max-height: 80vh; z-index: 1000; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); overflow: hidden;">
+    <div class="title-bar">
+      <div class="title-bar-text">Recursive Self Portraits: #0</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" id="closeDescriptionBtn"></button>
+      </div>
+    </div>
+    <div class="window-body" style="overflow-y: auto; max-height: calc(80vh - 50px); padding: 15px; box-sizing: border-box;">
+      <fieldset style="margin: 0; padding: 25px; font-family: 'Courier New', monospace; font-size: 1.15em; line-height: 1.3;">
+
+        <div style="text-align: center; margin: 15px ;">
+          <img src="/fig1.jpg" alt="Figure 1" style="max-width: 100%; height: auto; border: 2px solid #000;" />
+          <p style="font-size: 0.8em; margin-top: 5px;"><strong>fig. 1</strong></p>
+        </div>
+        <p style="margin: 10px 0;">this is a performance art piece, wherein a human artist performs the following:</p>
+        <ol style="margin: 10px 0; padding-left: 25px;">
+          <li style="margin: 5px 0;">look at your self, and produce a painting of what you see.</li>
+          <li style="margin: 5px 0;"><strong><em>WHILE YOU COMPLETE STEP 1:</em></strong>
+            <ol style="margin: 5px 0 5px 20px; padding-left: 20px;">
+              <li style="margin: 3px 0;">have a vision machine look at your self, and produce an image representation of what it sees.</li>
+              <li style="margin: 3px 0;">give the image to an image-to-text machine, and ask it to produce a text representation of what it sees</li>
+              <li style="margin: 3px 0;">give that text to a text-to-image machine, and ask it to produce an image of what it describes.</li>
+              <li style="margin: 3px 0;">repeat</li>
+            </ol>
+          </li>
+        </ol>
+        <p style="margin: 10px 0;">this instance of the piece is complete when step 1 is complete.</p>
+      </fieldset>
+    </div>
+  </div>
+  
+  <!-- Overlay for popup background -->
+  <div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;"></div>
 `
 
 const statusDiv = document.querySelector('#status');
 const galleryDiv = document.querySelector('#gallery');
+const descriptionBtn = document.querySelector('#descriptionBtn');
+const descriptionPopup = document.querySelector('#descriptionPopup');
+const closeDescriptionBtn = document.querySelector('#closeDescriptionBtn');
+const popupOverlay = document.querySelector('#popupOverlay');
+
+// Popup controls
+descriptionBtn.addEventListener('click', () => {
+  descriptionPopup.style.display = 'block';
+  popupOverlay.style.display = 'block';
+});
+
+closeDescriptionBtn.addEventListener('click', () => {
+  descriptionPopup.style.display = 'none';
+  popupOverlay.style.display = 'none';
+});
+
+popupOverlay.addEventListener('click', () => {
+  descriptionPopup.style.display = 'none';
+  popupOverlay.style.display = 'none';
+});
 
 // Load all generated images from the server
 async function loadHistory() {
@@ -81,7 +139,7 @@ async function loadHistory() {
           timeString = 'less than a minute';
         }
         
-        statusDiv.textContent = `${generatedImages.length} representations created over ${timeString}`;
+        statusDiv.textContent = `${generatedImages.length} portraits created in ${timeString}`;
         renderGallery();
       }
     } else {
