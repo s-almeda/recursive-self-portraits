@@ -1,0 +1,3290 @@
+[
+    {
+        "id": "cam_553a1a55",
+        "filename": "capture_1765318685159.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:18:05",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_aa6bfe52",
+        "filename": "capture_1765318710734.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:18:30",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_1eaf9f21",
+        "filename": "capture_1765318735825.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:18:55",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e827fe43",
+        "filename": "capture_1765318761172.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:19:21",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f5da6953",
+        "filename": "capture_1765318786707.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:19:46",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_43a4b74c",
+        "filename": "capture_1765318811116.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:20:11",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c5dfc846",
+        "filename": "capture_1765318838424.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:20:38",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_21310270",
+        "filename": "capture_1765318862670.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:21:02",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_add4a022",
+        "filename": "capture_1765318886668.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:21:26",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_262f1d99",
+        "filename": "capture_1765318913744.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:21:53",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_6a0243d2",
+        "filename": "capture_1765318941110.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:22:21",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_9aab1c0c",
+        "filename": "capture_1765318969915.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:22:49",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_7e996eba",
+        "filename": "capture_1765318996816.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:23:16",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_cd9341a0",
+        "filename": "capture_1765319022134.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:23:42",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e2650faa",
+        "filename": "capture_1765319048972.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:24:08",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f6cafbf1",
+        "filename": "capture_1765319073354.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:24:33",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ff60e0ed",
+        "filename": "capture_1765319099325.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:24:59",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_10b5ed2c",
+        "filename": "capture_1765319123592.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:25:23",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_311d538d",
+        "filename": "capture_1765319152290.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:25:52",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f4f2676a",
+        "filename": "capture_1765319177662.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:26:17",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_707c2326",
+        "filename": "capture_1765319201129.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:26:41",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a410a1be",
+        "filename": "capture_1765319225033.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:27:05",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_39a8e336",
+        "filename": "capture_1765319250942.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:27:30",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_45105d4c",
+        "filename": "capture_1765319278177.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:27:58",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b8b40084",
+        "filename": "capture_1765319305659.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:28:25",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e009bbb6",
+        "filename": "capture_1765319337266.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:28:57",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_57506a85",
+        "filename": "capture_1765319371237.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:29:31",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_6e803bdc",
+        "filename": "capture_1765319408259.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:30:08",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_2c1d3a8d",
+        "filename": "capture_1765319444265.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:30:44",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_dfe1a431",
+        "filename": "capture_1765319484247.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:31:24",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5e75ef00",
+        "filename": "capture_1765319519547.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:31:59",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_1c9c371f",
+        "filename": "capture_1765319546912.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:32:26",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_079286e6",
+        "filename": "capture_1765319574387.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:32:54",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_0755ec76",
+        "filename": "capture_1765319606923.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:33:26",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_8dfcde0a",
+        "filename": "capture_1765319638488.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:33:58",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_989cbd4e",
+        "filename": "capture_1765319669584.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:34:29",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_954544e9",
+        "filename": "capture_1765319701756.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:35:01",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c83defa6",
+        "filename": "capture_1765319731125.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:35:31",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_53055a15",
+        "filename": "capture_1765319763274.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:36:03",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_3a8c290c",
+        "filename": "capture_1765319793141.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:36:33",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_8cc8f7a6",
+        "filename": "capture_1765319822917.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:37:02",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f4bb67b3",
+        "filename": "capture_1765319853695.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:37:33",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_6847f887",
+        "filename": "capture_1765319887207.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:38:07",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_cd9c9312",
+        "filename": "capture_1765319914273.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:38:34",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_4543c770",
+        "filename": "capture_1765319942205.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:39:02",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_9c7931a7",
+        "filename": "capture_1765319976249.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:39:36",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_72190717",
+        "filename": "capture_1765320006332.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:40:06",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_fee43351",
+        "filename": "capture_1765320035784.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:40:35",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_9433ac5c",
+        "filename": "capture_1765320070278.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:41:10",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_57a44d58",
+        "filename": "capture_1765320109515.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:41:49",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_0e2231e9",
+        "filename": "capture_1765320141314.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:42:21",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_87491bc2",
+        "filename": "capture_1765320171238.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:42:51",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_43a5f34b",
+        "filename": "capture_1765320204664.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:43:24",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e2b9900a",
+        "filename": "capture_1765320237629.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:43:57",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_345da696",
+        "filename": "capture_1765320272192.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:44:32",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a741901c",
+        "filename": "capture_1765320303031.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:45:03",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_7f883895",
+        "filename": "capture_1765320334300.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:45:34",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_8af452a9",
+        "filename": "capture_1765320366300.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:46:06",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_2cd51b77",
+        "filename": "capture_1765320399655.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:46:39",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_0c60a4c4",
+        "filename": "capture_1765320432511.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:47:12",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c0ce4fcd",
+        "filename": "capture_1765320466393.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:47:46",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_830df910",
+        "filename": "capture_1765320498344.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:48:18",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_67326c53",
+        "filename": "capture_1765320532661.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:48:52",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_55586336",
+        "filename": "capture_1765320562160.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:49:22",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_299e99c0",
+        "filename": "capture_1765320596783.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:49:56",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_be1c31f8",
+        "filename": "capture_1765320624811.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:50:24",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5461e81b",
+        "filename": "capture_1765320656966.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:50:56",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_90020b91",
+        "filename": "capture_1765320690175.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:51:30",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_09e20e87",
+        "filename": "capture_1765320726644.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:52:06",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_53914712",
+        "filename": "capture_1765320755367.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:52:35",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ef7a357a",
+        "filename": "capture_1765320784573.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:53:04",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_46db8f09",
+        "filename": "capture_1765320817022.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:53:37",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ba38b7eb",
+        "filename": "capture_1765320857724.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:54:17",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f481d913",
+        "filename": "capture_1765320890026.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:54:50",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_bbee0708",
+        "filename": "capture_1765320919072.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:55:19",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_32863e69",
+        "filename": "capture_1765320953364.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:55:53",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_d2cc1dc3",
+        "filename": "capture_1765320988342.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:56:28",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_2e254917",
+        "filename": "capture_1765321021713.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:57:01",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_344c6151",
+        "filename": "capture_1765321052290.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:57:32",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_2e57fd17",
+        "filename": "capture_1765321089746.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:58:09",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_037cf73f",
+        "filename": "capture_1765321120492.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:58:40",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_dab68189",
+        "filename": "capture_1765321154896.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:59:14",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_95f5c74a",
+        "filename": "capture_1765321188036.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 22:59:48",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_081fa99a",
+        "filename": "capture_1765321220703.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:00:20",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_7ed7bbc7",
+        "filename": "capture_1765321249964.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:00:49",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_95dd82e6",
+        "filename": "capture_1765321281405.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:01:21",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f9a99b26",
+        "filename": "capture_1765321313753.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:01:53",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_3ab5a7d9",
+        "filename": "capture_1765321347873.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:02:27",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_57949421",
+        "filename": "capture_1765321379220.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:02:59",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_957f4540",
+        "filename": "capture_1765321411409.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:03:31",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_0b67b0b1",
+        "filename": "capture_1765321443242.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:04:03",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e8e2fe7b",
+        "filename": "capture_1765321473606.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:04:33",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e56af95d",
+        "filename": "capture_1765321506628.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:05:06",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_644c6770",
+        "filename": "capture_1765321538519.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:05:38",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_6e965f5f",
+        "filename": "capture_1765321570650.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:06:10",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_bc5bd4b7",
+        "filename": "capture_1765321600766.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:06:40",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a7ae9eec",
+        "filename": "capture_1765321631926.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:07:11",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_d344f44f",
+        "filename": "capture_1765321664445.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:07:44",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e5b01d22",
+        "filename": "capture_1765321699019.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:08:19",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_23b66392",
+        "filename": "capture_1765321732172.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:08:52",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_237f092c",
+        "filename": "capture_1765321765636.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:09:25",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5a88e462",
+        "filename": "capture_1765321800451.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:10:00",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_cea6b359",
+        "filename": "capture_1765321832020.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:10:32",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_1fb06b44",
+        "filename": "capture_1765321865159.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:11:05",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a8c3087c",
+        "filename": "capture_1765321895128.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:11:35",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_cc3cb261",
+        "filename": "capture_1765321924937.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:12:04",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_d6900514",
+        "filename": "capture_1765321956102.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:12:36",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b0ee85ab",
+        "filename": "capture_1765321988735.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:13:08",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_fa77ee21",
+        "filename": "capture_1765322023839.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:13:43",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_2e8d8a13",
+        "filename": "capture_1765322061630.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:14:21",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_7340885f",
+        "filename": "capture_1765322088696.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:14:48",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_880c44aa",
+        "filename": "capture_1765322117399.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:15:17",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_6427b876",
+        "filename": "capture_1765322148618.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:15:48",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_81e576d3",
+        "filename": "capture_1765322177898.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:16:17",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b004b3b8",
+        "filename": "capture_1765322211767.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:16:51",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_25b4249d",
+        "filename": "capture_1765322243665.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:17:23",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f9841ca6",
+        "filename": "capture_1765322274548.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:17:54",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_68ff2f6b",
+        "filename": "capture_1765322303614.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:18:23",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_474a15d4",
+        "filename": "capture_1765322333845.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:18:53",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_761ecbbb",
+        "filename": "capture_1765322366339.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:19:26",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5a4f2880",
+        "filename": "capture_1765322392989.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:19:52",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ab52f85f",
+        "filename": "capture_1765322417471.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:20:17",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_806fd52a",
+        "filename": "capture_1765322448469.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:20:48",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ad6b28c3",
+        "filename": "capture_1765322482714.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:21:22",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_553634e5",
+        "filename": "capture_1765322508888.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:21:48",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e3dff7e8",
+        "filename": "capture_1765322543630.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:22:23",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b8e1c774",
+        "filename": "capture_1765322572435.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:22:52",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c9531d48",
+        "filename": "capture_1765322604707.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:23:24",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ee82ca1b",
+        "filename": "capture_1765322638208.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:23:58",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_640352c4",
+        "filename": "capture_1765322669762.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:24:29",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_2c5d137b",
+        "filename": "capture_1765322699959.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:24:59",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ff5e304f",
+        "filename": "capture_1765322731887.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:25:31",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_1fd6109c",
+        "filename": "capture_1765322762691.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:26:02",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_cc3ef7a4",
+        "filename": "capture_1765322791766.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:26:31",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_04b222a4",
+        "filename": "capture_1765322822931.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:27:02",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_9b207cde",
+        "filename": "capture_1765322852069.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:27:32",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_9fdd33a1",
+        "filename": "capture_1765322886153.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:28:06",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_4c334f70",
+        "filename": "capture_1765322917785.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:28:37",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_25078f4d",
+        "filename": "capture_1765322947571.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:29:07",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5eb471ce",
+        "filename": "capture_1765322977398.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:29:37",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_084b8304",
+        "filename": "capture_1765323009290.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:30:09",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a1da9275",
+        "filename": "capture_1765323043083.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:30:43",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c2d0f8eb",
+        "filename": "capture_1765323074529.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:31:14",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ed5a6637",
+        "filename": "capture_1765323114990.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:31:54",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_593b42b2",
+        "filename": "capture_1765323146382.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:32:26",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_95469443",
+        "filename": "capture_1765323177870.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:32:57",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_d92a371b",
+        "filename": "capture_1765323209701.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:33:29",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_440c75e4",
+        "filename": "capture_1765323238421.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:33:58",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5220f41d",
+        "filename": "capture_1765323267583.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:34:27",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e50b5b21",
+        "filename": "capture_1765323297470.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:34:57",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e1ac635e",
+        "filename": "capture_1765323329032.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:35:29",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_4e74fb5c",
+        "filename": "capture_1765323359869.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:35:59",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_67df92a3",
+        "filename": "capture_1765323391523.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:36:31",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a5d65a25",
+        "filename": "capture_1765323419934.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:36:59",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_79981a43",
+        "filename": "capture_1765323450604.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:37:30",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_3a44b7e8",
+        "filename": "capture_1765323484589.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:38:04",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_cac16239",
+        "filename": "capture_1765323512437.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:38:32",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_1eb8ea32",
+        "filename": "capture_1765323543434.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:39:03",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_8cc49c05",
+        "filename": "capture_1765323575135.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:39:35",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a359275b",
+        "filename": "capture_1765323603078.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:40:03",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_4595992d",
+        "filename": "capture_1765323636171.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:40:36",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ba38809a",
+        "filename": "capture_1765323668253.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:41:08",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_6bc69c4a",
+        "filename": "capture_1765323699875.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:41:39",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_68547c64",
+        "filename": "capture_1765323732408.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:42:12",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_8c50b6d7",
+        "filename": "capture_1765323767479.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:42:47",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_95e665c6",
+        "filename": "capture_1765323795053.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:43:15",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_dad61fdf",
+        "filename": "capture_1765323822170.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:43:42",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e1422136",
+        "filename": "capture_1765323852048.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:44:12",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_55f25369",
+        "filename": "capture_1765323884426.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:44:44",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_9b357e75",
+        "filename": "capture_1765323917212.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:45:17",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_d514e756",
+        "filename": "capture_1765323945183.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:45:45",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_cfc22374",
+        "filename": "capture_1765323975176.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:46:15",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_4bfefaa0",
+        "filename": "capture_1765324005453.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:46:45",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_d336138b",
+        "filename": "capture_1765324032778.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:47:12",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_d43766e5",
+        "filename": "capture_1765324066193.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:47:46",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5631e841",
+        "filename": "capture_1765324098885.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:48:18",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_6460f5b4",
+        "filename": "capture_1765324133484.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:48:53",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_1e76b032",
+        "filename": "capture_1765324164239.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:49:24",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b029315e",
+        "filename": "capture_1765324197869.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:49:57",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f973d131",
+        "filename": "capture_1765324226264.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:50:26",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_4ee70e4d",
+        "filename": "capture_1765324256428.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:50:56",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_3d773728",
+        "filename": "capture_1765324287805.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:51:27",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c31fc5bd",
+        "filename": "capture_1765324317825.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:51:57",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e8a6a8a8",
+        "filename": "capture_1765324349773.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:52:29",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_01c18f3d",
+        "filename": "capture_1765324375646.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:52:55",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_6c380be6",
+        "filename": "capture_1765324405287.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:53:25",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f89c475d",
+        "filename": "capture_1765324435633.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:53:55",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_4622812b",
+        "filename": "capture_1765324467447.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:54:27",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_637d70c2",
+        "filename": "capture_1765324495647.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:54:55",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_2854e0ca",
+        "filename": "capture_1765324527078.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:55:27",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b17a3858",
+        "filename": "capture_1765324558070.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:55:58",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_bd099521",
+        "filename": "capture_1765324589689.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:56:29",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_54b3cb8c",
+        "filename": "capture_1765324621716.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:57:01",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5eb58df8",
+        "filename": "capture_1765324652451.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:57:32",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f65c6ec4",
+        "filename": "capture_1765324681732.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:58:01",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_85977648",
+        "filename": "capture_1765324710008.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:58:30",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_6fc729ed",
+        "filename": "capture_1765324741431.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:59:01",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b01f2cd6",
+        "filename": "capture_1765324767137.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:59:27",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_63a266df",
+        "filename": "capture_1765324795993.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-09 23:59:55",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e4e28b2d",
+        "filename": "capture_1765324823024.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:00:23",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ccfebd4b",
+        "filename": "capture_1765324852336.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:00:52",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_63751046",
+        "filename": "capture_1765324881800.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:01:21",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_bb435bd8",
+        "filename": "capture_1765324914222.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:01:54",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_70c0de92",
+        "filename": "capture_1765324942979.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:02:22",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f1080659",
+        "filename": "capture_1765324972419.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:02:52",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_6e003281",
+        "filename": "capture_1765325000205.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:03:20",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_863412d0",
+        "filename": "capture_1765325028418.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:03:48",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_97741f8b",
+        "filename": "capture_1765325057371.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:04:17",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e3268fc8",
+        "filename": "capture_1765325085083.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:04:45",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a00a63ff",
+        "filename": "capture_1765325117517.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:05:17",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_96e4f6c4",
+        "filename": "capture_1765325148619.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:05:48",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_68cd7087",
+        "filename": "capture_1765325177557.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:06:17",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_13d9954f",
+        "filename": "capture_1765325212371.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:06:52",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_19670642",
+        "filename": "capture_1765325240530.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:07:20",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_90f92ecf",
+        "filename": "capture_1765325265721.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:07:45",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f7a52bd3",
+        "filename": "capture_1765325295058.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:08:15",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_0864f986",
+        "filename": "capture_1765325323824.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:08:43",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_90d0456d",
+        "filename": "capture_1765325353136.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:09:13",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_37a0fab3",
+        "filename": "capture_1765325383321.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:09:43",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c7ba8d7e",
+        "filename": "capture_1765325414107.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:10:14",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_68e7d0c0",
+        "filename": "capture_1765325443115.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:10:43",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_912ded02",
+        "filename": "capture_1765325468567.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:11:08",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_3e865397",
+        "filename": "capture_1765325498567.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:11:38",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_59c7a078",
+        "filename": "capture_1765325526746.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:12:06",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_25e61c00",
+        "filename": "capture_1765325558257.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:12:38",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_7da2fc5b",
+        "filename": "capture_1765325588450.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:13:08",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_d5d635ad",
+        "filename": "capture_1765325620414.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:13:40",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5975199b",
+        "filename": "capture_1765325652740.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:14:12",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5d70338c",
+        "filename": "capture_1765325682902.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:14:42",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_26941c8a",
+        "filename": "capture_1765325710316.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:15:10",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_3ae215c9",
+        "filename": "capture_1765325742202.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:15:42",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_fcb3aab3",
+        "filename": "capture_1765325771709.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:16:11",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_81bc421e",
+        "filename": "capture_1765325800330.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:16:40",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_42e0b268",
+        "filename": "capture_1765325826838.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:17:06",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b80fa44c",
+        "filename": "capture_1765325855904.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:17:35",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a45d707b",
+        "filename": "capture_1765325885987.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:18:05",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b42ae381",
+        "filename": "capture_1765325913870.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:18:33",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c28f1c91",
+        "filename": "capture_1765325939698.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:18:59",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_42a2322f",
+        "filename": "capture_1765325968315.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:19:28",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_2fbf4378",
+        "filename": "capture_1765325992645.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:19:52",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_9b592c9c",
+        "filename": "capture_1765326021674.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:20:21",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_dd763876",
+        "filename": "capture_1765326047841.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:20:47",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a154e1d4",
+        "filename": "capture_1765326075674.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:21:15",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_496eccbb",
+        "filename": "capture_1765326104633.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:21:44",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_cfeefdf6",
+        "filename": "capture_1765326129461.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:22:09",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_df031cbb",
+        "filename": "capture_1765326160128.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:22:40",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_269348a9",
+        "filename": "capture_1765326189608.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:23:09",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_d507c10f",
+        "filename": "capture_1765326215354.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:23:35",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b6bd7d05",
+        "filename": "capture_1765326244770.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:24:04",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_eb1fe29c",
+        "filename": "capture_1765326271492.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:24:31",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_23d2808e",
+        "filename": "capture_1765326298292.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:24:58",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_8e98bac3",
+        "filename": "capture_1765326326725.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:25:26",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_2978d532",
+        "filename": "capture_1765326357814.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:25:57",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_cef5db0b",
+        "filename": "capture_1765326385323.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:26:25",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_65956e6e",
+        "filename": "capture_1765326415221.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:26:55",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_87ea8300",
+        "filename": "capture_1765326444752.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:27:24",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_185e8b0a",
+        "filename": "capture_1765326470856.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:27:50",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b3147b4f",
+        "filename": "capture_1765326498559.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:28:18",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_eb98dc0a",
+        "filename": "capture_1765326527286.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:28:47",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5539a4a0",
+        "filename": "capture_1765326555362.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:29:15",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_9c1e41f1",
+        "filename": "capture_1765326583609.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:29:43",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_1f30bbb4",
+        "filename": "capture_1765326613909.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:30:13",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_05163a8e",
+        "filename": "capture_1765326639017.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:30:39",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5fa067e2",
+        "filename": "capture_1765326670935.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:31:10",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_1ba39feb",
+        "filename": "capture_1765326697015.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:31:37",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_84c06c41",
+        "filename": "capture_1765326724261.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:32:04",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_0004c995",
+        "filename": "capture_1765326755171.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:32:35",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_71f9e58b",
+        "filename": "capture_1765326783497.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:33:03",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_13082681",
+        "filename": "capture_1765326811484.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:33:31",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a4c9196b",
+        "filename": "capture_1765326843407.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:34:03",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ca84fbb1",
+        "filename": "capture_1765326874433.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:34:34",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_564ef85e",
+        "filename": "capture_1765326904589.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:35:04",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f2463f91",
+        "filename": "capture_1765326933139.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:35:33",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_65c413ae",
+        "filename": "capture_1765326961011.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:36:01",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c4017e3d",
+        "filename": "capture_1765326990829.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:36:30",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_dbcd41a9",
+        "filename": "capture_1765327018108.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:36:58",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_af7a2ce3",
+        "filename": "capture_1765327046041.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:37:26",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_050d39ec",
+        "filename": "capture_1765327076056.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:37:56",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a44670d0",
+        "filename": "capture_1765327104236.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:38:24",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_d137d71a",
+        "filename": "capture_1765327136151.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:38:56",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_0ecabb84",
+        "filename": "capture_1765327165616.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:39:25",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_538a57d0",
+        "filename": "capture_1765327194374.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:39:54",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f9c66f60",
+        "filename": "capture_1765327222670.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:40:22",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ac527d0a",
+        "filename": "capture_1765327251184.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:40:51",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_742dcf69",
+        "filename": "capture_1765327280046.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:41:20",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_923bac0b",
+        "filename": "capture_1765327311814.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:41:51",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_84d8a0d9",
+        "filename": "capture_1765327341535.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:42:21",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b5e6f243",
+        "filename": "capture_1765327370853.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:42:50",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f371bc10",
+        "filename": "capture_1765327397003.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:43:17",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_71885975",
+        "filename": "capture_1765327426304.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:43:46",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_53e97069",
+        "filename": "capture_1765327450987.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:44:10",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_66acfd24",
+        "filename": "capture_1765327477459.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:44:37",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f980458f",
+        "filename": "capture_1765327507097.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:45:07",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_832538ac",
+        "filename": "capture_1765327535500.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:45:35",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c0744a00",
+        "filename": "capture_1765327564841.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:46:04",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_89becec4",
+        "filename": "capture_1765327593308.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:46:33",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5d857870",
+        "filename": "capture_1765327620706.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:47:00",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f64a2b4c",
+        "filename": "capture_1765327647857.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:47:27",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_1406dc75",
+        "filename": "capture_1765327676772.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:47:56",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_16f5af35",
+        "filename": "capture_1765327705493.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:48:25",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f39b0b5e",
+        "filename": "capture_1765327732660.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:48:52",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c4d881eb",
+        "filename": "capture_1765327759841.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:49:19",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a8dd74fe",
+        "filename": "capture_1765327791810.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:49:51",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ffee1015",
+        "filename": "capture_1765327821275.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:50:21",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_82309fe0",
+        "filename": "capture_1765327851370.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:50:51",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_187c221c",
+        "filename": "capture_1765327881857.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:51:21",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5ed63680",
+        "filename": "capture_1765327909445.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:51:49",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c09997be",
+        "filename": "capture_1765327937116.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:52:17",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_aa8e4fe3",
+        "filename": "capture_1765327965563.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:52:45",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_4728f7af",
+        "filename": "capture_1765327994523.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:53:14",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_81f7624e",
+        "filename": "capture_1765328020020.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:53:40",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f52225b8",
+        "filename": "capture_1765328048863.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:54:08",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_051f60f8",
+        "filename": "capture_1765328077928.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:54:37",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_7827b4e5",
+        "filename": "capture_1765328108081.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:55:08",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_59029d20",
+        "filename": "capture_1765328138976.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:55:38",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_273ef54c",
+        "filename": "capture_1765328164396.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:56:04",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_af0255e8",
+        "filename": "capture_1765328195162.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:56:35",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e149e0b0",
+        "filename": "capture_1765328224640.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:57:04",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_9d5716b9",
+        "filename": "capture_1765328254748.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:57:34",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_65485f4e",
+        "filename": "capture_1765328282474.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:58:02",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c7b6f701",
+        "filename": "capture_1765328312710.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:58:32",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_d8d0473b",
+        "filename": "capture_1765328342525.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:59:02",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_7a8d59d2",
+        "filename": "capture_1765328370669.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:59:30",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_cc568645",
+        "filename": "capture_1765328396865.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 00:59:56",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_88126cf9",
+        "filename": "capture_1765328430088.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:00:30",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_1a959b0d",
+        "filename": "capture_1765328462843.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:01:02",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_10e41965",
+        "filename": "capture_1765328490083.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:01:30",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_78e23e80",
+        "filename": "capture_1765328522130.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:02:02",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_7e6cacfa",
+        "filename": "capture_1765328550161.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:02:30",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_0320ead4",
+        "filename": "capture_1765328582416.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:03:02",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_fa4f064e",
+        "filename": "capture_1765328615315.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:03:35",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_4e2a7c92",
+        "filename": "capture_1765328649553.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:04:09",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5ecbae24",
+        "filename": "capture_1765328676861.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:04:36",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f047e502",
+        "filename": "capture_1765328703493.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:05:03",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_32d55765",
+        "filename": "capture_1765328733731.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:05:33",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_1458d9d6",
+        "filename": "capture_1765328769233.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:06:09",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e59df1c8",
+        "filename": "capture_1765328799295.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:06:39",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_083b3e02",
+        "filename": "capture_1765328831575.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:07:11",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f1914a8d",
+        "filename": "capture_1765328861726.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:07:41",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ea4c94eb",
+        "filename": "capture_1765328889717.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:08:09",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e8f7020d",
+        "filename": "capture_1765328921263.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:08:41",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_2e52105e",
+        "filename": "capture_1765328950527.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:09:10",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_4d933abc",
+        "filename": "capture_1765328981089.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:09:41",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_aab01720",
+        "filename": "capture_1765329009539.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:10:09",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f325a1f8",
+        "filename": "capture_1765329035415.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:10:35",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b20efe7d",
+        "filename": "capture_1765329067980.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:11:07",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5f87e1f4",
+        "filename": "capture_1765329092927.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:11:32",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_dd6b7846",
+        "filename": "capture_1765329125331.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:12:05",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e815b832",
+        "filename": "capture_1765329150465.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:12:30",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_4a80a807",
+        "filename": "capture_1765329175993.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:12:55",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e60ca168",
+        "filename": "capture_1765329205168.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:13:25",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_36500874",
+        "filename": "capture_1765329232819.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:13:52",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_ce4b32c9",
+        "filename": "capture_1765329257691.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:14:17",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_94dd7ea4",
+        "filename": "capture_1765329285813.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:14:45",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_634d02b9",
+        "filename": "capture_1765329316627.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:15:16",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_bd0a88bc",
+        "filename": "capture_1765329347927.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:15:47",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5bd369eb",
+        "filename": "capture_1765329375624.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:16:15",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_2cc86051",
+        "filename": "capture_1765329403469.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:16:43",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_eab7af08",
+        "filename": "capture_1765329432961.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:17:12",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_cd50ea2e",
+        "filename": "capture_1765329463836.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:17:43",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a01c6ba8",
+        "filename": "capture_1765329493945.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:18:13",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c02bef40",
+        "filename": "capture_1765329522639.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:18:42",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_50d0118d",
+        "filename": "capture_1765329549956.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:19:09",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b1e864a7",
+        "filename": "capture_1765329583125.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:19:43",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_636b7396",
+        "filename": "capture_1765329617794.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:20:17",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_dad37116",
+        "filename": "capture_1765329652360.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:20:52",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c062f3d7",
+        "filename": "capture_1765329688462.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:21:28",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_22d50e9b",
+        "filename": "capture_1765329719031.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:21:59",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_3577f9ff",
+        "filename": "capture_1765329751261.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:22:31",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b0abd91b",
+        "filename": "capture_1765329782128.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:23:02",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_a17cc576",
+        "filename": "capture_1765329810752.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:23:30",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_365fe4c3",
+        "filename": "capture_1765329844090.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:24:04",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_32987c99",
+        "filename": "capture_1765329873202.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:24:33",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_66ce8c7e",
+        "filename": "capture_1765329902781.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:25:02",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_6da3ec1f",
+        "filename": "capture_1765329932237.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:25:32",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_1618a5fa",
+        "filename": "capture_1765329963312.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:26:03",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_b11b4575",
+        "filename": "capture_1765329991053.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:26:31",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_3321e17c",
+        "filename": "capture_1765330017828.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:26:57",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_5aef576f",
+        "filename": "capture_1765330045891.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:27:25",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_c8b9a3a2",
+        "filename": "capture_1765330075072.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:27:55",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_15d0f1be",
+        "filename": "capture_1765330100530.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:28:20",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_99775055",
+        "filename": "capture_1765330128809.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:28:48",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_34ee727e",
+        "filename": "capture_1765330154911.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:29:14",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_dd38edfd",
+        "filename": "capture_1765330185577.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:29:45",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_4970efe9",
+        "filename": "capture_1765330217833.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:30:17",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_451845b8",
+        "filename": "capture_1765330253981.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:30:53",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_59d96e08",
+        "filename": "capture_1765330283176.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:31:23",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_891f752c",
+        "filename": "capture_1765330316886.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:31:56",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_8d65e264",
+        "filename": "capture_1765330345038.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:32:25",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_6410b88b",
+        "filename": "capture_1765330369883.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:32:49",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_09c6f61a",
+        "filename": "capture_1765330401135.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:33:21",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_785e5c8c",
+        "filename": "capture_1765330430151.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:33:50",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f859c9bf",
+        "filename": "capture_1765330461567.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:34:21",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_8292a2bc",
+        "filename": "capture_1765330492373.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:34:52",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_0a2dac36",
+        "filename": "capture_1765330522309.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:35:22",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_3d0afe1a",
+        "filename": "capture_1765330551071.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:35:51",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_7376ecad",
+        "filename": "capture_1765330578216.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:36:18",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_9e8e765d",
+        "filename": "capture_1765330608801.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:36:48",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_dc488241",
+        "filename": "capture_1765330633803.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:37:13",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_dec86a91",
+        "filename": "capture_1765330662448.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:37:42",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_472f1e4b",
+        "filename": "capture_1765330688200.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:38:08",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_bfe68d48",
+        "filename": "capture_1765330718735.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:38:38",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_e0d097dc",
+        "filename": "capture_1765330747256.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:39:07",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_307def19",
+        "filename": "capture_1765330776800.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:39:36",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_6fe28af6",
+        "filename": "capture_1765330805478.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:40:05",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_dbd6f4af",
+        "filename": "capture_1765330834764.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:40:34",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_9c67ec29",
+        "filename": "capture_1765330862807.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:41:02",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_f9ce1d8e",
+        "filename": "capture_1765330890838.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:41:30",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_145bdba8",
+        "filename": "capture_1765330917980.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:41:57",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_9c91ad33",
+        "filename": "capture_1765330944444.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:42:24",
+        "frame_rate": 0,
+        "status": "pending"
+    },
+    {
+        "id": "cam_be91401b",
+        "filename": "capture_1765330971238.jpg",
+        "camera_id": "7114093d7ecf6e2825379695d05a4a87bc37f23bce41e9fd4dfb3395b4a01479",
+        "captured_at": "2025-12-10 01:42:51",
+        "frame_rate": 0,
+        "status": "pending"
+    }
+]

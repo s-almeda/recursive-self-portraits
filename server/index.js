@@ -20,7 +20,10 @@ import {
   clearAllData,
   getPendingCameraImages,
   updateCameraImageStatus,
-  deleteUndescribedImagesExcept
+  deleteUndescribedImagesExcept,
+  insertQuestionnaireResponse,
+  getAllQuestionnaireResponses,
+  getRecentResponsesByIP
 } from './db.js';
 import { describeImage } from './ollama.js';
 
@@ -355,6 +358,61 @@ app.post('/api/cleanup-undescribed/:keepImageId', (req, res) => {
     res.json({ success: true, deletedCount });
   } catch (error) {
     console.error('Error cleaning up undescribed images:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Submit questionnaire response
+app.post('/api/questionnaire-response', (req, res) => {
+  try {
+    const ipAddress = req.ip || req.connection.remoteAddress;
+    
+    // Rate limiting: check if IP has submitted in last 5 seconds
+    const recentResponses = getRecentResponsesByIP(ipAddress, 5 / 60); // 5 seconds in minutes
+    if (recentResponses.length > 0) {
+      return res.status(429).json({ 
+        success: false, 
+        error: 'Please wait a few seconds before submitting another response.' 
+      });
+    }
+    
+    const responseData = {
+      ai_role: req.body.ai_role || null,
+      ai_role_other: req.body.ai_role_other || null,
+      camera_role: req.body.camera_role || null,
+      camera_role_other: req.body.camera_role_other || null,
+      human_role: req.body.human_role || null,
+      human_role_other: req.body.human_role_other || null,
+      painting_role: req.body.painting_role || null,
+      painting_role_other: req.body.painting_role_other || null,
+      obsolete_systems: req.body.obsolete_systems || null, // JSON string of array
+      obsolete_other: req.body.obsolete_other || null,
+      free_response: req.body.free_response || null,
+      ip_address: ipAddress
+    };
+    
+    const responseId = insertQuestionnaireResponse(responseData);
+    
+    console.log('📝 New questionnaire response submitted:', responseId);
+    
+    res.json({ 
+      success: true, 
+      message: 'Thank you for your response!',
+      responseId 
+    });
+  } catch (error) {
+    console.error('Error saving questionnaire response:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Get all questionnaire responses (optional - for viewing submissions)
+app.get('/api/questionnaire-responses', (req, res) => {
+  try {
+    const responses = getAllQuestionnaireResponses();
+    res.json({ success: true, responses });
+  } catch (error) {
+    console.error('Error getting questionnaire responses:', error);
     res.status(500).json({ success: false, error: error.message });
   }
 });

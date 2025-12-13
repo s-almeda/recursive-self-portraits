@@ -22,8 +22,9 @@ document.querySelector('#app').innerHTML = `
       </div>
     </div>
     <div class="window-body" style="height: calc(85vh - 50px); display: flex; flex-direction: column; padding: 10px; font-size: 1.1em; overflow-y: hidden;">
-      <div style="padding: 0 10px 10px 10px; text-align: center;">
+      <div style="padding: 0 10px 10px 10px; text-align: center; display: flex; gap: 10px; justify-content: center;">
         <button id="descriptionBtn">about</button>
+        <button id="questionnaireBtn">questionnaire</button>
       </div>
       <div id="status" style="padding: 10px; text-align: center; font-weight: bold;">
       </div>
@@ -34,7 +35,7 @@ document.querySelector('#app').innerHTML = `
   </div>
   
   <!-- Description Popup -->
-  <div id="descriptionPopup" class="window" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 700px; max-height: 80vh; z-index: 1000; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); overflow: hidden;">
+  <div id="descriptionPopup" class="window" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 700px; max-height: 80vh; z-index: 1000; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); overflow: hidden; pointer-events: auto;">
     <div class="title-bar">
       <div class="title-bar-text">Recursive Self Portraits: #0</div>
       <div class="title-bar-controls">
@@ -42,7 +43,7 @@ document.querySelector('#app').innerHTML = `
       </div>
     </div>
     <div class="window-body" style="overflow-y: auto; max-height: calc(80vh - 50px); padding: 15px; box-sizing: border-box;">
-      <fieldset style="margin: 0; padding: 25px; font-family: 'Courier New', monospace; font-size: 1.15em; line-height: 1.3;">
+      <fieldset style="margin: 0; padding: 25px; font-family: 'Courier New', monospace;">
 
         <div style="text-align: center; margin: 15px ;">
           <img src="/fig1.jpg" alt="Figure 1" style="max-width: 100%; height: auto; border: 2px solid #000;" />
@@ -65,8 +66,164 @@ document.querySelector('#app').innerHTML = `
     </div>
   </div>
   
+  <!-- Questionnaire Popup -->
+  <div id="questionnairePopup" class="window" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 700px; max-height: 85vh; z-index: 1000; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); overflow: hidden; pointer-events: auto;">
+    <div class="title-bar">
+      <div class="title-bar-text">questionnaire</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" id="closeQuestionnaireBtn"></button>
+      </div>
+    </div>
+    <div class="window-body" style="overflow-y: auto; max-height: calc(85vh - 33px); padding: 15px; box-sizing: border-box;">
+      <fieldset style="margin: 0; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.9em;">
+        <legend>Dear Viewer,</legend>
+        <p style="margin: 10px 0;">Thank you for visiting. Please write your answers to some or all of the following questions.</p>
+        <p style="margin: 10px 0; font-style: italic; font-size: 0.9em;">
+          We intend to compile and publicly share the submissions collected from this piece in a format that anyone can use as they please. In submitting a response, you consent to release what you have written here as 100% free to use.
+        </p>
+        
+        <form id="questionnaireForm" style="margin-top: 15px;">
+          <!-- Question 1: AI -->
+          <div style="margin: 15px 0;">
+            <p style="margin: 5px 0; font-weight: bold;">1. the AI is...</p>
+            <div class="field-row">
+              <input id="ai_artist" type="checkbox" name="ai_role" value="artist">
+              <label for="ai_artist">an artist</label>
+            </div>
+            <div class="field-row">
+              <input id="ai_medium" type="checkbox" name="ai_role" value="medium">
+              <label for="ai_medium">a medium</label>
+            </div>
+            <div class="field-row">
+              <input id="ai_system" type="checkbox" name="ai_role" value="system">
+              <label for="ai_system">a system for generating images</label>
+            </div>
+            <div style="margin-top: 3px; margin-bottom: 3px;">
+              <div class="field-row" style="display: inline-block;">
+                <input id="ai_other" type="checkbox" name="ai_role" value="other">
+                <label for="ai_other">other:</label>
+              </div>
+              <input id="ai_other_text" type="text" name="ai_role_other" style="width: 200px; padding: 3px; font-family: 'Courier New', monospace; color: #000; background: #fff; margin-left: 5px;" onfocus="document.getElementById('ai_other').checked = true;">
+            </div>
+          </div>
+          
+          <!-- Question 2: Camera -->
+          <div style="margin: 15px 0;">
+            <p style="margin: 5px 0; font-weight: bold;">2. the camera is...</p>
+            <div class="field-row">
+              <input id="camera_artist" type="checkbox" name="camera_role" value="artist">
+              <label for="camera_artist">an artist</label>
+            </div>
+            <div class="field-row">
+              <input id="camera_medium" type="checkbox" name="camera_role" value="medium">
+              <label for="camera_medium">a medium</label>
+            </div>
+            <div class="field-row">
+              <input id="camera_system" type="checkbox" name="camera_role" value="system">
+              <label for="camera_system">a system for generating images</label>
+            </div>
+            <div style="margin-top: 3px; margin-bottom: 3px;">
+              <div class="field-row" style="display: inline-block;">
+                <input id="camera_other" type="checkbox" name="camera_role" value="other">
+                <label for="camera_other">other:</label>
+              </div>
+              <input id="camera_other_text" type="text" name="camera_role_other" style="width: 200px; padding: 3px; font-family: 'Courier New', monospace; color: #000; background: #fff; margin-left: 5px;" onfocus="document.getElementById('camera_other').checked = true;">
+            </div>
+          </div>
+          
+          <!-- Question 3: Human -->
+          <div style="margin: 15px 0;">
+            <p style="margin: 5px 0; font-weight: bold;">3. the human is...</p>
+            <div class="field-row">
+              <input id="human_artist" type="checkbox" name="human_role" value="artist">
+              <label for="human_artist">an artist</label>
+            </div>
+            <div class="field-row">
+              <input id="human_medium" type="checkbox" name="human_role" value="medium">
+              <label for="human_medium">a medium</label>
+            </div>
+            <div class="field-row">
+              <input id="human_system" type="checkbox" name="human_role" value="system">
+              <label for="human_system">a system for generating images</label>
+            </div>
+            <div style="margin-top: 3px; margin-bottom: 3px;">
+              <div class="field-row" style="display: inline-block;">
+                <input id="human_other" type="checkbox" name="human_role" value="other">
+                <label for="human_other">other:</label>
+              </div>
+              <input id="human_other_text" type="text" name="human_role_other" style="width: 200px; padding: 3px; font-family: 'Courier New', monospace; color: #000; background: #fff; margin-left: 5px;" onfocus="document.getElementById('human_other').checked = true;">
+            </div>
+          </div>
+          
+          <!-- Question 4: Painting -->
+          <div style="margin: 15px 0;">
+            <p style="margin: 5px 0; font-weight: bold;">4. painting is...</p>
+            <div class="field-row">
+              <input id="painting_artist" type="checkbox" name="painting_role" value="artist">
+              <label for="painting_artist">an artist</label>
+            </div>
+            <div class="field-row">
+              <input id="painting_medium" type="checkbox" name="painting_role" value="medium">
+              <label for="painting_medium">a medium</label>
+            </div>
+            <div class="field-row">
+              <input id="painting_system" type="checkbox" name="painting_role" value="system">
+              <label for="painting_system">a system for generating images</label>
+            </div>
+            <div style="margin-top: 3px; margin-bottom: 3px;">
+              <div class="field-row" style="display: inline-block;">
+                <input id="painting_other" type="checkbox" name="painting_role" value="other">
+                <label for="painting_other">other:</label>
+              </div>
+              <input id="painting_other_text" type="text" name="painting_role_other" style="width: 200px; padding: 3px; font-family: 'Courier New', monospace; color: #000; background: #fff; margin-left: 5px;" onfocus="document.getElementById('painting_other').checked = true;">
+            </div>
+          </div>
+          
+          <!-- Question 5: Obsolete -->
+          <div style="margin: 15px 0;">
+            <p style="margin: 5px 0; font-weight: bold;">5. which systems are (or are <em>at risk of</em>) becoming obsolete? select all that apply.</p>
+            <div class="field-row">
+              <input id="obsolete_ai" type="checkbox" name="obsolete" value="AI">
+              <label for="obsolete_ai">AI</label>
+            </div>
+            <div class="field-row">
+              <input id="obsolete_camera" type="checkbox" name="obsolete" value="camera">
+              <label for="obsolete_camera">camera</label>
+            </div>
+            <div class="field-row">
+              <input id="obsolete_human" type="checkbox" name="obsolete" value="human">
+              <label for="obsolete_human">human</label>
+            </div>
+            <div class="field-row">
+              <input id="obsolete_painting" type="checkbox" name="obsolete" value="painting">
+              <label for="obsolete_painting">painting</label>
+            </div>
+            <div style="margin-top: 3px; margin-bottom: 3px;">
+              <div class="field-row" style="display: inline-block;">
+                <input id="obsolete_other_checkbox" type="checkbox" name="obsolete" value="other">
+                <label for="obsolete_other_checkbox">other:</label>
+              </div>
+              <input id="obsolete_other_text" type="text" name="obsolete_other" style="width: 250px; padding: 3px; font-family: 'Courier New', monospace; color: #000; background: #fff; margin-left: 5px;" onfocus="document.getElementById('obsolete_other_checkbox').checked = true;">
+            </div>
+          </div>
+          
+          <!-- Question 6: Free response -->
+          <div style="margin: 15px 0;">
+            <p style="margin: 5px 0; font-weight: bold;">6. you are invited to use this space to write a free-form response or elaboration on your responses:</p>
+            <textarea id="free_response_text" name="free_response" rows="6" style="width: 100%; box-sizing: border-box; font-family: 'Courier New', monospace; padding: 5px; margin-top: 5px; color: #000; background: #fff; border: 1px solid #000;"></textarea>
+          </div>
+          
+          <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" style="padding: 5px 20px;">submit</button>
+            <div id="submitStatus" style="margin-top: 10px; font-weight: bold;"></div>
+          </div>
+        </form>
+      </fieldset>
+    </div>
+  </div>
+  
   <!-- Overlay for popup background -->
-  <div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;"></div>
+  <div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; pointer-events: none;"></div>
 `
 
 const statusDiv = document.querySelector('#status');
@@ -74,9 +231,14 @@ const galleryDiv = document.querySelector('#gallery');
 const descriptionBtn = document.querySelector('#descriptionBtn');
 const descriptionPopup = document.querySelector('#descriptionPopup');
 const closeDescriptionBtn = document.querySelector('#closeDescriptionBtn');
+const questionnaireBtn = document.querySelector('#questionnaireBtn');
+const questionnairePopup = document.querySelector('#questionnairePopup');
+const closeQuestionnaireBtn = document.querySelector('#closeQuestionnaireBtn');
 const popupOverlay = document.querySelector('#popupOverlay');
+const questionnaireForm = document.querySelector('#questionnaireForm');
+const submitStatus = document.querySelector('#submitStatus');
 
-// Popup controls
+// Popup controls - Description
 descriptionBtn.addEventListener('click', () => {
   descriptionPopup.style.display = 'block';
   popupOverlay.style.display = 'block';
@@ -87,9 +249,78 @@ closeDescriptionBtn.addEventListener('click', () => {
   popupOverlay.style.display = 'none';
 });
 
-popupOverlay.addEventListener('click', () => {
-  descriptionPopup.style.display = 'none';
+// Popup controls - Questionnaire
+questionnaireBtn.addEventListener('click', () => {
+  questionnairePopup.style.display = 'block';
+  popupOverlay.style.display = 'block';
+});
+
+closeQuestionnaireBtn.addEventListener('click', () => {
+  questionnairePopup.style.display = 'none';
   popupOverlay.style.display = 'none';
+});
+
+// Handle questionnaire form submission
+questionnaireForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  submitStatus.textContent = 'Submitting...';
+  submitStatus.style.color = '#000';
+  
+  const formData = new FormData(questionnaireForm);
+  
+  // Collect all checkbox values for each role question
+  const aiRoles = formData.getAll('ai_role');
+  const cameraRoles = formData.getAll('camera_role');
+  const humanRoles = formData.getAll('human_role');
+  const paintingRoles = formData.getAll('painting_role');
+  const obsoleteSystems = formData.getAll('obsolete');
+  
+  const responseData = {
+    ai_role: JSON.stringify(aiRoles),
+    ai_role_other: formData.get('ai_role_other'),
+    camera_role: JSON.stringify(cameraRoles),
+    camera_role_other: formData.get('camera_role_other'),
+    human_role: JSON.stringify(humanRoles),
+    human_role_other: formData.get('human_role_other'),
+    painting_role: JSON.stringify(paintingRoles),
+    painting_role_other: formData.get('painting_role_other'),
+    obsolete_systems: JSON.stringify(obsoleteSystems),
+    obsolete_other: formData.get('obsolete_other'),
+    free_response: formData.get('free_response')
+  };
+  
+  try {
+    const response = await fetch(`${SERVER_URL}/api/questionnaire-response`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(responseData)
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      submitStatus.textContent = 'Thank you for your response!';
+      submitStatus.style.color = 'green';
+      questionnaireForm.reset();
+      
+      // Close popup after 2 seconds
+      setTimeout(() => {
+        questionnairePopup.style.display = 'none';
+        popupOverlay.style.display = 'none';
+        submitStatus.textContent = '';
+      }, 2000);
+    } else {
+      submitStatus.textContent = result.error || 'Error submitting response';
+      submitStatus.style.color = 'red';
+    }
+  } catch (error) {
+    console.error('Error submitting questionnaire:', error);
+    submitStatus.textContent = 'Error connecting to server';
+    submitStatus.style.color = 'red';
+  }
 });
 
 // Load all generated images from the server

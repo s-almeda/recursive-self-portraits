@@ -38,6 +38,23 @@ db.exec(`
     generated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (text_description_id) REFERENCES text_descriptions(id) ON DELETE CASCADE
   );
+
+  CREATE TABLE IF NOT EXISTS questionnaire_responses (
+    id TEXT PRIMARY KEY,
+    ai_role TEXT,
+    ai_role_other TEXT,
+    camera_role TEXT,
+    camera_role_other TEXT,
+    human_role TEXT,
+    human_role_other TEXT,
+    painting_role TEXT,
+    painting_role_other TEXT,
+    obsolete_systems TEXT,
+    obsolete_other TEXT,
+    free_response TEXT,
+    submitted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    ip_address TEXT
+  );
 `);
 
 // Migration: Add status column if it doesn't exist
@@ -197,6 +214,52 @@ export function deleteUndescribedImagesExcept(keepImageId) {
   `);
   const result = stmt.run(keepImageId);
   return result.changes;
+}
+
+// Questionnaire Responses
+export function insertQuestionnaireResponse(data) {
+  const id = generateId('qr');
+  const stmt = db.prepare(`
+    INSERT INTO questionnaire_responses (
+      id, ai_role, ai_role_other, camera_role, camera_role_other,
+      human_role, human_role_other, painting_role, painting_role_other,
+      obsolete_systems, obsolete_other, free_response, ip_address
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+  stmt.run(
+    id,
+    data.ai_role,
+    data.ai_role_other,
+    data.camera_role,
+    data.camera_role_other,
+    data.human_role,
+    data.human_role_other,
+    data.painting_role,
+    data.painting_role_other,
+    data.obsolete_systems,
+    data.obsolete_other,
+    data.free_response,
+    data.ip_address
+  );
+  return id;
+}
+
+export function getAllQuestionnaireResponses() {
+  const stmt = db.prepare(`
+    SELECT * FROM questionnaire_responses 
+    ORDER BY submitted_at DESC
+  `);
+  return stmt.all();
+}
+
+export function getRecentResponsesByIP(ipAddress, minutesAgo = 5) {
+  const stmt = db.prepare(`
+    SELECT * FROM questionnaire_responses 
+    WHERE ip_address = ? 
+    AND submitted_at > datetime('now', '-' || ? || ' minutes')
+  `);
+  return stmt.all(ipAddress, minutesAgo);
 }
 
 export default db;
