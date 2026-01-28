@@ -105,6 +105,73 @@
       section {
         margin-bottom: 30px;
       }
+
+      #resultsGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        width: 100%;
+      }
+
+      .question-block {
+        margin-bottom: 15px;
+      }
+
+      .question-block p {
+        margin: 5px 0 10px 0;
+        font-weight: bold;
+        font-size: 13px;
+      }
+
+      .option-row {
+        margin: 8px 0;
+      }
+
+      .option-row-content {
+        display: grid;
+        grid-template-columns: 70px 1fr 50px;
+        gap: 3px;
+        align-items: center;
+      }
+
+      .option-row label {
+        font-size: 0.8em;
+        white-space: normal;
+        word-break: break-word;
+      }
+
+      .option-row progress {
+        width: 100%;
+        height: 12px;
+        cursor: pointer;
+      }
+
+      .option-row span {
+        font-size: 0.75em;
+        color: #666;
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      @media (max-width: 768px) {
+        #resultsGrid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      #customTooltip {
+        position: fixed;
+        background-color: rgb(255, 255, 228);
+        border: 1px solid #000;
+        padding: 5px 7px;
+        font-family: Arial, sans-serif;
+        font-size: 0.85em;
+        pointer-events: none;
+        z-index: 9999;
+        display: none;
+        white-space: nowrap;
+        box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+      }
     </style>
   </head>
   <body>
@@ -147,6 +214,12 @@
                 </ol>
 
                 <p>this instance of the piece is complete when step 1 is complete.</p>
+              </section>
+
+              <!-- Questionnaire Aggregate Results Section -->
+              <section id="resultsSection" style="overflow: none; display: none;">
+                <h2>Responses Summary</h2>
+                <div id="resultsGrid" style="font-size: 0.9em;">Loading...</div>
               </section>
 
               <!-- Questionnaire Section -->
@@ -213,6 +286,7 @@
             responses.push(row);
           }
           
+          calculateAggregates();
           displayResponse(0);
           updateButtons();
         } catch (error) {
@@ -227,6 +301,126 @@
         } catch {
           return [];
         }
+      }
+
+      function calculateAggregates() {
+        const totals = responses.length;
+        
+        const stats = {
+          ai_role: { artist: 0, medium: 0, system: 0, other: 0 },
+          camera_role: { artist: 0, medium: 0, system: 0, other: 0 },
+          human_role: { artist: 0, medium: 0, system: 0, other: 0 },
+          painting_role: { artist: 0, medium: 0, system: 0, other: 0 },
+          obsolete_systems: { AI: 0, camera: 0, human: 0, painting: 0, other: 0 }
+        };
+        
+        responses.forEach(response => {
+          const aiRole = parseJsonField(response.ai_role);
+          const cameraRole = parseJsonField(response.camera_role);
+          const humanRole = parseJsonField(response.human_role);
+          const paintingRole = parseJsonField(response.painting_role);
+          const obsoleteSystems = parseJsonField(response.obsolete_systems);
+          
+          if (aiRole.includes('artist')) stats.ai_role.artist++;
+          if (aiRole.includes('medium')) stats.ai_role.medium++;
+          if (aiRole.includes('system')) stats.ai_role.system++;
+          if (aiRole.includes('other')) stats.ai_role.other++;
+          
+          if (cameraRole.includes('artist')) stats.camera_role.artist++;
+          if (cameraRole.includes('medium')) stats.camera_role.medium++;
+          if (cameraRole.includes('system')) stats.camera_role.system++;
+          if (cameraRole.includes('other')) stats.camera_role.other++;
+          
+          if (humanRole.includes('artist')) stats.human_role.artist++;
+          if (humanRole.includes('medium')) stats.human_role.medium++;
+          if (humanRole.includes('system')) stats.human_role.system++;
+          if (humanRole.includes('other')) stats.human_role.other++;
+          
+          if (paintingRole.includes('artist')) stats.painting_role.artist++;
+          if (paintingRole.includes('medium')) stats.painting_role.medium++;
+          if (paintingRole.includes('system')) stats.painting_role.system++;
+          if (paintingRole.includes('other')) stats.painting_role.other++;
+          
+          if (obsoleteSystems.includes('AI')) stats.obsolete_systems.AI++;
+          if (obsoleteSystems.includes('camera')) stats.obsolete_systems.camera++;
+          if (obsoleteSystems.includes('human')) stats.obsolete_systems.human++;
+          if (obsoleteSystems.includes('painting')) stats.obsolete_systems.painting++;
+          if (obsoleteSystems.includes('other')) stats.obsolete_systems.other++;
+        });
+        
+        displayAggregates(stats, totals);
+      }
+
+      function displayAggregates(stats, totals) {
+        let html = '';
+        
+        const displayMap = {
+          'an artist': 'artist',
+          'a medium': 'medium',
+          'a system for generating images': 'system',
+          'other': 'other',
+          'AI': 'AI',
+          'camera': 'camera',
+          'human': 'human',
+          'painting': 'painting'
+        };
+        
+        const questions = [
+          { title: '1. the AI is...', field: 'ai_role', options: ['an artist', 'a medium', 'a system for generating images', 'other'] },
+          { title: '2. the camera is...', field: 'camera_role', options: ['an artist', 'a medium', 'a system for generating images', 'other'] },
+          { title: '3. the human is...', field: 'human_role', options: ['an artist', 'a medium', 'a system for generating images', 'other'] },
+          { title: '4. painting is...', field: 'painting_role', options: ['an artist', 'a medium', 'a system for generating images', 'other'] },
+          { title: '5. which systems are (or are at risk of) becoming obsolete?', field: 'obsolete_systems', options: ['AI', 'camera', 'human', 'painting', 'other'] }
+        ];
+        
+        questions.forEach(q => {
+          html += '<div class="question-block">';
+          html += '<p>' + q.title + '</p>';
+          
+          q.options.forEach(option => {
+            const statsKey = displayMap[option];
+            const count = stats[q.field][statsKey] || 0;
+            const percentage = (count / totals * 100).toFixed(1);
+            const tooltip = count + '/' + totals + ' participants selected this response';
+            
+            html += '<div class="option-row">';
+            html += '<div class="option-row-content">';
+            html += '<label>' + option + '</label>';
+            html += '<progress max="100" value="' + percentage + '" data-tooltip="' + tooltip + '"></progress>';
+            html += '<span>' + count + '/' + totals + '</span>';
+            html += '</div>';
+            html += '</div>';
+          });
+          
+          html += '</div>';
+        });
+        
+        document.getElementById('resultsGrid').innerHTML = html;
+        document.getElementById('resultsSection').style.display = 'block';
+      }
+
+      function setupTooltips() {
+        const tooltip = document.createElement('div');
+        tooltip.id = 'customTooltip';
+        document.body.appendChild(tooltip);
+
+        document.addEventListener('mousemove', (e) => {
+          tooltip.style.left = (e.clientX + 10) + 'px';
+          tooltip.style.top = (e.clientY + 10) + 'px';
+        });
+
+        document.addEventListener('mouseover', (e) => {
+          if (e.target.tagName === 'PROGRESS' && e.target.dataset.tooltip) {
+            tooltip.textContent = e.target.dataset.tooltip;
+            tooltip.style.display = 'block';
+          }
+        });
+
+        document.addEventListener('mouseout', (e) => {
+          if (e.target.tagName === 'PROGRESS') {
+            tooltip.style.display = 'none';
+          }
+        });
       }
 
       function displayResponse(index) {
@@ -337,6 +531,7 @@
           updateButtons();
         });
         
+        setupTooltips();
         loadResponses();
       }, 0);
     </script>
