@@ -17,6 +17,7 @@
         background: #1b1b1a;
         color: #000;
         overflow: hidden;
+        overflow-x: hidden !important;
       }
 
       #app {
@@ -159,6 +160,28 @@
         }
       }
 
+      .response-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        height: 500px;
+      }
+
+      @media (max-width: 900px) {
+        .response-grid {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
+      }
+
+      .nav-button {
+        position: sticky;
+        top: 50%;
+        transform: translateY(-50%);
+        flex-shrink: 0;
+        height: fit-content;
+      }
+
       #customTooltip {
         position: fixed;
         background-color: rgb(255, 255, 228);
@@ -218,23 +241,25 @@
 
               <!-- Questionnaire Aggregate Results Section -->
               <section id="resultsSection" style="overflow: none; display: none;">
-                <h2>Responses Summary</h2>
+                <h4>Responses Summary</h4>
                 <div id="resultsGrid" style="font-size: 0.9em;">Loading...</div>
               </section>
 
               <!-- Questionnaire Section -->
               <section id="questionnaireSection" style="overflow: none;">
-                <div style="overflow: none; display: flex; gap: 10px; margin-bottom: 15px; align-items: center;">
-                  <button id="prevBtn" style="width: 60px;">← prev</button>
+                <div style="overflow: none; display: flex; gap: 10px; margin-bottom: 15px; align-items: center; justify-content: center;">
                   <div id="responseCounter" style="flex: 1; text-align: center; font-weight: bold;">Loading...</div>
-                  <button id="nextBtn" style="width: 60px;">next →</button>
                 </div>
-                <div id="responseTimestamp" style=" overflow: none;  text-align: center; font-size: 0.9em; margin-bottom: 15px; color: #666;"></div>
-                <fieldset id="responseFieldset" style="overflow-y: scroll; margin: 0px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.9em;">
-                  <legend>Response</legend>
-                  <p id="responseLoading" style="margin: 10px 0; font-size: 16px;">Loading responses...</p>
-                  <div style="overflow: none;" id="responseContent"></div>
-                </fieldset>
+                <div id="responseTimestamp" style="overflow: none; text-align: center; font-size: 0.9em; margin-bottom: 15px; color: #666;"></div>
+                <div style="display: flex; gap: 10px; align-items: stretch; position: relative; overflow-x: hidden !important;">
+                  <button id="prevBtn" class="nav-button" style="width: 60px;">←</button>
+                  <fieldset id="responseFieldset" style="overflow-y: scroll; margin: 0px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.9em; flex: 1; overflow-x: hidden !important;">
+                    <legend>Response</legend>
+                    <p id="responseLoading" style="margin: 10px 0; font-size: 16px;">Loading responses...</p>
+                    <div style="overflow: none;" id="responseContent"></div>
+                  </fieldset>
+                  <button id="nextBtn" class="nav-button" style="width: 60px;">→</button>
+                </div>
               </section>
 
             </fieldset>
@@ -448,7 +473,7 @@
         const freeResponse = data.free_response ? data.free_response : '(no response provided)';
         
         // Build response content with 2-column layout
-        let html = '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 500px;">';
+        let html = '<div class="response-grid">';
         
         // Left column: Questions 1-5
         html += '<div style="padding-right: 10px;">';
