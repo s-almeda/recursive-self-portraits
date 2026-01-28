@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/895.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recursive Self Portraits</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xp.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        place-items: center;
+        min-width: 320px;
+        min-height: 100vh;
+        background: #1b1b1a;
+        color: #000;
+        overflow: hidden;
+      }
+
+      #app {
+        width: 100%;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+      }
+
+      button, select, label {
+        color: #000;
+      }
+
+      .main-window {
+        width: calc(100vw - 40px);
+        height: 85vh;
+        margin: auto;
+        margin-top: 50px;
+        max-width: 95vw;
+        box-sizing: border-box;
+      }
+
+      .window-body {
+        height: calc(85vh - 50px);
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        font-size: 1.1em;
+        overflow-y: auto;
+      }
+
+      fieldset {
+        margin: 0;
+        padding: 25px;
+        font-family: 'Courier New', monospace;
+      }
+
+      figure {
+        text-align: center;
+        margin: 15px 0;
+      }
+
+      figure img {
+        max-width: 100%;
+        height: auto;
+        border: 2px solid #000;
+      }
+
+      figure figcaption {
+        font-size: 0.8em;
+        margin-top: 5px;
+        font-weight: bold;
+      }
+
+      p {
+        margin: 10px 0;
+        line-height: 1.6;
+      }
+
+      ol {
+        margin: 10px 0;
+        padding-left: 25px;
+      }
+
+      li {
+        margin: 5px 0;
+      }
+
+      .nested-list {
+        margin: 5px 0 5px 20px;
+        padding-left: 20px;
+      }
+
+      .nested-list li {
+        margin: 3px 0;
+      }
+
+      h2 {
+        margin-top: 20px;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #000;
+        padding-bottom: 5px;
+      }
+
+      section {
+        margin-bottom: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      document.querySelector('#app').innerHTML = `
+        <div class="window main-window">
+          <div class="title-bar">
+            <div class="title-bar-text">Recursive Self Portraits: #0</div>
+            <div class="title-bar-controls">
+              <button aria-label="Minimize"></button>
+              <button aria-label="Maximize"></button>
+              <button aria-label="Close"></button>
+            </div>
+          </div>
+          <div class="window-body" style="overflow: none;">
+            <fieldset style="overflow-y: scroll; margin: 5px; max-height: 90%;">
+              <legend>About the Piece</legend>
+
+              <!-- Overview Section -->
+              <section style="overflow: none;">
+                <figure>
+                  <img src="/fig1.jpg" alt="Figure 1" />
+                  <figcaption>fig. 1</figcaption>
+                </figure>
+
+                <p>this is a performance art piece, wherein a human artist performs the following:</p>
+
+                <ol>
+                  <li>look at your self, and produce a painting of what you see.</li>
+                  <li>
+                    <strong><em>WHILE YOU COMPLETE STEP 1:</em></strong>
+                    <ol class="nested-list">
+                      <li>have a vision machine look at your self, and produce an image representation of what it sees.</li>
+                      <li>give the image to an image-to-text machine, and ask it to produce a text representation of what it sees</li>
+                      <li>give that text to a text-to-image machine, and ask it to produce an image of what it describes.</li>
+                      <li>repeat</li>
+                    </ol>
+                  </li>
+                </ol>
+
+                <p>this instance of the piece is complete when step 1 is complete.</p>
+              </section>
+
+              <!-- Questionnaire Section -->
+              <section id="questionnaireSection" style="overflow: none;">
+                <div style="display: flex; gap: 10px; margin-bottom: 15px; align-items: center;">
+                  <button id="prevBtn" style="width: 60px;">← prev</button>
+                  <div id="responseCounter" style="flex: 1; text-align: center; font-weight: bold;">Loading...</div>
+                  <button id="nextBtn" style="width: 60px;">next →</button>
+                </div>
+                <div id="responseTimestamp" style="text-align: center; font-size: 0.9em; margin-bottom: 15px; color: #666;"></div>
+                <fieldset id="responseFieldset" style="margin: 0px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.9em;">
+                  <legend>Response</legend>
+                  <p id="responseLoading" style="margin: 10px 0;">Loading responses...</p>
+                  <div id="responseContent"></div>
+                </fieldset>
+              </section>
+
+            </fieldset>
+          </div>
+        </div>
+      `;
+
+      // Questionnaire viewer logic
+      let responses = [];
+      let currentIndex = 0;
+
+      // Parse CSV
+      async function loadResponses() {
+        try {
+          const response = await fetch('/questionnaire_responses_combined.csv');
+          const csv = await response.text();
+          const lines = csv.split('\n');
+          const headers = lines[0].split(',').map(h => h.trim());
+          
+          for (let i = 1; i < lines.length; i++) {
+            if (lines[i].trim() === '') continue;
+            
+            // Simple CSV parser (handles quoted fields)
+            const row = {};
+            let field = '';
+            let inQuotes = false;
+            let colIndex = 0;
+            
+            for (let j = 0; j < lines[i].length; j++) {
+              const char = lines[i][j];
+              const nextChar = lines[i][j + 1];
+              
+              if (char === '"') {
+                if (inQuotes && nextChar === '"') {
+                  field += '"';
+                  j++;
+                } else {
+                  inQuotes = !inQuotes;
+                }
+              } else if (char === ',' && !inQuotes) {
+                row[headers[colIndex]] = field.trim();
+                field = '';
+                colIndex++;
+              } else {
+                field += char;
+              }
+            }
+            row[headers[colIndex]] = field.trim();
+            responses.push(row);
+          }
+          
+          displayResponse(0);
+          updateButtons();
+        } catch (error) {
+          console.error('Error loading responses:', error);
+          document.getElementById('responseLoading').textContent = 'Error loading responses';
+        }
+      }
+
+      function parseJsonField(field) {
+        try {
+          return JSON.parse(field);
+        } catch {
+          return [];
+        }
+      }
+
+      function displayResponse(index) {
+        if (responses.length === 0) return;
+        
+        currentIndex = Math.max(0, Math.min(index, responses.length - 1));
+        const data = responses[currentIndex];
+        
+        // Update counter and timestamp
+        document.getElementById('responseCounter').textContent = 'Response ' + (currentIndex + 1) + ' of ' + responses.length;
+        document.getElementById('responseTimestamp').textContent = 'Submitted: ' + data.submitted_at;
+        
+        // Parse checkbox fields
+        const aiRole = parseJsonField(data.ai_role);
+        const cameraRole = parseJsonField(data.camera_role);
+        const humanRole = parseJsonField(data.human_role);
+        const paintingRole = parseJsonField(data.painting_role);
+        const obsoleteSystems = parseJsonField(data.obsolete_systems);
+        
+        const aiOther = data.ai_role_other ? data.ai_role_other : '(none)';
+        const cameraOther = data.camera_role_other ? data.camera_role_other : '(none)';
+        const humanOther = data.human_role_other ? data.human_role_other : '(none)';
+        const paintingOther = data.painting_role_other ? data.painting_role_other : '(none)';
+        const obsoleteOther = data.obsolete_other ? data.obsolete_other : '(none)';
+        const freeResponse = data.free_response ? data.free_response : '(no response provided)';
+        
+        // Build response content
+        let html = '<p style="margin: 10px 0;"><em>Thank you for visiting. Here is a submitted response.</em></p>';
+        
+        // Question 1: AI
+        html += '<div style="margin: 15px 0;">';
+        html += '<p style="margin: 5px 0; font-weight: bold;">1. the AI is...</p>';
+        html += '<div class="field-row"><input type="checkbox" ' + (aiRole.includes('artist') ? 'checked' : '') + ' disabled><label>an artist</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (aiRole.includes('medium') ? 'checked' : '') + ' disabled><label>a medium</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (aiRole.includes('system') ? 'checked' : '') + ' disabled><label>a system for generating images</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (aiRole.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + aiOther + '</label></div>';
+        html += '</div>';
+        
+        // Question 2: Camera
+        html += '<div style="margin: 15px 0;">';
+        html += '<p style="margin: 5px 0; font-weight: bold;">2. the camera is...</p>';
+        html += '<div class="field-row"><input type="checkbox" ' + (cameraRole.includes('artist') ? 'checked' : '') + ' disabled><label>an artist</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (cameraRole.includes('medium') ? 'checked' : '') + ' disabled><label>a medium</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (cameraRole.includes('system') ? 'checked' : '') + ' disabled><label>a system for generating images</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (cameraRole.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + cameraOther + '</label></div>';
+        html += '</div>';
+        
+        // Question 3: Human
+        html += '<div style="margin: 15px 0;">';
+        html += '<p style="margin: 5px 0; font-weight: bold;">3. the human is...</p>';
+        html += '<div class="field-row"><input type="checkbox" ' + (humanRole.includes('artist') ? 'checked' : '') + ' disabled><label>an artist</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (humanRole.includes('medium') ? 'checked' : '') + ' disabled><label>a medium</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (humanRole.includes('system') ? 'checked' : '') + ' disabled><label>a system for generating images</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (humanRole.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + humanOther + '</label></div>';
+        html += '</div>';
+        
+        // Question 4: Painting
+        html += '<div style="margin: 15px 0;">';
+        html += '<p style="margin: 5px 0; font-weight: bold;">4. painting is...</p>';
+        html += '<div class="field-row"><input type="checkbox" ' + (paintingRole.includes('artist') ? 'checked' : '') + ' disabled><label>an artist</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (paintingRole.includes('medium') ? 'checked' : '') + ' disabled><label>a medium</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (paintingRole.includes('system') ? 'checked' : '') + ' disabled><label>a system for generating images</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (paintingRole.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + paintingOther + '</label></div>';
+        html += '</div>';
+        
+        // Question 5: Obsolete Systems
+        html += '<div style="margin: 15px 0;">';
+        html += '<p style="margin: 5px 0; font-weight: bold;">5. which systems are (or are <em>at risk of</em>) becoming obsolete? select all that apply.</p>';
+        html += '<div class="field-row"><input type="checkbox" ' + (obsoleteSystems.includes('AI') ? 'checked' : '') + ' disabled><label>AI</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (obsoleteSystems.includes('camera') ? 'checked' : '') + ' disabled><label>camera</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (obsoleteSystems.includes('human') ? 'checked' : '') + ' disabled><label>human</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (obsoleteSystems.includes('painting') ? 'checked' : '') + ' disabled><label>painting</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (obsoleteSystems.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + obsoleteOther + '</label></div>';
+        html += '</div>';
+        
+        // Question 6: Free Response
+        html += '<div style="margin: 15px 0;">';
+        html += '<p style="margin: 5px 0; font-weight: bold;">6. free-form response or elaboration:</p>';
+        html += '<div style="background-color: #f0f0f0; padding: 10px; border: 1px solid #999; min-height: 60px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em;">' + freeResponse + '</div>';
+        html += '</div>';
+        
+        document.getElementById('responseContent').innerHTML = html;
+        document.getElementById('responseLoading').style.display = 'none';
+      }
+
+      function updateButtons() {
+        document.getElementById('prevBtn').disabled = currentIndex === 0;
+        document.getElementById('nextBtn').disabled = currentIndex === responses.length - 1;
+      }
+
+      // Event listeners for navigation
+      setTimeout(() => {
+        document.getElementById('prevBtn').addEventListener('click', () => {
+          displayResponse(currentIndex - 1);
+          updateButtons();
+        });
+        
+        document.getElementById('nextBtn').addEventListener('click', () => {
+          displayResponse(currentIndex + 1);
+          updateButtons();
+        });
+        
+        loadResponses();
+      }, 0);
+    </script>
+  </body>
+</html>
