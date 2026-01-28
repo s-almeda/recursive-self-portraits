@@ -195,6 +195,23 @@
         white-space: nowrap;
         box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
       }
+
+      /* Disabled checkbox styling - look like normal checkboxes but non-editable */
+      input[type="checkbox"][disabled] + label {
+        display: flex;
+        align-items: flex-start;
+      }
+
+      input[type="checkbox"][disabled] + label::before {
+        background: var(--button-highlight) !important;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      input[type="checkbox"][disabled]:checked + label::after {
+        background: svg-load("./icon/checkmark.svg") !important;
+        top: 3px !important;
+      }
     </style>
   </head>
   <body>
@@ -212,9 +229,7 @@
           </div>
           <div class="window-body" style="overflow: none;">
             <fieldset style="overflow-y: scroll; margin: 5px; max-height: 90%;">
-              <legend>About the Piece</legend>
-
-              <!-- Overview Section -->
+                         <!-- Overview Section -->
               <section style="overflow: none;">
                 <figure>
                   <img src="/fig1.jpg" alt="Figure 1" />
@@ -239,28 +254,34 @@
                 <p>this instance of the piece is complete when step 1 is complete.</p>
               </section>
 
-              <!-- Questionnaire Aggregate Results Section -->
-              <section id="resultsSection" style="overflow: none; display: none;">
-                <h4>Responses Summary</h4>
-                <div id="resultsGrid" style="font-size: 0.9em;">Loading...</div>
-              </section>
+              <!-- Responses Fieldset -->
+              <fieldset>
+                <legend>Responses</legend>
+                <p>During the performance, we made a questionnaire available (as physical paper cards that participants could fill out, and as a digital form they could submit from the gallery page.) It had the following multiple choice questions, and a free response section. Here are the results.</p>
 
-              <!-- Questionnaire Section -->
-              <section id="questionnaireSection" style="overflow: none;">
-                <div style="overflow: none; display: flex; gap: 10px; margin-bottom: 15px; align-items: center; justify-content: center;">
-                  <div id="responseCounter" style="flex: 1; text-align: center; font-weight: bold;">Loading...</div>
-                </div>
-                <div id="responseTimestamp" style="overflow: none; text-align: center; font-size: 0.9em; margin-bottom: 15px; color: #666;"></div>
-                <div style="display: flex; gap: 10px; align-items: stretch; position: relative; overflow-x: hidden !important;">
-                  <button id="prevBtn" class="nav-button" style="width: 60px;">←</button>
-                  <fieldset id="responseFieldset" style="overflow-y: scroll; margin: 0px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.9em; flex: 1; overflow-x: hidden !important;">
-                    <legend>Response</legend>
-                    <p id="responseLoading" style="margin: 10px 0; font-size: 16px;">Loading responses...</p>
-                    <div style="overflow: none;" id="responseContent"></div>
-                  </fieldset>
-                  <button id="nextBtn" class="nav-button" style="width: 60px;">→</button>
-                </div>
-              </section>
+                <!-- Questionnaire Aggregate Results Section -->
+                <section id="resultsSection" style="overflow: none; display: none;">
+
+                  <div id="resultsGrid" style="font-size: 0.9em;">Loading...</div>
+                </section>
+
+                <!-- Questionnaire Section -->
+                <section id="questionnaireSection" style="overflow: none;">
+                  <div style="overflow: none; display: flex; gap: 10px; margin-bottom: 15px; align-items: center; justify-content: center;">
+                    <div id="responseCounter" style="flex: 1; text-align: center; font-weight: bold;">Loading...</div>
+                  </div>
+                  <div id="responseTimestamp" style="overflow: none; text-align: center; font-size: 0.9em; margin-bottom: 15px; color: #666;"></div>
+                  <div style="display: flex; gap: 10px; align-items: stretch; position: relative; overflow-x: hidden !important;">
+                    <button id="prevBtn" class="nav-button" style="width: 60px;">← prev</button>
+                    <fieldset id="responseFieldset" style="overflow-y: scroll; margin: 0px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.9em; flex: 1; overflow-x: hidden !important;">
+                      <legend>Response</legend>
+                      <p id="responseLoading" style="margin: 10px 0; font-size: 16px;">Loading responses...</p>
+                      <div style="overflow: none;" id="responseContent"></div>
+                    </fieldset>
+                    <button id="nextBtn" class="nav-button" style="width: 60px;">next →</button>
+                  </div>
+                </section>
+              </fieldset>
 
             </fieldset>
           </div>
