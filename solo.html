@@ -73,7 +73,8 @@
 
       p {
         margin: 10px 0;
-        line-height: 1.6;
+        line-height: 1.3;
+        font-size: 14px;
       }
 
       ol {
@@ -150,16 +151,16 @@
 
               <!-- Questionnaire Section -->
               <section id="questionnaireSection" style="overflow: none;">
-                <div style="display: flex; gap: 10px; margin-bottom: 15px; align-items: center;">
+                <div style="overflow: none; display: flex; gap: 10px; margin-bottom: 15px; align-items: center;">
                   <button id="prevBtn" style="width: 60px;">← prev</button>
                   <div id="responseCounter" style="flex: 1; text-align: center; font-weight: bold;">Loading...</div>
                   <button id="nextBtn" style="width: 60px;">next →</button>
                 </div>
-                <div id="responseTimestamp" style="text-align: center; font-size: 0.9em; margin-bottom: 15px; color: #666;"></div>
-                <fieldset id="responseFieldset" style="margin: 0px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.9em;">
+                <div id="responseTimestamp" style=" overflow: none;  text-align: center; font-size: 0.9em; margin-bottom: 15px; color: #666;"></div>
+                <fieldset id="responseFieldset" style="overflow-y: scroll; margin: 0px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.9em;">
                   <legend>Response</legend>
-                  <p id="responseLoading" style="margin: 10px 0;">Loading responses...</p>
-                  <div id="responseContent"></div>
+                  <p id="responseLoading" style="margin: 10px 0; font-size: 16px;">Loading responses...</p>
+                  <div style="overflow: none;" id="responseContent"></div>
                 </fieldset>
               </section>
 
@@ -252,8 +253,12 @@
         const obsoleteOther = data.obsolete_other ? data.obsolete_other : '(none)';
         const freeResponse = data.free_response ? data.free_response : '(no response provided)';
         
-        // Build response content
-        let html = '<p style="margin: 10px 0;"><em>Thank you for visiting. Here is a submitted response.</em></p>';
+        // Build response content with 2-column layout
+        let html = '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 500px;">';
+        
+        // Left column: Questions 1-5
+        html += '<div style="padding-right: 10px;">';
+        // html += '<p style="margin: 10px 0;"><em>Thank you for visiting. Here is a submitted response.</em></p>';
         
         // Question 1: AI
         html += '<div style="margin: 15px 0;">';
@@ -261,7 +266,7 @@
         html += '<div class="field-row"><input type="checkbox" ' + (aiRole.includes('artist') ? 'checked' : '') + ' disabled><label>an artist</label></div>';
         html += '<div class="field-row"><input type="checkbox" ' + (aiRole.includes('medium') ? 'checked' : '') + ' disabled><label>a medium</label></div>';
         html += '<div class="field-row"><input type="checkbox" ' + (aiRole.includes('system') ? 'checked' : '') + ' disabled><label>a system for generating images</label></div>';
-        html += '<div class="field-row"><input type="checkbox" ' + (aiRole.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + aiOther + '</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (aiRole.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + (aiOther !== '(none)' ? '<span style="font-size: 15px; font-weight: bold; font-style: italic; margin-left: 8px;">' + aiOther + '</span>' : aiOther) + '</label></div>';
         html += '</div>';
         
         // Question 2: Camera
@@ -270,7 +275,7 @@
         html += '<div class="field-row"><input type="checkbox" ' + (cameraRole.includes('artist') ? 'checked' : '') + ' disabled><label>an artist</label></div>';
         html += '<div class="field-row"><input type="checkbox" ' + (cameraRole.includes('medium') ? 'checked' : '') + ' disabled><label>a medium</label></div>';
         html += '<div class="field-row"><input type="checkbox" ' + (cameraRole.includes('system') ? 'checked' : '') + ' disabled><label>a system for generating images</label></div>';
-        html += '<div class="field-row"><input type="checkbox" ' + (cameraRole.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + cameraOther + '</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (cameraRole.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + (cameraOther !== '(none)' ? '<span style="font-size: 15px; font-weight: bold; font-style: italic; margin-left: 8px;">' + cameraOther + '</span>' : cameraOther) + '</label></div>';
         html += '</div>';
         
         // Question 3: Human
@@ -279,7 +284,7 @@
         html += '<div class="field-row"><input type="checkbox" ' + (humanRole.includes('artist') ? 'checked' : '') + ' disabled><label>an artist</label></div>';
         html += '<div class="field-row"><input type="checkbox" ' + (humanRole.includes('medium') ? 'checked' : '') + ' disabled><label>a medium</label></div>';
         html += '<div class="field-row"><input type="checkbox" ' + (humanRole.includes('system') ? 'checked' : '') + ' disabled><label>a system for generating images</label></div>';
-        html += '<div class="field-row"><input type="checkbox" ' + (humanRole.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + humanOther + '</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (humanRole.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + (humanOther !== '(none)' ? '<span style="font-size: 15px; font-weight: bold; font-style: italic; margin-left: 8px;">' + humanOther + '</span>' : humanOther) + '</label></div>';
         html += '</div>';
         
         // Question 4: Painting
@@ -288,7 +293,7 @@
         html += '<div class="field-row"><input type="checkbox" ' + (paintingRole.includes('artist') ? 'checked' : '') + ' disabled><label>an artist</label></div>';
         html += '<div class="field-row"><input type="checkbox" ' + (paintingRole.includes('medium') ? 'checked' : '') + ' disabled><label>a medium</label></div>';
         html += '<div class="field-row"><input type="checkbox" ' + (paintingRole.includes('system') ? 'checked' : '') + ' disabled><label>a system for generating images</label></div>';
-        html += '<div class="field-row"><input type="checkbox" ' + (paintingRole.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + paintingOther + '</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (paintingRole.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + (paintingOther !== '(none)' ? '<span style="font-size: 15px; font-weight: bold; font-style: italic; margin-left: 8px;">' + paintingOther + '</span>' : paintingOther) + '</label></div>';
         html += '</div>';
         
         // Question 5: Obsolete Systems
@@ -298,13 +303,17 @@
         html += '<div class="field-row"><input type="checkbox" ' + (obsoleteSystems.includes('camera') ? 'checked' : '') + ' disabled><label>camera</label></div>';
         html += '<div class="field-row"><input type="checkbox" ' + (obsoleteSystems.includes('human') ? 'checked' : '') + ' disabled><label>human</label></div>';
         html += '<div class="field-row"><input type="checkbox" ' + (obsoleteSystems.includes('painting') ? 'checked' : '') + ' disabled><label>painting</label></div>';
-        html += '<div class="field-row"><input type="checkbox" ' + (obsoleteSystems.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + obsoleteOther + '</label></div>';
+        html += '<div class="field-row"><input type="checkbox" ' + (obsoleteSystems.includes('other') ? 'checked' : '') + ' disabled><label>other: ' + (obsoleteOther !== '(none)' ? '<span style="font-size: 15px; font-weight: bold; font-style: italic; margin-left: 8px;">' + obsoleteOther + '</span>' : obsoleteOther) + '</label></div>';
         html += '</div>';
         
-        // Question 6: Free Response
-        html += '<div style="margin: 15px 0;">';
+        html += '</div>';
+        
+        // Right column: Free Response
+        html += '<div style="padding: 20px; border-left: 1px solid #ccc; display: flex; flex-direction: column;">';
         html += '<p style="margin: 5px 0; font-weight: bold;">6. free-form response or elaboration:</p>';
-        html += '<div style="background-color: #f0f0f0; padding: 10px; border: 1px solid #999; min-height: 60px; white-space: pre-wrap; word-wrap: break-word; font-size: 0.9em;">' + freeResponse + '</div>';
+        html += '<div style="background-color: #f0f0f0; padding: 10px; border: 1px solid #999; height: 50%; white-space: pre-wrap; word-wrap: break-word; font-size: ' + (freeResponse !== '(no response provided)' ? '15px; font-weight: bold; font-style: italic;' : '0.9em;') + '">' + freeResponse + '</div>';
+        html += '</div>';
+        
         html += '</div>';
         
         document.getElementById('responseContent').innerHTML = html;
