@@ -58,6 +58,9 @@
       figure {
         text-align: center;
         margin: 15px 0;
+        max-width: 70%;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       figure img {
@@ -229,34 +232,39 @@
           </div>
           <div class="window-body" style="overflow: none;">
             <fieldset style="overflow-y: scroll; margin: 5px; max-height: 90%;">
-                         <!-- Overview Section -->
-              <section style="overflow: none;">
-                <figure>
-                  <img src="/fig1.jpg" alt="Figure 1" />
-                  <figcaption>fig. 1</figcaption>
-                </figure>
+              <!-- About the Piece Fieldset -->
+              <fieldset>
+                <legend>original text description of the piece</legend>
+                
+                <!-- Overview Section -->
+                <section style="overflow: none;">
+                  <figure>
+                    <img src="/fig1.jpg" alt="Figure 1" />
+                    <figcaption>fig. 1</figcaption>
+                  </figure>
 
-                <p>this is a performance art piece, wherein a human artist performs the following:</p>
+                  <p>this is a performance art piece, wherein a human artist performs the following:</p>
 
-                <ol>
-                  <li>look at your self, and produce a painting of what you see.</li>
-                  <li>
-                    <strong><em>WHILE YOU COMPLETE STEP 1:</em></strong>
-                    <ol class="nested-list">
-                      <li>have a vision machine look at your self, and produce an image representation of what it sees.</li>
-                      <li>give the image to an image-to-text machine, and ask it to produce a text representation of what it sees</li>
-                      <li>give that text to a text-to-image machine, and ask it to produce an image of what it describes.</li>
-                      <li>repeat</li>
-                    </ol>
-                  </li>
-                </ol>
+                  <ol>
+                    <li>look at your self, and produce a painting of what you see.</li>
+                    <li>
+                      <strong><em>WHILE YOU COMPLETE STEP 1:</em></strong>
+                      <ol class="nested-list">
+                        <li>have a vision machine look at your self, and produce an image representation of what it sees.</li>
+                        <li>give the image to an image-to-text machine, and ask it to produce a text representation of what it sees</li>
+                        <li>give that text to a text-to-image machine, and ask it to produce an image of what it describes.</li>
+                        <li>repeat</li>
+                      </ol>
+                    </li>
+                  </ol>
 
-                <p>this instance of the piece is complete when step 1 is complete.</p>
-              </section>
+                  <p>this instance of the piece is complete when step 1 is complete.</p>
+                </section>
+              </fieldset>
 
               <!-- Responses Fieldset -->
               <fieldset>
-                <legend>Responses</legend>
+                <legend>responses</legend>
                 <p>During the performance, we made a questionnaire available (as physical paper cards that participants could fill out, and as a digital form they could submit from the gallery page.) It had the following multiple choice questions, and a free response section. Here are the results.</p>
 
                 <!-- Questionnaire Aggregate Results Section -->
@@ -270,11 +278,10 @@
                   <div style="overflow: none; display: flex; gap: 10px; margin-bottom: 15px; align-items: center; justify-content: center;">
                     <div id="responseCounter" style="flex: 1; text-align: center; font-weight: bold;">Loading...</div>
                   </div>
-                  <div id="responseTimestamp" style="overflow: none; text-align: center; font-size: 0.9em; margin-bottom: 15px; color: #666;"></div>
                   <div style="display: flex; gap: 10px; align-items: stretch; position: relative; overflow-x: hidden !important;">
                     <button id="prevBtn" class="nav-button" style="width: 60px;">← prev</button>
                     <fieldset id="responseFieldset" style="overflow-y: scroll; margin: 0px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.9em; flex: 1; overflow-x: hidden !important;">
-                      <legend>Response</legend>
+                      <legend id="responseLegend">Response</legend>
                       <p id="responseLoading" style="margin: 10px 0; font-size: 16px;">Loading responses...</p>
                       <div style="overflow: none;" id="responseContent"></div>
                     </fieldset>
@@ -469,6 +476,10 @@
         });
       }
 
+      function formatTimestamp(dateString) {
+        return dateString;
+      }
+
       function displayResponse(index) {
         if (responses.length === 0) return;
         
@@ -477,7 +488,7 @@
         
         // Update counter and timestamp
         document.getElementById('responseCounter').textContent = 'Response ' + (currentIndex + 1) + ' of ' + responses.length;
-        document.getElementById('responseTimestamp').textContent = 'Submitted: ' + data.submitted_at;
+        document.getElementById('responseLegend').textContent = 'submitted ' + formatTimestamp(data.submitted_at);
         
         // Parse checkbox fields
         const aiRole = parseJsonField(data.ai_role);
