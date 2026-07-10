@@ -58,12 +58,12 @@ document.querySelector('#app').innerHTML = `
       <p style="margin: 5px 0 15px;">This deletes both images below. This action cannot be undone.</p>
       <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
         <div>
-          <img id="deleteCamImg" src="" style="max-width: 240px; max-height: 240px; object-fit: contain; border: 2px solid #000; background: #fff;" />
-          <div style="font-size: 0.8em; margin-top: 4px;">the capture</div>
+          <img id="deleteCamImg" src="" style="max-width: 200px; max-height: 200px; object-fit: contain; border: 2px solid #000; background: #fff;" />
+          <div style="font-size: 0.8em; margin-top: 4px;">capture</div>
         </div>
         <div>
-          <img id="deleteGenImg" src="" style="max-width: 240px; max-height: 240px; object-fit: contain; border: 2px solid #000; background: #fff;" />
-          <div style="font-size: 0.8em; margin-top: 4px;">the portrait</div>
+          <img id="deleteGenImg" src="" style="max-width: 200px; max-height: 200px; object-fit: contain; border: 2px solid #000; background: #fff;" />
+          <div style="font-size: 0.8em; margin-top: 4px;">portrait</div>
         </div>
       </div>
       <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
@@ -75,9 +75,9 @@ document.querySelector('#app').innerHTML = `
   </div>
 
   <!-- View portrait popup -->
-  <div id="viewPopup" class="window" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 820px; max-height: 88vh; z-index: 1000; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); overflow: hidden; pointer-events: auto;">
+  <div id="viewPopup" class="window" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70%; max-width: 620px; max-height: 75vh; z-index: 1000; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); overflow: hidden; pointer-events: auto;">
     <div class="title-bar">
-      <div class="title-bar-text">your portrait</div>
+      <div class="title-bar-text"><img src="/magnify_note.ico" alt="view" style="width: 8px; height: 8px; image-rendering: pixelated;" /></div>
       <div class="title-bar-controls">
         <button aria-label="Close" id="closeViewX"></button>
       </div>
@@ -85,15 +85,15 @@ document.querySelector('#app').innerHTML = `
     <div class="window-body" style="overflow-y: auto; max-height: calc(88vh - 40px); padding: 15px; box-sizing: border-box;">
       <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
         <div style="text-align: center;">
-          <img id="viewCamImg" src="" style="max-width: 340px; max-height: 340px; object-fit: contain; border: 2px solid #000; background: #fff;" />
-          <div style="font-size: 0.8em; margin-top: 4px;">the capture</div>
+          <img id="viewCamImg" src="" style="max-width: 240px; max-height: 240px; object-fit: contain; border: 2px solid #000; background: #fff;" />
+          <div style="font-size: 0.8em; margin-top: 4px;">capture</div>
         </div>
         <div style="text-align: center;">
-          <img id="viewGenImg" src="" style="max-width: 340px; max-height: 340px; object-fit: contain; border: 2px solid #000; background: #fff;" />
-          <div style="font-size: 0.8em; margin-top: 4px;">the portrait</div>
+          <img id="viewGenImg" src="" style="max-width: 240px; max-height: 240px; object-fit: contain; border: 2px solid #000; background: #fff;" />
+          <div style="font-size: 0.8em; margin-top: 4px;">portrait</div>
         </div>
       </div>
-      <div id="viewDescText" style="margin-top: 15px; font-family: 'Courier New', monospace; font-size: 1.05em; line-height: 1.6; background: #fff; border: 2px inset #dfdfdf; color: #000; padding: 14px; max-height: 30vh; overflow-y: auto; white-space: pre-wrap;"></div>
+      <div id="viewDescText" style="margin-top: 10px; font-family: 'Arial'; font-size: 1.15em; line-height: 1.6; background: #fff; border: 2px inset #dfdfdf; color: #000; padding: 10px; max-height: 25vh; overflow-y: auto; white-space: pre-wrap;"></div>
     </div>
   </div>
 
