@@ -5,6 +5,10 @@ import memoizee from 'memoizee';
 
 const MODEL = 'granite3.2-vision';
 
+// Shared portrait-description prompt (used by both the local Ollama path and the
+// Replicate granite-vision path for the booth).
+export const PORTRAIT_PROMPT = 'Describe the person and any objects in front of them with extreme detail, focusing primarily on their face and facial features with accurate color descriptions. precise enough for an artist to create an accurate portrait painting. Include: facial structure (face shape, jawline, cheekbones), eyes (shape, color, expression, eyebrows), nose (shape, size), mouth (lip shape, size, expression), hair (color, style, texture, length), skin tone, distinctive features (facial hair, glasses, accessories, marks, expression lines). Also note head position, angle, and lighting. Be objective and detailed, but not too verbose. Limit to 200 words. No new lines or extra white space.';
+
 /**
  * Describe an image using Ollama vision model (memoized with max 10 cache)
  * @param {string} imagePath - Absolute path to the image file
@@ -22,7 +26,7 @@ export const describeImage = memoizee(async (imagePath) => {
       messages: [
         {
           role: 'user',
-          content: 'Describe the person and any objects in front of them with extreme detail, focusing primarily on their face and facial features with accurate color descriptions. precise enough for an artist to create an accurate portrait painting. Include: facial structure (face shape, jawline, cheekbones), eyes (shape, color, expression, eyebrows), nose (shape, size), mouth (lip shape, size, expression), hair (color, style, texture, length), skin tone, distinctive features (facial hair, glasses, accessories, marks, expression lines). Also note head position, angle, and lighting. Be objective and detailed, but not too verbose. Limit to 200 words. No new lines or extra white space.',
+          content: PORTRAIT_PROMPT,
           images: [base64Image]
         }
       ],

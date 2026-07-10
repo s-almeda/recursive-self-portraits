@@ -147,6 +147,13 @@ socket.on('state-updated', (data) => {
   console.log('📡 [booth] State updated:', data.type);
 
   if (data.type === 'description') {
+    // New run starting → drop the previous portrait back to a placeholder
+    // while the new one is generated.
+    generatedImage.style.display = 'none';
+    generatedImage.removeAttribute('src');
+    noImageText.style.display = 'block';
+    timestamp.textContent = '';
+    pendingGeneration = null;
     updateDescription(data.latestDescription);
   } else if (data.type === 'generation') {
     updateGeneration(data.latestGeneration);

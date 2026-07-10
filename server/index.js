@@ -26,6 +26,7 @@ import {
   getRecentResponsesByIP
 } from './db.js';
 import { describeImage } from './ollama.js';
+import { describeBooth } from './booth-describe.js';
 import * as boothDb from './booth-db.js';
 import Replicate from 'replicate';
 
@@ -484,10 +485,10 @@ app.post('/api/booth/start-pipeline', boothUpload.single('image'), async (req, r
       latestCapture: image
     });
 
-    // Step 2: Generate description with Ollama (minimum 10 seconds)
+    // Step 2: Generate description (Ollama or Replicate, per BOOTH_DESCRIBER)
     console.log('📝 [booth] Generating description...');
     const descriptionStartTime = Date.now();
-    const description = await describeImage(imagePath);
+    const description = await describeBooth(imagePath);
     const descId = boothDb.insertTextDescription(imageId, description);
     const descRecord = boothDb.getDescriptionByCameraImageId(imageId);
 

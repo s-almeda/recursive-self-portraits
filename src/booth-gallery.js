@@ -13,7 +13,7 @@ let generatedImages = [];
 document.querySelector('#app').innerHTML = `
   <div class="window" style="width: calc(100vw - 40px); height: calc(100vh - 70px); margin: auto; margin-top: 50px; max-width: 95vw; box-sizing: border-box; display: flex; flex-direction: column;">
     <div class="title-bar">
-      <div class="title-bar-text">public gallery</div>
+      <div class="title-bar-text">🖼️</div>
     </div>
     <div class="window-body" style="flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 10px; font-size: 1.1em; overflow: hidden;">
       <div style="padding: 0 10px 10px 10px; text-align: center; display: flex; gap: 10px; justify-content: center;">

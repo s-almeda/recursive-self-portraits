@@ -32,8 +32,8 @@ document.querySelector('#app').innerHTML = `
           <legend>👁️</legend>
           <div style="flex: 1; display: flex; align-items: stretch; justify-content: center; background: #fff; overflow: hidden; padding: 10px;">
             <div id="viewWrap" style="position: relative; flex: 1; min-height: 0;">
-              <video id="webcam" autoplay playsinline muted style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
-              <img id="capturedImage" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: none;" />
+              <video id="webcam" autoplay playsinline muted style="width: 100%; height: 100%; object-fit: contain; display: block; transform: scaleX(-1);"></video>
+              <img id="capturedImage" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: none; transform: scaleX(-1);" />
               <canvas id="overlay" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
             </div>
           </div>
@@ -86,6 +86,7 @@ let busy = false;         // a capture→describe→generate cycle is in flight
 let modelsLoaded = false;
 let detecting = false;    // detection loop running
 let happyStreak = 0;
+let armed = true;         // must see a non-smiling / no-face frame before firing again
 let progressInterval = null;
 let capturedURL = null;
 
@@ -178,10 +179,13 @@ function drawBox(box) {
   const offX = (cw - vw * scale) / 2;
   const offY = (ch - vh * scale) / 2;
 
-  const x = offX + box.x * scale;
   const y = offY + box.y * scale;
   const w = box.width * scale;
   const h = box.height * scale;
+  // The video is displayed mirrored (scaleX -1), but the overlay canvas is NOT
+  // mirrored (so the label text stays readable). Flip the box's x to match the
+  // mirrored video.
+  const x = offX + vw * scale - box.x * scale - w;
 
   // thin white box
   octx.strokeStyle = '#ffffff';
@@ -226,20 +230,25 @@ async function detectionLoop() {
       if (!busy) {
         if (!result) {
           happyStreak = 0;
+          armed = true; // no face re-arms the trigger
           clearBox();
           overlayText.textContent = 'SHOW ME A FACE';
         } else {
           drawBox(result.detection.box);
           if (result.expressions.happy >= HAPPY_THRESHOLD) {
-            happyStreak++;
-            if (happyStreak >= HAPPY_FRAMES) {
-              happyStreak = 0;
-              takeCapture();
-            } else {
-              overlayText.textContent = 'SMILE TO LET ME CAPTURE YOU';
+            // Only fire if armed (prevents one held smile from making many captures)
+            if (armed) {
+              happyStreak++;
+              if (happyStreak >= HAPPY_FRAMES) {
+                happyStreak = 0;
+                armed = false; // disarm until they relax / leave the frame
+                takeCapture();
+              }
             }
+            overlayText.textContent = 'SMILE TO LET ME CAPTURE YOU';
           } else {
             happyStreak = 0;
+            armed = true; // a non-smiling frame re-arms the trigger
             overlayText.textContent = 'SMILE TO LET ME CAPTURE YOU';
           }
         }
