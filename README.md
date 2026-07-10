@@ -59,13 +59,15 @@ The main installation (`/itt`, `/tti`, `/history`, `rsp.db`) is untouched.
    ```
 2. **Replicate token** in `.env` (already set): `REPLICATE_API_TOKEN=...`
 
-   **Describe step is switchable** via `.env`:
+   **Describe step is switchable** via `.env` (independently for each pipeline):
    ```
-   BOOTH_DESCRIBER=replicate   # cloud granite-vision — no local Ollama needed (default)
-   BOOTH_DESCRIBER=ollama      # local Ollama (needs `ollama serve` + granite3.2-vision)
+   MAIN_DESCRIBER=ollama       # installation pipeline (default ollama)
+   BOOTH_DESCRIBER=replicate   # public booth pipeline (default replicate)
    ```
-   If it's slow at the venue, flip to `replicate` (or vice-versa) and restart the server.
-   With `replicate` you do **not** need Ollama running at all.
+   Each is either `replicate` (cloud granite-vision — no local Ollama needed) or
+   `ollama` (local, needs `ollama serve` + granite3.2-vision). If it's slow at the
+   venue, flip to `replicate` (or vice-versa) and restart the server. If **both** are
+   `replicate`, you don't need Ollama running at all.
 3. **Start the backend** (loads `.env`, creates `booth.db` on first run):
    ```bash
    npm run server

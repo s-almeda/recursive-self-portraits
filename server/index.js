@@ -25,8 +25,7 @@ import {
   getAllQuestionnaireResponses,
   getRecentResponsesByIP
 } from './db.js';
-import { describeImage } from './ollama.js';
-import { describeBooth } from './booth-describe.js';
+import { describeMain, describeBooth } from './describe.js';
 import * as boothDb from './booth-db.js';
 import Replicate from 'replicate';
 
@@ -266,10 +265,10 @@ app.post('/api/start-pipeline', upload.single('image'), async (req, res) => {
       latestCapture: image
     });
     
-    // Step 2: Generate description with Ollama (minimum 5 seconds)
+    // Step 2: Generate description (Ollama or Replicate, per MAIN_DESCRIBER)
     console.log('📝 Generating description...');
     const descriptionStartTime = Date.now();
-    const description = await describeImage(imagePath);
+    const description = await describeMain(imagePath);
     const descId = insertTextDescription(imageId, description);
     const descRecord = getDescriptionByCameraImageId(imageId);
     
@@ -464,7 +463,7 @@ app.get('/history', (req, res) => {
 // ============================================================================
 // BOOTH ("shm-is-not-present" public photobooth) — isolated pipeline.
 // Mirrors the installation routes above but uses boothDb, public/booth-captures,
-// and the /booth Socket.IO namespace. Reuses describeImage + replicate.
+// and the /booth Socket.IO namespace. Reuses describeBooth + replicate.
 // ============================================================================
 
 // Start booth pipeline (capture → describe → generate), triggered by spacebar

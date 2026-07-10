@@ -374,7 +374,7 @@ socket.on('state-updated', (data) => {
   } else if (data.type === 'generation') {
     // Portrait is ready (shown on Monitor 2). Hold, then reset to live.
     showIdle();
-    overlayText.textContent = 'done — thank you!';
+    overlayText.textContent = 'done.';
     setTimeout(enterLiveMode, 5000);
   }
 });
