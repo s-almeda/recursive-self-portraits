@@ -26,6 +26,9 @@ import {
   getRecentResponsesByIP
 } from './db.js';
 import { describeImage } from './ollama.js';
+import Replicate from 'replicate';
+
+const replicate = new Replicate(); // reads REPLICATE_API_TOKEN from env
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -251,27 +254,20 @@ app.post('/api/start-pipeline', upload.single('image'), async (req, res) => {
       latestDescription: descRecord
     });
     
-    // Step 3: Generate image with Reagent API (minimum 5 seconds)
+    // Step 3: Generate image with Replicate FLUX schnell (minimum 5 seconds)
     console.log('🎨 Generating image...');
     const generationStartTime = Date.now();
-    const imageGenResponse = await fetch(
-      'https://noggin.rea.gent/willing-raccoon-7030',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer rg_v1_jj5u5a2wpjk8iog49161uxx0stpepagsa9c3_ngk',
-        },
-        body: JSON.stringify({ prompt: description }),
-      }
-    );
-    
-    const imageBlob = await imageGenResponse.arrayBuffer();
+    const output = await replicate.run('black-forest-labs/flux-schnell', {
+      input: { prompt: description },
+    });
+
+    // output is an array of FileOutput objects; grab the first image as a Buffer
+    const imageBlob = await output[0].blob();
     const genFilename = `generated_${Date.now()}.webp`;
     const genPath = path.join(__dirname, '../public/captures', genFilename);
-    
+
     // Save generated image to filesystem
-    fs.writeFileSync(genPath, Buffer.from(imageBlob));
+    fs.writeFileSync(genPath, Buffer.from(await imageBlob.arrayBuffer()));
     
     // Save to database
     const genId = insertGeneratedImage(genFilename, descId, description);
