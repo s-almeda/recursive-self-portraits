@@ -20,8 +20,8 @@ export default defineConfig({
     host: '0.0.0.0',
     strictPort: true,
     allowedHosts: ['.ngrok-free.app', '.ngrok.io'], // Allow all ngrok domains
-    hmr: {
-      clientPort: 443
-    }
+    // hmr: {
+    //   clientPort: 443
+    // }
   }
 })
