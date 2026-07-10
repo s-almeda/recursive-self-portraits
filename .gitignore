@@ -17,6 +17,10 @@ dist-ssr
 .env.*
 !.env.example
 
+# Runtime databases (keep out of git — they regenerate)
+*.db
+*.sqlite
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
