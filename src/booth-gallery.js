@@ -54,7 +54,7 @@ document.querySelector('#app').innerHTML = `
       </div>
     </div>
     <div class="window-body" style="overflow-y: auto; max-height: calc(85vh - 40px); padding: 15px; box-sizing: border-box; text-align: center;">
-      <p style="margin: 5px 0 15px;">This permanently deletes both images below. It can't be undone.</p>
+      <p style="margin: 5px 0 15px;">This deletes both images below. This action cannot be undone.</p>
       <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
         <div>
           <img id="deleteGenImg" src="" style="max-width: 240px; max-height: 240px; object-fit: contain; border: 2px solid #000; background: #fff;" />
@@ -378,8 +378,10 @@ style.textContent = `
     transition: transform 0.2s;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
   }
+  /* Flip-rotate when pressing the image itself — the recycle bin sits in a
+     sibling row above, so pressing it never triggers this. */
   .image-container { transition: transform 0.3s; }
-  .gallery-item:active .image-container { transform: rotateY(180deg); }
+  .image-container:active { transform: rotateY(180deg); }
 
   /* Win98-style grey square delete button, in its own row above the image */
   .delete-x {
