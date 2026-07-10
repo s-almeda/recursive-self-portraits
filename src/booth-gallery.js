@@ -29,7 +29,7 @@ document.querySelector('#app').innerHTML = `
   <!-- Description Popup -->
   <div id="descriptionPopup" class="window" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 700px; max-height: 80vh; z-index: 1000; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); overflow: hidden; pointer-events: auto;">
     <div class="title-bar">
-      <div class="title-bar-text">Recursive Self Portraits: #0</div>
+      <div class="title-bar-text">about</div>
       <div class="title-bar-controls">
         <button aria-label="Close" id="closeDescriptionBtn"></button>
       </div>
@@ -37,6 +37,7 @@ document.querySelector('#app').innerHTML = `
     <div class="window-body" style="overflow-y: auto; max-height: calc(80vh - 50px); padding: 15px; box-sizing: border-box;">
       <fieldset style="margin: 0; padding: 25px; font-family: 'Courier New', monospace;">
         <p style="margin: 10px 0;">this is a public kiosk version of the system shm will use in their performance of <em>Artist-in-the-Loop</em>, part of the RECURSIVE SELF PORTRAIT SERIES.</p>
+        <p style="margin: 10px 0;">the next performance will take place on <strong>Wednesday, July 15, at 4:30PM.</strong></p>
         <div style="text-align: center; margin: 15px;">
           <img style="width: 10vw; max-width: 100%; height: auto; border: 2px solid #000;" src="/aitl.png" alt="Artist-in-the-Loop" />
           <p style="font-size: 1.1em; margin-top: 5px;">visit <strong><u>shmuh.co/aitl</u></strong> to learn more.</p>
