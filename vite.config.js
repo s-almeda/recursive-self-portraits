@@ -8,7 +8,10 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         itt: resolve(__dirname, 'itt.html'),
         tti: resolve(__dirname, 'tti.html'),
-        history: resolve(__dirname, 'history.html')
+        history: resolve(__dirname, 'history.html'),
+        booth: resolve(__dirname, 'booth.html'),
+        'booth-tti': resolve(__dirname, 'booth-tti.html'),
+        'booth-gallery': resolve(__dirname, 'booth-gallery.html')
       }
     }
   },
