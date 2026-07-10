@@ -27,14 +27,16 @@ document.querySelector('#app').innerHTML = `
         <button id="startBtn">Start</button>
       </div>
 
+      <!-- Instruction / status text: plain pixelated MS Sans, black, centered above the fieldset -->
+      <div id="overlayText" style="text-align: center; color: #000; font-family: 'Pixelated MS Sans Serif', Arial, sans-serif; padding: 4px 0 10px; min-height: 1.4em;"></div>
+
       <div style="flex: 1; display: flex; gap: 10px; min-height: 0;">
         <!-- Live/captured view -->
         <fieldset style="flex: 1; display: flex; flex-direction: column; align-self: stretch; min-height: 0;">
           <legend>👁️</legend>
-          <div style="flex: 1; position: relative; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden;">
+          <div style="flex: 1; display: flex; align-items: center; justify-content: center; background: #fff; overflow: hidden; padding: 10px;">
             <video id="webcam" autoplay playsinline style="max-width: 100%; max-height: 100%; object-fit: contain;"></video>
             <img id="capturedImage" style="max-width: 100%; max-height: 100%; object-fit: contain; display: none;" />
-            <div id="overlayText" style="position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; color: #fff; font-weight: bold; text-shadow: 0 0 6px #000, 0 0 6px #000; padding: 0 10px;"></div>
           </div>
         </fieldset>
 
@@ -153,7 +155,7 @@ async function takeCapture() {
   video.style.display = 'none';
   overlayText.textContent = 'CAPTURE TAKEN...';
   descriptionText.value = '...';
-  startProgress('...describing...');
+  startProgress('...seeing \& describing...');
 
   // Send to the booth pipeline; UI updates arrive via socket events
   const formData = new FormData();
@@ -221,8 +223,8 @@ socket.on('state-updated', (data) => {
 
   if (data.type === 'description' && data.latestDescription) {
     descriptionText.value = data.latestDescription.description;
-    overlayText.textContent = 'CAPTURE TAKEN...';
-    startProgress('...painting...');
+    overlayText.textContent = 'CAPTURE TAKEN';
+    startProgress('...describing...');
     // flash
     descriptionText.style.backgroundColor = '#ffffcc';
     setTimeout(() => { descriptionText.style.backgroundColor = '#fff'; }, 300);

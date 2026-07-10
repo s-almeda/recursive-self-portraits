@@ -124,10 +124,11 @@ async function loadHistory() {
       if (generatedImages.length === 0) {
         statusDiv.textContent = '';
         galleryDiv.innerHTML = '';
-      } else {
-        statusDiv.textContent = `${generatedImages.length} portraits created in ${durationString()}`;
-        renderGallery();
-      }
+      } 
+      // else {
+      //   statusDiv.textContent = `${generatedImages.length} portraits created in ${durationString()}`;
+      //   renderGallery();
+      // }
     } else {
       statusDiv.textContent = 'Error loading gallery';
       console.error('Error loading gallery:', result.error);
