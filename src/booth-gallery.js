@@ -58,12 +58,12 @@ document.querySelector('#app').innerHTML = `
       <p style="margin: 5px 0 15px;">This deletes both images below. This action cannot be undone.</p>
       <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
         <div>
-          <img id="deleteGenImg" src="" style="max-width: 240px; max-height: 240px; object-fit: contain; border: 2px solid #000; background: #fff;" />
-          <div style="font-size: 0.8em; margin-top: 4px;">generated</div>
+          <img id="deleteCamImg" src="" style="max-width: 240px; max-height: 240px; object-fit: contain; border: 2px solid #000; background: #fff;" />
+          <div style="font-size: 0.8em; margin-top: 4px;">the capture</div>
         </div>
         <div>
-          <img id="deleteCamImg" src="" style="max-width: 240px; max-height: 240px; object-fit: contain; border: 2px solid #000; background: #fff;" />
-          <div style="font-size: 0.8em; margin-top: 4px;">webcam capture</div>
+          <img id="deleteGenImg" src="" style="max-width: 240px; max-height: 240px; object-fit: contain; border: 2px solid #000; background: #fff;" />
+          <div style="font-size: 0.8em; margin-top: 4px;">the portrait</div>
         </div>
       </div>
       <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
@@ -74,8 +74,31 @@ document.querySelector('#app').innerHTML = `
     </div>
   </div>
 
-  <!-- Overlay for popup background -->
-  <div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; pointer-events: none;"></div>
+  <!-- View portrait popup -->
+  <div id="viewPopup" class="window" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 820px; max-height: 88vh; z-index: 1000; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); overflow: hidden; pointer-events: auto;">
+    <div class="title-bar">
+      <div class="title-bar-text">your portrait</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" id="closeViewX"></button>
+      </div>
+    </div>
+    <div class="window-body" style="overflow-y: auto; max-height: calc(88vh - 40px); padding: 15px; box-sizing: border-box;">
+      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <div style="text-align: center;">
+          <img id="viewCamImg" src="" style="max-width: 340px; max-height: 340px; object-fit: contain; border: 2px solid #000; background: #fff;" />
+          <div style="font-size: 0.8em; margin-top: 4px;">the capture</div>
+        </div>
+        <div style="text-align: center;">
+          <img id="viewGenImg" src="" style="max-width: 340px; max-height: 340px; object-fit: contain; border: 2px solid #000; background: #fff;" />
+          <div style="font-size: 0.8em; margin-top: 4px;">the portrait</div>
+        </div>
+      </div>
+      <div id="viewDescText" style="margin-top: 15px; font-family: 'Courier New', monospace; font-size: 1.05em; line-height: 1.6; background: #fff; border: 2px inset #dfdfdf; color: #000; padding: 14px; max-height: 30vh; overflow-y: auto; white-space: pre-wrap;"></div>
+    </div>
+  </div>
+
+  <!-- Overlay for popup background (click to close) -->
+  <div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; pointer-events: auto; cursor: pointer;"></div>
 `
 
 const statusDiv = document.querySelector('#status');
@@ -91,8 +114,48 @@ const confirmDeleteBtn = document.querySelector('#confirmDeleteBtn');
 const cancelDeleteBtn = document.querySelector('#cancelDeleteBtn');
 const cancelDeleteX = document.querySelector('#cancelDeleteX');
 const deleteStatus = document.querySelector('#deleteStatus');
+const viewPopup = document.querySelector('#viewPopup');
+const viewCamImg = document.querySelector('#viewCamImg');
+const viewGenImg = document.querySelector('#viewGenImg');
+const viewDescText = document.querySelector('#viewDescText');
+const closeViewX = document.querySelector('#closeViewX');
 
 let pendingDeleteId = null;
+
+// Close any open popup + the dark overlay
+function closeAllPopups() {
+  descriptionPopup.style.display = 'none';
+  deletePopup.style.display = 'none';
+  viewPopup.style.display = 'none';
+  popupOverlay.style.display = 'none';
+  pendingDeleteId = null;
+}
+
+// Clicking the darkened background closes whatever is open
+popupOverlay.addEventListener('click', closeAllPopups);
+
+// ---- View-a-portrait popup (capture left, generated right, description below) ----
+async function openViewPopup(item) {
+  viewGenImg.src = `/booth-captures/${item.filename}?t=${Date.now()}`;
+  viewCamImg.src = '';
+  viewDescText.textContent = item.prompt || 'No description';
+  viewPopup.style.display = 'block';
+  popupOverlay.style.display = 'block';
+
+  // Fetch the webcam capture (and full description) for this generated image
+  try {
+    const response = await fetch(`${SERVER_URL}/api/booth/pipeline/${item.id}`);
+    const result = await response.json();
+    if (result.success && result.pipeline) {
+      viewCamImg.src = `/booth-captures/${result.pipeline.cam_filename}`;
+      if (result.pipeline.description) viewDescText.textContent = result.pipeline.description;
+    }
+  } catch (error) {
+    console.error('Error loading portrait for view popup:', error);
+  }
+}
+
+closeViewX.addEventListener('click', closeAllPopups);
 
 // ---- Delete-a-capture popup ----
 async function openDeletePopup(item) {
@@ -250,6 +313,7 @@ function createGalleryItem(item, index, isNewItem = false) {
     <p style="font-family: 'Pixelated MS Sans Serif', monospace; font-size: 0.8em; margin: 1ch;">click to delete this capture --></p>
       <button class="delete-x" aria-label="delete this capture" title="delete this capture"><img src="/recycling_bin.ico" alt="delete" /></button>
     </div>
+    <button class="view-btn" aria-label="view this portrait" title="view this portrait"><img src="/magnify_note.ico" alt="view" /></button>
     <div class="image-container" style="background: #fff; padding: 5px; margin-bottom: 5px; text-align: center; min-height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
       <img class="generated-img" src="/booth-captures/${item.filename}${cacheBuster}" style="max-width: 100%; max-height: 200px; object-fit: contain;" onerror="this.dataset.retries = (this.dataset.retries || 0); if (this.dataset.retries < 5) { this.dataset.retries++; setTimeout(() => this.src = '/booth-captures/${item.filename}?t=' + Date.now(), 200 * this.dataset.retries); }" />
       <img class="camera-img" src="" style="max-width: 100%; max-height: 200px; object-fit: contain; display: none;" />
@@ -267,6 +331,12 @@ function createGalleryItem(item, index, isNewItem = false) {
   div.querySelector('.delete-x').addEventListener('click', (e) => {
     e.stopPropagation();
     openDeletePopup(item);
+  });
+
+  // Magnify → view-portrait popup (don't let it trigger the flip)
+  div.querySelector('.view-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    openViewPopup(item);
   });
 
   div.addEventListener('click', async () => {
@@ -384,8 +454,8 @@ style.textContent = `
   .image-container { transition: transform 0.3s; }
   .image-container:active { transform: rotateY(180deg); }
 
-  /* Win98-style grey square delete button, in its own row above the image */
-  .delete-x {
+  /* Win98-style grey square icon buttons (delete = recycle bin, view = magnify) */
+  .delete-x, .view-btn {
     width: 24px;
     height: 24px;
     min-width: 0;
@@ -402,17 +472,24 @@ style.textContent = `
     border-bottom: 2px solid #808080;
     cursor: pointer;
   }
-  .delete-x img {
+  .delete-x img, .view-btn img {
     width: 16px;
     height: 16px;
     display: block;
     image-rendering: pixelated;
   }
-  .delete-x:active {
+  .delete-x:active, .view-btn:active {
     border-top: 2px solid #808080;
     border-left: 2px solid #808080;
     border-right: 2px solid #ffffff;
     border-bottom: 2px solid #ffffff;
+  }
+  /* View button lives in the bottom-left corner of the card */
+  .view-btn {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    z-index: 4;
   }
 `;
 document.head.appendChild(style);
