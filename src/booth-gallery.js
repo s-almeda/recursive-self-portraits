@@ -11,16 +11,16 @@ const socket = io(`${SERVER_URL}/booth`);
 let generatedImages = [];
 
 document.querySelector('#app').innerHTML = `
-  <div class="window" style="width: calc(100vw - 40px); height: 85vh; margin: auto; margin-top: 50px; max-width: 95vw; box-sizing: border-box;">
+  <div class="window" style="width: calc(100vw - 40px); height: calc(100vh - 70px); margin: auto; margin-top: 50px; max-width: 95vw; box-sizing: border-box; display: flex; flex-direction: column;">
     <div class="title-bar">
       <div class="title-bar-text">public gallery</div>
     </div>
-    <div class="window-body" style="height: calc(85vh - 50px); display: flex; flex-direction: column; padding: 10px; font-size: 1.1em; overflow-y: hidden;">
+    <div class="window-body" style="flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 10px; font-size: 1.1em; overflow: hidden;">
       <div style="padding: 0 10px 10px 10px; text-align: center; display: flex; gap: 10px; justify-content: center;">
         <button id="descriptionBtn">about</button>
       </div>
       <div id="status" style="padding: 10px; text-align: center; font-weight: bold;"></div>
-      <div id="gallery" style="flex: 1; overflow-y: auto; padding: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; align-content: start;">
+      <div id="gallery" style="flex: 1; min-height: 0; overflow-y: auto; padding: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; align-content: start;">
         <!-- Gallery items will be inserted here -->
       </div>
     </div>
@@ -193,8 +193,6 @@ function durationString() {
 // Load all generated images from the booth server
 async function loadHistory() {
   try {
-    statusDiv.textContent = 'Loading gallery...';
-
     const response = await fetch(`${SERVER_URL}/api/booth/generated-images`);
     const result = await response.json();
 
@@ -218,12 +216,12 @@ async function loadHistory() {
   }
 }
 
-// Render the gallery grid (oldest first)
+// Render the gallery grid — newest first (oldest at the bottom)
 function renderGallery() {
   galleryDiv.innerHTML = '';
-  generatedImages.forEach((item, index) => {
-    galleryDiv.appendChild(createGalleryItem(item, index));
-  });
+  for (let i = generatedImages.length - 1, pos = 0; i >= 0; i--, pos++) {
+    galleryDiv.appendChild(createGalleryItem(generatedImages[i], pos));
+  }
 }
 
 // Create a single gallery item (flip between generated and camera image)
@@ -248,6 +246,7 @@ function createGalleryItem(item, index, isNewItem = false) {
 
   div.innerHTML = `
     <div class="delete-row" style="display: flex; justify-content: flex-end; margin-bottom: 5px;">
+    <p style="font-family: 'Pixelated MS Sans Serif', monospace; font-size: 0.8em; margin: 1ch;">click to delete this capture --></p>
       <button class="delete-x" aria-label="delete this capture" title="delete this capture"><img src="/recycling_bin.ico" alt="delete" /></button>
     </div>
     <div class="image-container" style="background: #fff; padding: 5px; margin-bottom: 5px; text-align: center; min-height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
@@ -311,11 +310,12 @@ function addNewItem(item) {
   generatedImages.push(item);
   // NO STATUS NEEDED FOR THE BOOTH VERSION
 
-  const galleryItem = createGalleryItem(item, generatedImages.length - 1, true);
-  galleryDiv.appendChild(galleryItem);
+  const galleryItem = createGalleryItem(item, 0, true);
+  galleryDiv.prepend(galleryItem);
 
+  // Newest is at the top — scroll up so it's visible
   setTimeout(() => {
-    galleryDiv.scrollTop = galleryDiv.scrollHeight;
+    galleryDiv.scrollTop = 0;
   }, 100);
 
   console.log('✨ New image added to gallery:', item.filename);
@@ -357,6 +357,18 @@ socket.on('disconnect', () => {
 // CSS animation (matches history.js)
 const style = document.createElement('style');
 style.textContent = `
+  /* Only #gallery scrolls — never the page itself (avoids the xp.css double scrollbar) */
+  html, body { margin: 0; height: 100%; overflow: hidden; }
+
+  /* xp.css renders a bogus 2nd (wrong-direction) arrow at each end of the scrollbar.
+     Hide the mirrored buttons so only one up (top) and one down (bottom) remain. */
+  ::-webkit-scrollbar-button:vertical:start:increment,
+  ::-webkit-scrollbar-button:vertical:end:decrement,
+  ::-webkit-scrollbar-button:horizontal:start:increment,
+  ::-webkit-scrollbar-button:horizontal:end:decrement {
+    display: none;
+  }
+
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
