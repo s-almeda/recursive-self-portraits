@@ -77,7 +77,7 @@ document.querySelector('#app').innerHTML = `
   <!-- View portrait popup -->
   <div id="viewPopup" class="window" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70%; max-width: 620px; max-height: 75vh; z-index: 1000; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); overflow: hidden; pointer-events: auto;">
     <div class="title-bar">
-      <div class="title-bar-text"><img src="/magnify_note.ico" alt="view" style="width: 8px; height: 8px; image-rendering: pixelated;" /></div>
+      <div class="title-bar-text"><img src="/magnify_note.ico" alt="view" style="width: 1em; height: 1em; image-rendering: pixelated;" /></div>
       <div class="title-bar-controls">
         <button aria-label="Close" id="closeViewX"></button>
       </div>
@@ -363,7 +363,7 @@ function createGalleryItem(item, index, isNewItem = false) {
 
       generatedImg.style.display = 'none';
       cameraImg.style.display = 'block';
-      flipHint.textContent = 'click to see generated representation';
+      flipHint.textContent = 'click to see generated portrait';
       isFlipped = true;
     } else {
       generatedImg.style.display = 'block';
