@@ -24,7 +24,7 @@ document.querySelector('#app').innerHTML = `
       </div>
 
       <!-- Instruction / status text: plain pixelated MS Sans, black, centered above the fieldset -->
-      <div id="overlayText" style="text-align: center; color: #000; font-family: 'Pixelated MS Sans Serif', Arial, sans-serif; padding: 4px 0 10px; min-height: 2.2em; font-size: 2em;"></div>
+      <div id="overlayText" style="text-align: center; color: #000; font-family: 'Pixelated MS Sans Serif', Arial, sans-serif; padding: 4px 0 10px; min-height: 1.65em; font-size: 1.6em;"></div>
 
       <div style="flex: 1; display: flex; gap: 10px; min-height: 0;">
         <!-- Live/captured view (≈50% of the row) -->
