@@ -12,11 +12,6 @@ document.querySelector('#app').innerHTML = `
   <div class="window" style="width: calc(100vw - 40px); height: 85vh; margin: auto; margin-top: 50px; max-width: 90vw; box-sizing: border-box;">
     <div class="title-bar">
       <div class="title-bar-text">tti</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize"></button>
-        <button aria-label="Maximize"></button>
-        <button aria-label="Close"></button>
-      </div>
     </div>
     <div class="window-body" style="height: calc(85vh - 50px); display: flex; gap: 10px; padding: 10px; font-size: 1.3em;">
       <fieldset style="flex: 1; display: flex; flex-direction: column; align-self: stretch;">
@@ -27,7 +22,7 @@ document.querySelector('#app').innerHTML = `
       </fieldset>
 
       <div id="progressContainer" style="flex: 0.5; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; min-width: 200px; max-width: 200px;">
-        <img id="hourglassImg" src="/hourglass.gif" style="width: 64px; height: 64px;" alt="Idle" />
+        <img id="hourglassImg" src="/hourglass.gif" style="width: 64px; height: 64px; display: none;" alt="Working" />
         <progress id="progressBar" max="100" value="0" style="display: none; width: 200px;"></progress>
       </div>
 
@@ -137,7 +132,7 @@ function startProgressBar() {
       }
 
       progressBar.style.display = 'none';
-      hourglassImg.style.display = 'block';
+      hourglassImg.style.display = 'none'; // idle: no hourglass
     }
   }, updateInterval);
 }

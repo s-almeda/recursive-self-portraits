@@ -140,6 +140,14 @@ export function getFullPipeline(generatedImageId) {
   return stmt.get(generatedImageId);
 }
 
+// Delete one capture chain by its camera image id.
+// Foreign keys are ON with ON DELETE CASCADE, so removing the camera_images
+// row also removes its text_descriptions and generated_images rows.
+export function deleteCameraImage(id) {
+  const stmt = db.prepare('DELETE FROM camera_images WHERE id = ?');
+  stmt.run(id);
+}
+
 // Clear all data
 export function clearAllData() {
   db.exec(`

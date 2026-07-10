@@ -13,12 +13,7 @@ let generatedImages = [];
 document.querySelector('#app').innerHTML = `
   <div class="window" style="width: calc(100vw - 40px); height: 85vh; margin: auto; margin-top: 50px; max-width: 95vw; box-sizing: border-box;">
     <div class="title-bar">
-      <div class="title-bar-text">photobooth gallery</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize"></button>
-        <button aria-label="Maximize"></button>
-        <button aria-label="Close"></button>
-      </div>
+      <div class="title-bar-text">public gallery</div>
     </div>
     <div class="window-body" style="height: calc(85vh - 50px); display: flex; flex-direction: column; padding: 10px; font-size: 1.1em; overflow-y: hidden;">
       <div style="padding: 0 10px 10px 10px; text-align: center; display: flex; gap: 10px; justify-content: center;">
@@ -41,24 +36,40 @@ document.querySelector('#app').innerHTML = `
     </div>
     <div class="window-body" style="overflow-y: auto; max-height: calc(80vh - 50px); padding: 15px; box-sizing: border-box;">
       <fieldset style="margin: 0; padding: 25px; font-family: 'Courier New', monospace;">
-        <div style="text-align: center; margin: 15px ;">
-          <img src="/fig1.jpg" alt="Figure 1" style="max-width: 100%; height: auto; border: 2px solid #000;" />
-          <p style="font-size: 0.8em; margin-top: 5px;"><strong>fig. 1</strong></p>
+        <p style="margin: 10px 0;">this is a public kiosk version of the system shm will use in their performance of <em>Artist-in-the-Loop</em>, part of the RECURSIVE SELF PORTRAIT SERIES.</p>
+        <div style="text-align: center; margin: 15px;">
+          <img style="width: 10vw; max-width: 100%; height: auto; border: 2px solid #000;" src="/aitl.png" alt="Artist-in-the-Loop" />
+          <p style="font-size: 1.1em; margin-top: 5px;">visit <strong><u>shmuh.co/aitl</u></strong> to learn more.</p>
         </div>
-        <p style="margin: 10px 0;">this is a performance art piece, wherein a human artist performs the following:</p>
-        <ol style="margin: 10px 0; padding-left: 25px;">
-          <li style="margin: 5px 0;">look at your self, and produce a painting of what you see.</li>
-          <li style="margin: 5px 0;"><strong><em>WHILE YOU COMPLETE STEP 1:</em></strong>
-            <ol style="margin: 5px 0 5px 20px; padding-left: 20px;">
-              <li style="margin: 3px 0;">have a vision machine look at your self, and produce an image representation of what it sees.</li>
-              <li style="margin: 3px 0;">give the image to an image-to-text machine, and ask it to produce a text representation of what it sees</li>
-              <li style="margin: 3px 0;">give that text to a text-to-image machine, and ask it to produce an image of what it describes.</li>
-              <li style="margin: 3px 0;">repeat</li>
-            </ol>
-          </li>
-        </ol>
-        <p style="margin: 10px 0;">this instance of the piece is complete when step 1 is complete.</p>
       </fieldset>
+    </div>
+  </div>
+
+  <!-- Delete confirmation popup -->
+  <div id="deletePopup" class="window" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 600px; max-height: 85vh; z-index: 1000; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); overflow: hidden; pointer-events: auto;">
+    <div class="title-bar">
+      <div class="title-bar-text">delete this capture?</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" id="cancelDeleteX"></button>
+      </div>
+    </div>
+    <div class="window-body" style="overflow-y: auto; max-height: calc(85vh - 40px); padding: 15px; box-sizing: border-box; text-align: center;">
+      <p style="margin: 5px 0 15px;">This permanently deletes both images below. It can't be undone.</p>
+      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <div>
+          <img id="deleteGenImg" src="" style="max-width: 240px; max-height: 240px; object-fit: contain; border: 2px solid #000; background: #fff;" />
+          <div style="font-size: 0.8em; margin-top: 4px;">generated</div>
+        </div>
+        <div>
+          <img id="deleteCamImg" src="" style="max-width: 240px; max-height: 240px; object-fit: contain; border: 2px solid #000; background: #fff;" />
+          <div style="font-size: 0.8em; margin-top: 4px;">webcam capture</div>
+        </div>
+      </div>
+      <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
+        <button id="confirmDeleteBtn">delete</button>
+        <button id="cancelDeleteBtn">cancel</button>
+      </div>
+      <div id="deleteStatus" style="margin-top: 10px; font-size: 0.85em;"></div>
     </div>
   </div>
 
@@ -72,6 +83,75 @@ const descriptionBtn = document.querySelector('#descriptionBtn');
 const descriptionPopup = document.querySelector('#descriptionPopup');
 const closeDescriptionBtn = document.querySelector('#closeDescriptionBtn');
 const popupOverlay = document.querySelector('#popupOverlay');
+const deletePopup = document.querySelector('#deletePopup');
+const deleteGenImg = document.querySelector('#deleteGenImg');
+const deleteCamImg = document.querySelector('#deleteCamImg');
+const confirmDeleteBtn = document.querySelector('#confirmDeleteBtn');
+const cancelDeleteBtn = document.querySelector('#cancelDeleteBtn');
+const cancelDeleteX = document.querySelector('#cancelDeleteX');
+const deleteStatus = document.querySelector('#deleteStatus');
+
+let pendingDeleteId = null;
+
+// ---- Delete-a-capture popup ----
+async function openDeletePopup(item) {
+  pendingDeleteId = item.id;
+  deleteStatus.textContent = '';
+  deleteGenImg.src = `/booth-captures/${item.filename}?t=${Date.now()}`;
+  deleteCamImg.src = '';
+  deletePopup.style.display = 'block';
+  popupOverlay.style.display = 'block';
+
+  // Fetch the webcam capture filename for this generated image
+  try {
+    const response = await fetch(`${SERVER_URL}/api/booth/pipeline/${item.id}`);
+    const result = await response.json();
+    if (result.success && result.pipeline) {
+      deleteCamImg.src = `/booth-captures/${result.pipeline.cam_filename}`;
+    }
+  } catch (error) {
+    console.error('Error loading capture for delete popup:', error);
+  }
+}
+
+function closeDeletePopup() {
+  deletePopup.style.display = 'none';
+  popupOverlay.style.display = 'none';
+  pendingDeleteId = null;
+}
+
+confirmDeleteBtn.addEventListener('click', async () => {
+  if (!pendingDeleteId) return;
+  deleteStatus.style.color = '#000';
+  deleteStatus.textContent = 'Deleting...';
+  try {
+    const response = await fetch(`${SERVER_URL}/api/booth/generated-images/${pendingDeleteId}`, {
+      method: 'DELETE'
+    });
+    const result = await response.json();
+    if (result.success) {
+      // Card removal is handled by the 'capture-deleted' socket event
+      closeDeletePopup();
+    } else {
+      deleteStatus.style.color = 'red';
+      deleteStatus.textContent = result.error || 'Error deleting';
+    }
+  } catch (error) {
+    console.error('Error deleting capture:', error);
+    deleteStatus.style.color = 'red';
+    deleteStatus.textContent = 'Error connecting to server';
+  }
+});
+
+cancelDeleteBtn.addEventListener('click', closeDeletePopup);
+cancelDeleteX.addEventListener('click', closeDeletePopup);
+
+// Remove a card from the grid (fired for every client when a capture is deleted)
+function removeCard(genId) {
+  generatedImages = generatedImages.filter((it) => it.id !== genId);
+  const card = galleryDiv.querySelector(`[data-gen-id="${genId}"]`);
+  if (card) card.remove();
+}
 
 // Popup controls - Description / about
 descriptionBtn.addEventListener('click', () => {
@@ -124,11 +204,10 @@ async function loadHistory() {
       if (generatedImages.length === 0) {
         statusDiv.textContent = '';
         galleryDiv.innerHTML = '';
-      } 
-      // else {
-      //   statusDiv.textContent = `${generatedImages.length} portraits created in ${durationString()}`;
-      //   renderGallery();
-      // }
+      } else {
+        // NO STATUS NEEDED FOR THE BOOTH VERSION — just render the grid
+        renderGallery();
+      }
     } else {
       statusDiv.textContent = 'Error loading gallery';
       console.error('Error loading gallery:', result.error);
@@ -163,10 +242,14 @@ function createGalleryItem(item, index, isNewItem = false) {
     cursor: pointer;
     position: relative;
   `;
+  div.dataset.genId = item.id;
 
   const cacheBuster = isNewItem ? `?t=${Date.now()}` : '';
 
   div.innerHTML = `
+    <div class="delete-row" style="display: flex; justify-content: flex-end; margin-bottom: 5px;">
+      <button class="delete-x" aria-label="delete this capture" title="delete this capture"><img src="/recycling_bin.ico" alt="delete" /></button>
+    </div>
     <div class="image-container" style="background: #fff; padding: 5px; margin-bottom: 5px; text-align: center; min-height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
       <img class="generated-img" src="/booth-captures/${item.filename}${cacheBuster}" style="max-width: 100%; max-height: 200px; object-fit: contain;" onerror="this.dataset.retries = (this.dataset.retries || 0); if (this.dataset.retries < 5) { this.dataset.retries++; setTimeout(() => this.src = '/booth-captures/${item.filename}?t=' + Date.now(), 200 * this.dataset.retries); }" />
       <img class="camera-img" src="" style="max-width: 100%; max-height: 200px; object-fit: contain; display: none;" />
@@ -174,11 +257,17 @@ function createGalleryItem(item, index, isNewItem = false) {
     </div>
     <textarea readonly style="width: 100%; height: 90px; resize: none; font-family: 'Courier New', monospace; font-size: 0.8em; padding: 5px; background: #fff; border: 2px inset #dfdfdf; color: #000; box-sizing: border-box;">${item.prompt || 'No description'}</textarea>
     <div style="font-size: 0.7em; color: #666; margin-top: 5px; text-align: right;">${new Date(item.generated_at).toLocaleString()}</div>
-    <div class="flip-hint" style="font-size: 0.75em; color: #000; text-align: center; margin-top: 3px; font-weight: bold;">click to see capture 👁️</div>
+    <div class="flip-hint" style="font-size: 0.75em; color: #000; text-align: center; margin-top: 3px; font-weight: bold;">click to see webcam capture</div>
   `;
 
   let isFlipped = false;
   let cameraImageLoaded = false;
+
+  // Grey X → delete-confirmation popup (don't let it trigger the flip)
+  div.querySelector('.delete-x').addEventListener('click', (e) => {
+    e.stopPropagation();
+    openDeletePopup(item);
+  });
 
   div.addEventListener('click', async () => {
     const generatedImg = div.querySelector('.generated-img');
@@ -220,7 +309,7 @@ function createGalleryItem(item, index, isNewItem = false) {
 // Add new item with animation (real-time updates)
 function addNewItem(item) {
   generatedImages.push(item);
-  statusDiv.textContent = `${generatedImages.length} portraits created in ${durationString()}`;
+  // NO STATUS NEEDED FOR THE BOOTH VERSION
 
   const galleryItem = createGalleryItem(item, generatedImages.length - 1, true);
   galleryDiv.appendChild(galleryItem);
@@ -246,6 +335,11 @@ socket.on('generation-complete', (data) => {
     prompt: data.description,
     generated_at: data.timestamp
   });
+});
+
+socket.on('capture-deleted', (data) => {
+  console.log('🗑️ Capture deleted:', data.generatedImageId);
+  removeCard(data.generatedImageId);
 });
 
 socket.on('data-cleared', () => {
@@ -274,6 +368,37 @@ style.textContent = `
   }
   .image-container { transition: transform 0.3s; }
   .gallery-item:active .image-container { transform: rotateY(180deg); }
+
+  /* Win98-style grey square delete button, in its own row above the image */
+  .delete-x {
+    width: 24px;
+    height: 24px;
+    min-width: 0;
+    min-height: 0;
+    padding: 2px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+    cursor: pointer;
+  }
+  .delete-x img {
+    width: 16px;
+    height: 16px;
+    display: block;
+    image-rendering: pixelated;
+  }
+  .delete-x:active {
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+  }
 `;
 document.head.appendChild(style);
 

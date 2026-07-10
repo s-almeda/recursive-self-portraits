@@ -11,12 +11,7 @@ const socket = io(`${SERVER_URL}/booth`);
 document.querySelector('#app').innerHTML = `
   <div class="window" style="width: calc(100vw - 40px); height: 85vh; margin: auto; margin-top: 50px; max-width: 90vw; box-sizing: border-box;">
     <div class="title-bar">
-      <div class="title-bar-text">booth</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize"></button>
-        <button aria-label="Maximize"></button>
-        <button aria-label="Close"></button>
-      </div>
+      <div class="title-bar-text">👁️</div>
     </div>
     <div class="window-body" style="height: calc(85vh - 50px); display: flex; flex-direction: column; padding: 10px; font-size: 1.3em; box-sizing: border-box;">
 
@@ -138,7 +133,7 @@ function enterLiveMode() {
   capturedImage.style.display = 'none';
   overlayText.textContent = PROMPT_TEXT;
   descriptionText.value = '...';
-  stopProgress();
+  showIdle();
 }
 
 async function takeCapture() {
@@ -153,9 +148,9 @@ async function takeCapture() {
   capturedImage.src = capturedURL;
   capturedImage.style.display = 'block';
   video.style.display = 'none';
-  overlayText.textContent = 'CAPTURE TAKEN...';
+  overlayText.textContent = 'CAPTURE TAKEN';
   descriptionText.value = '...';
-  startProgress('...seeing \& describing...');
+  showLoading('...seeing, describing...');
 
   // Send to the booth pipeline; UI updates arrive via socket events
   const formData = new FormData();
@@ -176,30 +171,45 @@ async function takeCapture() {
   }
 }
 
-// ---- Looping progress bar with a label ----
-function startProgress(label) {
-  stopProgress();
-  progressLabel.textContent = label;
-  progressBar.style.display = 'block';
-  hourglassImg.style.display = 'none';
-  progressBar.value = 0;
-
-  const duration = 10000; // one sweep; loops while we wait
-  const start = Date.now();
-  progressInterval = setInterval(() => {
-    const elapsed = (Date.now() - start) % duration;
-    progressBar.value = (elapsed / duration) * 100;
-  }, 50);
-}
-
-function stopProgress() {
+// ---- Progress states: loading bar (describing) → hourglass (painting) → idle ----
+function clearProgressTimer() {
   if (progressInterval) {
     clearInterval(progressInterval);
     progressInterval = null;
   }
+}
+
+// Loading bar that eases toward 100% without ever looping or resetting.
+// Used while the description is being generated.
+function showLoading(label) {
+  clearProgressTimer();
+  progressLabel.textContent = label;
+  hourglassImg.style.display = 'none';
+  progressBar.style.display = 'block';
+  progressBar.value = 0;
+
+  const tau = 7000; // time constant; approaches but never reaches 100%
+  const start = Date.now();
+  progressInterval = setInterval(() => {
+    const t = Date.now() - start;
+    progressBar.value = 100 * (1 - Math.exp(-t / tau));
+  }, 50);
+}
+
+// Hourglass animation, shown while the image is being painted (Monitor 2).
+function showHourglass(label) {
+  clearProgressTimer();
+  progressLabel.textContent = label || '';
   progressBar.style.display = 'none';
-  progressLabel.textContent = '';
   hourglassImg.style.display = 'block';
+}
+
+// Idle: nothing at all (no bar, no hourglass) while waiting for spacebar.
+function showIdle() {
+  clearProgressTimer();
+  progressLabel.textContent = '';
+  progressBar.style.display = 'none';
+  hourglassImg.style.display = 'none';
 }
 
 // ---- Input ----
@@ -222,16 +232,16 @@ socket.on('state-updated', (data) => {
   console.log('📡 [booth] State updated:', data.type);
 
   if (data.type === 'description' && data.latestDescription) {
+    // Description is in → immediately switch the bar to the hourglass (painting).
     descriptionText.value = data.latestDescription.description;
     overlayText.textContent = 'CAPTURE TAKEN';
-    startProgress('...describing...');
+    showHourglass('...creating image...');
     // flash
     descriptionText.style.backgroundColor = '#ffffcc';
     setTimeout(() => { descriptionText.style.backgroundColor = '#fff'; }, 300);
   } else if (data.type === 'generation') {
     // Generated image is ready (shown on Monitor 2). Hold, then reset to live.
-    stopProgress();
-    progressLabel.textContent = '';
+    showIdle();
     overlayText.textContent = 'done — thank you!';
     setTimeout(enterLiveMode, 5000);
   }

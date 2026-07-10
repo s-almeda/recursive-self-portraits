@@ -583,6 +583,35 @@ app.get('/api/booth/pipeline/:generatedImageId', (req, res) => {
   }
 });
 
+// Delete one booth capture (files + db chain). Lets participants remove
+// captures they don't want saved.
+app.delete('/api/booth/generated-images/:id', (req, res) => {
+  try {
+    const pipeline = boothDb.getFullPipeline(req.params.id);
+    if (!pipeline) {
+      return res.status(404).json({ success: false, error: 'Capture not found' });
+    }
+
+    // Remove the generated image and the webcam capture files
+    for (const fname of [pipeline.gen_filename, pipeline.cam_filename]) {
+      if (!fname) continue;
+      const p = path.join(__dirname, '../public/booth-captures', fname);
+      if (fs.existsSync(p)) fs.unlinkSync(p);
+    }
+
+    // Remove the db rows (cascade from the camera image)
+    boothDb.deleteCameraImage(pipeline.cam_id);
+
+    // Tell every booth gallery client to drop the card
+    boothIo.emit('capture-deleted', { generatedImageId: req.params.id });
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting booth capture:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 // Serve booth pages (production / dist) for clean URLs
 app.get('/booth', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/booth.html'));
