@@ -78,19 +78,25 @@ function updateDescription(description) {
   }
 }
 
-// Update generated image display (waits for progress to complete)
+// Update generated image display. The image is the real signal that the
+// pipeline finished, so applying it also finishes/hides the progress bar.
 function updateGeneration(generation) {
   if (generation) {
-    if (progressInterval) {
-      pendingGeneration = generation;
-    } else {
-      applyGeneration(generation);
-    }
+    applyGeneration(generation);
   }
 }
 
 // Actually apply the generated image to the UI
 function applyGeneration(generation) {
+  // The portrait actually landed — complete and clear the loading bar.
+  if (progressInterval) {
+    clearInterval(progressInterval);
+    progressInterval = null;
+  }
+  progressBar.value = 100;
+  progressBar.style.display = 'none';
+  hourglassImg.style.display = 'none';
+
   generatedImage.src = `${SERVER_URL}/booth-captures/${generation.filename}`;
   generatedImage.style.display = 'block';
   noImageText.style.display = 'none';
@@ -104,7 +110,9 @@ function applyGeneration(generation) {
   pendingGeneration = null;
 }
 
-// Start 5-second progress bar
+// Loading bar that eases toward (but never reaches) 100%, so it can't finish
+// before the real image lands — however slow the venue wifi is. It's completed
+// and hidden by applyGeneration() when the portrait actually arrives.
 function startProgressBar() {
   if (progressInterval) {
     clearInterval(progressInterval);
@@ -115,25 +123,13 @@ function startProgressBar() {
   progressBar.value = 0;
   progressStartTime = Date.now();
 
-  const duration = 5000;
+  const tau = 8000;          // time constant; asymptotes, never reaches the cap
+  const cap = 95;            // hold just short of full until the image is in
   const updateInterval = 50;
 
   progressInterval = setInterval(() => {
     const elapsed = Date.now() - progressStartTime;
-    const percent = Math.min((elapsed / duration) * 100, 100);
-    progressBar.value = percent;
-
-    if (percent >= 100) {
-      clearInterval(progressInterval);
-      progressInterval = null;
-
-      if (pendingGeneration) {
-        applyGeneration(pendingGeneration);
-      }
-
-      progressBar.style.display = 'none';
-      hourglassImg.style.display = 'none'; // idle: no hourglass
-    }
+    progressBar.value = cap * (1 - Math.exp(-elapsed / tau));
   }, updateInterval);
 }
 

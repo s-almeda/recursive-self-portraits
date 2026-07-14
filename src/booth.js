@@ -26,9 +26,10 @@ document.querySelector('#app').innerHTML = `
       <!-- Instruction / status text: plain pixelated MS Sans, black, centered above the fieldset -->
       <div id="overlayText" style="text-align: center; color: #000; font-family: 'Pixelated MS Sans Serif', Arial, sans-serif; padding: 4px 0 10px; min-height: 1.65em; font-size: 1.6em;"></div>
 
-      <div style="flex: 1; display: flex; gap: 10px; min-height: 0;">
-        <!-- Live/captured view (≈50% of the row) -->
-        <fieldset style="flex: 2; display: flex; flex-direction: column; align-self: stretch; min-height: 0; min-width: 0;">
+      <!-- Single-monitor layout: webcam spans the full width, loading bar underneath -->
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px; min-height: 0;">
+        <!-- Live/captured view (full width) -->
+        <fieldset style="flex: 1; display: flex; flex-direction: column; align-self: stretch; min-height: 0; min-width: 0;">
           <legend>👁️</legend>
           <div style="flex: 1; display: flex; align-items: stretch; justify-content: center; background: #fff; overflow: hidden; padding: 10px;">
             <div id="viewWrap" style="position: relative; flex: 1; min-height: 0;">
@@ -39,21 +40,17 @@ document.querySelector('#app').innerHTML = `
           </div>
         </fieldset>
 
-        <!-- Progress (≈25% of the row) -->
-        <div id="progressContainer" style="flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px;">
-          <img id="hourglassImg" src="/hourglass.gif" style="width: 64px; height: 64px;" alt="Idle" />
-          <progress id="progressBar" max="100" value="0" style="display: none; width: 200px;"></progress>
+        <!-- Progress bar underneath the webcam (horizontal) -->
+        <div id="progressContainer" style="flex: 0 0 auto; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 4px 0;">
+          <img id="hourglassImg" src="/hourglass.gif" style="width: 48px; height: 48px;" alt="Idle" />
+          <progress id="progressBar" max="100" value="0" style="display: none; width: 60%; max-width: 600px;"></progress>
           <div id="progressLabel" style="font-size: 0.7em; color: #000; text-align: center;"></div>
         </div>
-
-        <!-- Description (≈25% of the row) -->
-        <fieldset style="flex: 1; display: flex; flex-direction: column; align-self: stretch; min-height: 0; min-width: 0;">
-          <legend>💬</legend>
-          <div style="flex: 1; display: flex; flex-direction: column; padding: 10px; overflow: hidden;">
-            <textarea id="descriptionText" readonly style="flex: 1; resize: none; font-family: 'Courier New', monospace; font-size: 0.9em; padding: 10px; background: #fff; border: 2px inset #dfdfdf; color: #000; line-height: 1.4;">...</textarea>
-          </div>
-        </fieldset>
       </div>
+
+      <!-- Description no longer shown on the booth page (single-monitor setup),
+           but kept hidden so the capture/socket code can still write to it. -->
+      <textarea id="descriptionText" readonly style="display: none;"></textarea>
     </div>
   </div>
 
