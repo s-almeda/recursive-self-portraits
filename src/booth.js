@@ -40,11 +40,11 @@ document.querySelector('#app').innerHTML = `
           </div>
         </fieldset>
 
-        <!-- Progress bar underneath the webcam (horizontal) -->
-        <div id="progressContainer" style="flex: 0 0 auto; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 4px 0;">
+        <!-- Progress underneath the webcam: bar/hourglass on top, its label directly below -->
+        <div id="progressContainer" style="flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 4px 0;">
           <img id="hourglassImg" src="/hourglass.gif" style="width: 48px; height: 48px;" alt="Idle" />
           <progress id="progressBar" max="100" value="0" style="display: none; width: 60%; max-width: 600px;"></progress>
-          <div id="progressLabel" style="font-size: 0.7em; color: #000; text-align: center;"></div>
+          <div id="progressLabel" style="font-size: 0.9em; color: #000; text-align: center;"></div>
         </div>
       </div>
 
@@ -73,8 +73,7 @@ const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
 // Face-detection tuning
-const HAPPY_THRESHOLD = 0.7;   // min "happy" probability to count as a smile
-const HAPPY_FRAMES = 2;        // consecutive smiling frames required to trigger
+const FACE_FRAMES = 2;         // consecutive frames with a face required to trigger
 const DETECT_INTERVAL_MS = 200;
 
 let stream = null;
@@ -82,12 +81,12 @@ let started = false;      // webcam running, in LIVE mode
 let busy = false;         // a capture→describe→generate cycle is in flight
 let modelsLoaded = false;
 let detecting = false;    // detection loop running
-let happyStreak = 0;
-let armed = true;         // must see a non-smiling / no-face frame before firing again
+let faceStreak = 0;
+let armed = true;         // must see a no-face frame before firing again
 let progressInterval = null;
 let capturedURL = null;
 
-// ---- Load face-api models (tiny detector + expressions) ----
+// ---- Load face-api models (tiny detector) ----
 async function loadModels() {
   try {
     // Ensure a tfjs backend is actually initialized before any inference,
@@ -102,7 +101,6 @@ async function loadModels() {
     console.log('🧠 tfjs backend:', faceapi.tf.getBackend());
 
     await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
-    await faceapi.nets.faceExpressionNet.loadFromUri('/models');
     modelsLoaded = true;
     console.log('✅ face-api models loaded');
   } catch (error) {
@@ -221,33 +219,28 @@ async function detectionLoop() {
   if (modelsLoaded && !busy && video.readyState >= 2 && video.videoWidth > 0) {
     try {
       const result = await faceapi
-        .detectSingleFace(video, new faceapi.TinyFaceDetectorOptions({ inputSize: 224, scoreThreshold: 0.5 }))
-        .withFaceExpressions();
+        .detectSingleFace(video, new faceapi.TinyFaceDetectorOptions({ inputSize: 224, scoreThreshold: 0.5 }));
 
       if (!busy) {
         if (!result) {
-          happyStreak = 0;
+          faceStreak = 0;
           armed = true; // no face re-arms the trigger
           clearBox();
-          overlayText.textContent = 'SHOW ME A FACE';
+          overlayText.textContent = 'PUT A FACE IN THE FRAME';
         } else {
-          drawBox(result.detection.box);
-          if (result.expressions.happy >= HAPPY_THRESHOLD) {
-            // Only fire if armed (prevents one held smile from making many captures)
-            if (armed) {
-              happyStreak++;
-              if (happyStreak >= HAPPY_FRAMES) {
-                happyStreak = 0;
-                armed = false; // disarm until they relax / leave the frame
-                takeCapture();
-              }
+          drawBox(result.box);
+          // Fire as soon as a face is present (over a couple of stable frames).
+          // Only if armed, so one person standing in frame triggers just once —
+          // they must leave the frame (a no-face frame) to re-arm the next capture.
+          if (armed) {
+            faceStreak++;
+            if (faceStreak >= FACE_FRAMES) {
+              faceStreak = 0;
+              armed = false; // disarm until the face leaves the frame
+              takeCapture();
             }
-            overlayText.textContent = 'SMILE TO LET ME CAPTURE YOU';
-          } else {
-            happyStreak = 0;
-            armed = true; // a non-smiling frame re-arms the trigger
-            overlayText.textContent = 'SMILE TO LET ME CAPTURE YOU';
           }
+          overlayText.textContent = 'HOLD STILL...';
         }
       }
     } catch (error) {
@@ -261,11 +254,11 @@ async function detectionLoop() {
 // ---- State transitions ----
 function enterLiveMode() {
   busy = false;
-  happyStreak = 0;
+  faceStreak = 0;
   video.style.display = 'block';
   capturedImage.style.display = 'none';
   clearBox();
-  overlayText.textContent = 'SHOW ME A FACE';
+  overlayText.textContent = 'PUT A FACE IN THE FRAME';
   descriptionText.value = '...';
   showIdle();
 }
