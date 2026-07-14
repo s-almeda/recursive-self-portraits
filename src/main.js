@@ -16,14 +16,23 @@ const CYCLE_DELAY_MS = 5000; // 5 seconds between cycles
 document.querySelector('#app').innerHTML = `
   <div class="window" style="width: 900px; margin: 2rem auto; overflow: auto; max-height: calc(100vh - 4rem);">
     <div class="title-bar">
-      <div class="title-bar-text">Recursive Self-Portrait - Control Center</div>
+      <div class="title-bar-text">Control Center</div>
       <div class="title-bar-controls">
-        <button aria-label="Minimize"></button>
-        <button aria-label="Maximize"></button>
-        <button aria-label="Close"></button>
       </div>
     </div>
     <div class="window-body">
+    <fieldset>
+      <legend>Navigation</legend>
+      <div class="field-row" style="gap: 8px; flex-wrap: wrap;">
+        <a href="/itt" style="flex: 1; min-width: 100px;"><button style="width: 100%;">ITT</button></a>
+        <a href="/tti" style="flex: 1; min-width: 100px;"><button style="width: 100%;">TTI</button></a>
+        <a href="/history" style="flex: 1; min-width: 100px;"><button style="width: 100%;">History</button></a>
+        <a href="/booth" style="flex: 1; min-width: 100px;"><button style="width: 100%;">Booth ITT</button></a>
+        <a href="/booth-tti" style="flex: 1; min-width: 100px;"><button style="width: 100%;">Booth TTI</button></a>
+        <a href="/booth-gallery" style="flex: 1; min-width: 100px;"><button style="width: 100%;">Booth Gallery</button></a>
+      </div>
+    </fieldset>
+
       <fieldset>
         <legend>Camera Controls</legend>
         <div class="field-row" style="margin-bottom: 10px;">

@@ -316,62 +316,24 @@ function createGalleryItem(item, index, isNewItem = false) {
     <button class="view-btn" aria-label="view this portrait" title="view this portrait"><img src="/magnify_note.ico" alt="view" /></button>
     <div class="image-container" style="background: #fff; padding: 5px; margin-bottom: 5px; text-align: center; min-height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
       <img class="generated-img" src="/booth-captures/${item.filename}${cacheBuster}" style="max-width: 100%; max-height: 200px; object-fit: contain;" onerror="this.dataset.retries = (this.dataset.retries || 0); if (this.dataset.retries < 5) { this.dataset.retries++; setTimeout(() => this.src = '/booth-captures/${item.filename}?t=' + Date.now(), 200 * this.dataset.retries); }" />
-      <img class="camera-img" src="" style="max-width: 100%; max-height: 200px; object-fit: contain; display: none;" />
-      <div class="loading-msg" style="display: none; position: absolute; background: rgba(0,0,0,0.7); color: white; padding: 10px; border-radius: 5px;">Loading...</div>
     </div>
     <textarea readonly style="width: 100%; height: 90px; resize: none; font-family: 'Courier New', monospace; font-size: 0.8em; padding: 5px; background: #fff; border: 2px inset #dfdfdf; color: #000; box-sizing: border-box;">${item.prompt || 'No description'}</textarea>
     <div style="font-size: 0.7em; color: #666; margin-top: 5px; text-align: right;">${new Date(item.generated_at).toLocaleString()}</div>
-    <div class="flip-hint" style="font-size: 0.75em; color: #000; text-align: center; margin-top: 3px; font-weight: bold;">click to see webcam capture</div>
+    <div class="flip-hint" style="font-size: 0.75em; color: #000; text-align: center; margin-top: 3px; font-weight: bold;">&lt;-- click to inspect</div>
   `;
 
-  let isFlipped = false;
-  let cameraImageLoaded = false;
-
-  // Grey X → delete-confirmation popup (don't let it trigger the flip)
+  // Grey X → delete-confirmation popup (don't let it also open the view modal)
   div.querySelector('.delete-x').addEventListener('click', (e) => {
     e.stopPropagation();
     openDeletePopup(item);
   });
 
-  // Magnify → view-portrait popup (don't let it trigger the flip)
+  // Magnify button OR anywhere on the card → view-portrait popup
   div.querySelector('.view-btn').addEventListener('click', (e) => {
     e.stopPropagation();
     openViewPopup(item);
   });
-
-  div.addEventListener('click', async () => {
-    const generatedImg = div.querySelector('.generated-img');
-    const cameraImg = div.querySelector('.camera-img');
-    const loadingMsg = div.querySelector('.loading-msg');
-    const flipHint = div.querySelector('.flip-hint');
-
-    if (!isFlipped) {
-      if (!cameraImageLoaded) {
-        loadingMsg.style.display = 'block';
-        try {
-          const response = await fetch(`${SERVER_URL}/api/booth/pipeline/${item.id}`);
-          const result = await response.json();
-          if (result.success && result.pipeline) {
-            cameraImg.src = `/booth-captures/${result.pipeline.cam_filename}`;
-            cameraImageLoaded = true;
-          }
-        } catch (error) {
-          console.error('Error loading camera image:', error);
-        }
-        loadingMsg.style.display = 'none';
-      }
-
-      generatedImg.style.display = 'none';
-      cameraImg.style.display = 'block';
-      flipHint.textContent = 'click to see generated portrait';
-      isFlipped = true;
-    } else {
-      generatedImg.style.display = 'block';
-      cameraImg.style.display = 'none';
-      flipHint.textContent = 'click to see capture 👁️';
-      isFlipped = false;
-    }
-  });
+  div.addEventListener('click', () => openViewPopup(item));
 
   return div;
 }
@@ -449,10 +411,6 @@ style.textContent = `
     transition: transform 0.2s;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
   }
-  /* Flip-rotate when pressing the image itself — the recycle bin sits in a
-     sibling row above, so pressing it never triggers this. */
-  .image-container { transition: transform 0.3s; }
-  .image-container:active { transform: rotateY(180deg); }
 
   /* Win98-style grey square icon buttons (delete = recycle bin, view = magnify) */
   .delete-x, .view-btn {

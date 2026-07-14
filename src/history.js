@@ -222,8 +222,31 @@ document.querySelector('#app').innerHTML = `
     </div>
   </div>
   
-  <!-- Overlay for popup background -->
-  <div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; pointer-events: none;"></div>
+  <!-- View portrait popup -->
+  <div id="viewPopup" class="window" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70%; max-width: 620px; max-height: 75vh; z-index: 1000; box-shadow: 4px 4px 10px rgba(0,0,0,0.5); overflow: hidden; pointer-events: auto;">
+    <div class="title-bar">
+      <div class="title-bar-text"><img src="/magnify_note.ico" alt="view" style="width: 1em; height: 1em; image-rendering: pixelated;" /></div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" id="closeViewX"></button>
+      </div>
+    </div>
+    <div class="window-body" style="overflow-y: auto; max-height: calc(88vh - 40px); padding: 15px; box-sizing: border-box;">
+      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <div style="text-align: center;">
+          <img id="viewCamImg" src="" style="max-width: 240px; max-height: 240px; object-fit: contain; border: 2px solid #000; background: #fff;" />
+          <div style="font-size: 0.8em; margin-top: 4px;">capture</div>
+        </div>
+        <div style="text-align: center;">
+          <img id="viewGenImg" src="" style="max-width: 240px; max-height: 240px; object-fit: contain; border: 2px solid #000; background: #fff;" />
+          <div style="font-size: 0.8em; margin-top: 4px;">portrait</div>
+        </div>
+      </div>
+      <div id="viewDescText" style="margin-top: 10px; font-family: 'Arial'; font-size: 1.15em; line-height: 1.6; background: #fff; border: 2px inset #dfdfdf; color: #000; padding: 10px; max-height: 25vh; overflow-y: auto; white-space: pre-wrap;"></div>
+    </div>
+  </div>
+
+  <!-- Overlay for popup background (click to close) -->
+  <div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; pointer-events: auto; cursor: pointer;"></div>
 `
 
 const statusDiv = document.querySelector('#status');
@@ -237,6 +260,44 @@ const closeQuestionnaireBtn = document.querySelector('#closeQuestionnaireBtn');
 const popupOverlay = document.querySelector('#popupOverlay');
 const questionnaireForm = document.querySelector('#questionnaireForm');
 const submitStatus = document.querySelector('#submitStatus');
+const viewPopup = document.querySelector('#viewPopup');
+const viewCamImg = document.querySelector('#viewCamImg');
+const viewGenImg = document.querySelector('#viewGenImg');
+const viewDescText = document.querySelector('#viewDescText');
+const closeViewX = document.querySelector('#closeViewX');
+
+// Close any open popup + the dark overlay
+function closeAllPopups() {
+  descriptionPopup.style.display = 'none';
+  questionnairePopup.style.display = 'none';
+  viewPopup.style.display = 'none';
+  popupOverlay.style.display = 'none';
+}
+
+// Clicking the darkened background closes whatever is open
+popupOverlay.addEventListener('click', closeAllPopups);
+
+// ---- View-a-portrait popup (capture left, generated right, description below) ----
+async function openViewPopup(item) {
+  viewGenImg.src = `/captures/${item.filename}?t=${Date.now()}`;
+  viewCamImg.src = '';
+  viewDescText.textContent = item.prompt || 'No description';
+  viewPopup.style.display = 'block';
+  popupOverlay.style.display = 'block';
+
+  try {
+    const response = await fetch(`${SERVER_URL}/api/pipeline/${item.id}`);
+    const result = await response.json();
+    if (result.success && result.pipeline) {
+      viewCamImg.src = `/captures/${result.pipeline.cam_filename}`;
+      if (result.pipeline.description) viewDescText.textContent = result.pipeline.description;
+    }
+  } catch (error) {
+    console.error('Error loading portrait for view popup:', error);
+  }
+}
+
+closeViewX.addEventListener('click', closeAllPopups);
 
 // Popup controls - Description
 descriptionBtn.addEventListener('click', () => {
@@ -415,59 +476,22 @@ function createGalleryItem(item, index, isNewItem = false) {
   const cacheBuster = isNewItem ? `?t=${Date.now()}` : '';
   
   div.innerHTML = `
+    <button class="view-btn" aria-label="view this portrait" title="view this portrait"><img src="/magnify_note.ico" alt="view" /></button>
     <div class="image-container" style="background: #fff; padding: 5px; margin-bottom: 5px; text-align: center; min-height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
       <img class="generated-img" src="/captures/${item.filename}${cacheBuster}" style="max-width: 100%; max-height: 200px; object-fit: contain;" onerror="this.dataset.retries = (this.dataset.retries || 0); if (this.dataset.retries < 5) { this.dataset.retries++; setTimeout(() => this.src = '/captures/${item.filename}?t=' + Date.now(), 200 * this.dataset.retries); }" />
-      <img class="camera-img" src="" style="max-width: 100%; max-height: 200px; object-fit: contain; display: none;" />
-      <div class="loading-msg" style="display: none; position: absolute; background: rgba(0,0,0,0.7); color: white; padding: 10px; border-radius: 5px;">Loading...</div>
     </div>
     <textarea readonly style="width: 100%; height: 90px; resize: none; font-family: 'Courier New', monospace; font-size: 0.8em; padding: 5px; background: #fff; border: 2px inset #dfdfdf; color: #000; box-sizing: border-box;">${item.prompt || 'No description'}</textarea>
     <div style="font-size: 0.7em; color: #666; margin-top: 5px; text-align: right;">${new Date(item.generated_at).toLocaleString()}</div>
-    <div class="flip-hint" style="font-size: 0.75em; color: #000; text-align: center; margin-top: 3px; font-weight: bold;">click to see capture 👁️</div>
+    <div class="flip-hint" style="font-size: 0.75em; color: #000; text-align: center; margin-top: 3px; font-weight: bold;">&lt;-- click to inspect</div>
   `;
-  
-  let isFlipped = false;
-  let cameraImageLoaded = false;
-  
-  // Click handler to flip between generated and camera image
-  div.addEventListener('click', async () => {
-    const generatedImg = div.querySelector('.generated-img');
-    const cameraImg = div.querySelector('.camera-img');
-    const loadingMsg = div.querySelector('.loading-msg');
-    const flipHint = div.querySelector('.flip-hint');
-    
-    if (!isFlipped) {
-      // Flip to camera image
-      if (!cameraImageLoaded) {
-        // Load camera image from pipeline
-        loadingMsg.style.display = 'block';
-        try {
-          const response = await fetch(`${SERVER_URL}/api/pipeline/${item.id}`);
-          const result = await response.json();
-          
-          if (result.success && result.pipeline) {
-            cameraImg.src = `/captures/${result.pipeline.cam_filename}`;
-            cameraImageLoaded = true;
-          }
-        } catch (error) {
-          console.error('Error loading camera image:', error);
-        }
-        loadingMsg.style.display = 'none';
-      }
-      
-      // Show camera image
-      generatedImg.style.display = 'none';
-      cameraImg.style.display = 'block';
-      flipHint.textContent = 'click to see generated representation';
-      isFlipped = true;
-    } else {
-      // Flip back to generated image
-      generatedImg.style.display = 'block';
-      cameraImg.style.display = 'none';
-      flipHint.textContent = 'click to see capture 👁️';
-      isFlipped = false;
-    }
+
+  // Magnify button OR anywhere on the card → view-portrait popup
+  div.querySelector('.view-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    openViewPopup(item);
   });
-  
+  div.addEventListener('click', () => openViewPopup(item));
+
   return div;
 }
 
@@ -571,12 +595,39 @@ style.textContent = `
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
   }
   
-  .image-container {
-    transition: transform 0.3s;
+  /* Win98-style grey square magnify button in the bottom-left corner of the card */
+  .view-btn {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    z-index: 4;
+    width: 24px;
+    height: 24px;
+    min-width: 0;
+    min-height: 0;
+    padding: 2px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+    cursor: pointer;
   }
-  
-  .gallery-item:active .image-container {
-    transform: rotateY(180deg);
+  .view-btn img {
+    width: 16px;
+    height: 16px;
+    display: block;
+    image-rendering: pixelated;
+  }
+  .view-btn:active {
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
   }
 `;
 document.head.appendChild(style);
